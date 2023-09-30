@@ -19,11 +19,12 @@ body.dark-mode {
 
 /* Navbar styles */
 nav {
-  background-color: #333;
-  padding: 10px 10px;
+  background-color: #3333339c;
+  padding: 0px 10px 0px 0px;
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
+  height: 8vh;
 }
 
 .left-content {
@@ -37,13 +38,13 @@ nav {
 
 .right-content {
   list-style-type: none;
-  padding: 0;
-  margin: 0;
+  padding: 0px 0px;
+  margin: 0px;
 }
 
 .right-content li {
   display: inline;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .right-content a {

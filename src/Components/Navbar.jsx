@@ -22,7 +22,7 @@ export default function Navbar() {
     <div>
       <nav>
         <div className="left-content">
-            <a href="Home"><img src="./src/Images/RCStudio.png" alt="Logo" /></a>
+            <a href="Home"><img src="./src/Images/RCStudio.png" width="60%"/></a>
         </div>
         <ul className="right-content">
           <li><a href="Sign-in">Sign in</a></li>
