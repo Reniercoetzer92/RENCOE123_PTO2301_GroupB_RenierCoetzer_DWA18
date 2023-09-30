@@ -1,14 +1,15 @@
 import ReactDOM from "react-dom/client";
-import Navbar from "./src/Components/Navbar";
-import Header from "./src/Components/Header";
-import Footer from "./src/Components/Footer";
+import HomePage from "./src/Pages/Home";
+import Preview from "./src/Components/Preview"
 
 // eslint-disable-next-line react-refresh/only-export-components
 function App() {
   return <div>
-          <h1><Navbar /></h1>
-          <h2><Header /></h2>
-          <h3><Footer /></h3>
+          <HomePage />
+          {/* <h2><Navbar /></h2>
+          <h3><Header /></h3>
+          <h4><Footer /></h4> */}
+          <Preview />
         </div>
 }
 
