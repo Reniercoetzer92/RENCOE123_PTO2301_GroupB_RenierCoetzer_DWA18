@@ -2,7 +2,7 @@ Here's a breakdown of the user stories:
 
 Deployment and UI/UX:
 
-Project deployment to a custom Netlify URL.
+# Project deployment to a custom Netlify URL.
 Responsive design for mobile devices (iPhone SE).
 Favicon and metatag information setup.
 Loading states for data loading.

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export default function ShowDisplay({ combinedData }) {
-  // Use the combined data in this component
   return (
     <div>
       {/* Render the combined data here */}
@@ -16,7 +15,6 @@ export default function ShowDisplay({ combinedData }) {
   );
 }
 
-// Add prop type validation
 ShowDisplay.propTypes = {
   combinedData: PropTypes.array.isRequired,
 };
