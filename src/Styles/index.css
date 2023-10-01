@@ -62,6 +62,7 @@ nav {
 }
 
 #right-content a:hover { 
+  background-clip: value;
   background: url('../Img/Back.jpg');
   -webkit-background-clip: text;
   color: transparent;
