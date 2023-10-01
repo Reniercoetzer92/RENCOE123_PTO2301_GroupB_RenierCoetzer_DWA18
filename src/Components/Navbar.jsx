@@ -19,7 +19,6 @@ export default function Navbar() {
     alert('Avatar clicked!');
   };
   return (
-    <div>
       <nav>
         <div id="left-content">
           <a href="index.html">
@@ -38,6 +37,5 @@ export default function Navbar() {
           </sl-button></li>
         </ul>
       </nav>
-    </div>
   );
 }
