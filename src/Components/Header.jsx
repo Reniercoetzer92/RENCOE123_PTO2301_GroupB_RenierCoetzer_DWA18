@@ -1,4 +1,6 @@
-import Navbar from "./Navbar"
+//@ts-check
+
+import Navbar from "./Navbar";
 import Featured from "./Featured";
 
 export default function Header() {

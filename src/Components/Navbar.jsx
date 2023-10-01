@@ -1,3 +1,5 @@
+//@ts-check
+
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -21,19 +23,19 @@ export default function Navbar() {
   return (
     <div>
       <nav>
-        <div className="left-content">
+        <div id="left-content">
             <a href="Home"><img src="./src/Images/RCStudio.png" width="60%" alt="Logo"></img></a>
         </div>
-        <ul className="right-content">
+        <ul id="right-content">
           <li><a href="Sign-in">Sign in</a></li>
           <li onClick={handleAvatarClick}>
-              <a href="avatar"><sl-avatar label="User avatar"></sl-avatar></a>
+              <a href="Avatar"><sl-avatar label="User avatar"></sl-avatar></a>
             </li>
           <li><a href="Sign-up">Sign up</a></li>
           
-          <sl-button variant="default" size="small" circle onClick={toggleMode}>
+          <li><sl-button variant="default" size="small" circle onClick={toggleMode}>
             <sl-icon name="gear" label="Settings"></sl-icon>
-          </sl-button>
+          </sl-button></li>
         </ul>
       </nav>
     </div>
