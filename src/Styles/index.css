@@ -32,8 +32,15 @@ nav {
   align-items: center; 
 }
 
+@keyframes back {
+  100%{
+        background-position: 2000px 0;
+  }
+}
+
 #left-content img:hover{
   cursor: pointer;
+  
 }
 
 #right-content {
@@ -54,8 +61,11 @@ nav {
   transition: color 0.3s;
 }
 
-#right-content a:hover {
-  color: #1ecd41;
+#right-content a:hover { 
+  background: url('../Img/Back.jpg');
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: back 100s linear infinite;
 }
 
 #Footer {
