@@ -1,16 +1,12 @@
 import { useState } from 'react';
 
 export default function Navbar() {
-  // Initialize the mode state with 'light' as the default
+  
   const [mode, setMode] = useState('light');
-
-  // Function to toggle between light and dark mode
   const toggleMode = () => {
-    // Toggle the mode based on the current mode
     setMode(mode === 'light' ? 'dark' : 'light');
     console.log('Mode set to:', mode);
 
-    // Add or remove the dark-mode class from the body element
     document.body.classList.toggle('dark-mode', mode === 'light');
 
   };

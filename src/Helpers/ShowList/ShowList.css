@@ -1,0 +1,23 @@
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+}
+
+.carousel-item {
+  background: black;
+  width: 250px;
+}
+
+.carousel-image {
+  width: 250px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.smaller-image {
+  width: 100px;
+  height: 75px;
+  cursor: pointer;
+}
