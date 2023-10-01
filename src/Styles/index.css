@@ -9,11 +9,11 @@ body {
   min-width: 100%;
   color: var(--text-light);
   background-size: cover;
-  background-image: url('../Images/background1.jpg'); /* Light mode background image */
+  background-image: url('../Img/background1.jpg'); /* Light mode background image */
 }
 
 body.dark-mode {
-  background-image: url('../Images/background2.jpg'); /* Dark mode background image */
+  background-image: url('../img/background2.jpg'); /* Dark mode background image */
   color: white;
 }
 
