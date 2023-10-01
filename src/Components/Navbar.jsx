@@ -22,7 +22,7 @@ export default function Navbar() {
       <nav>
         <div id="left-content">
           <a href="index.html">
-              <img src="../src/Images/RCStudioLogo.jpg" width="60%" alt="Logo"/>
+              <img src="./Meta/mstile-150x150.png" width="100%" alt="Logo"/>
           </a>
         </div>
         <ul id="right-content">

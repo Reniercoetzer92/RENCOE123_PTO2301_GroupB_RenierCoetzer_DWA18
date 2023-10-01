@@ -29,7 +29,10 @@ nav {
 
 #left-content {
   display: flex; 
-  align-items: center; 
+  align-items: center;
+  margin-top: 40px; 
+  margin-left: -50px;
+  width: 200px;
 }
 
 @keyframes back {
@@ -40,13 +43,11 @@ nav {
 
 #left-content img:hover{
   cursor: pointer;
-  
 }
 
 #right-content {
   list-style-type: none;
   padding: 0px 0px;
-  margin: 0px;
 }
 
 #right-content li {
@@ -71,6 +72,7 @@ nav {
 
 #Footer {
   text-align: center;
+  line-height: 0px;
 }
 
 #Featured {
@@ -80,5 +82,6 @@ nav {
 
 #Body-Description {
   text-align: center;
-  height: 32vh;
+  height: 25vh;
+  line-height: 30px;
 }
