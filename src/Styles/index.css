@@ -9,11 +9,11 @@ body {
   min-width: 100%;
   color: var(--text-light);
   background-size: cover;
-  background-image: url('../Img/background1.jpg'); /* Light mode background image */
+  background-image: url('../Images/background1.jpg'); /* Light mode background image */
 }
 
 body.dark-mode {
-  background-image: url('../img/background2.jpg'); /* Dark mode background image */
+  background-image: url('../Images/background2.jpg'); /* Dark mode background image */
   color: white;
 }
 
@@ -63,7 +63,7 @@ nav {
 
 #right-content a:hover { 
   background-clip: value;
-  background: url('../Img/Back.jpg');
+  background: url('../Images/Back.jpg');
   -webkit-background-clip: text;
   color: transparent;
   animation: back 100s linear infinite;
