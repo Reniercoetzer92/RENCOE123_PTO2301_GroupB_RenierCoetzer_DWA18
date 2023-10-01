@@ -32,6 +32,10 @@ nav {
   align-items: center; 
 }
 
+#left-content img:hover{
+  cursor: pointer;
+}
+
 #right-content {
   list-style-type: none;
   padding: 0px 0px;
