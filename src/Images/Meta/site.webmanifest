@@ -1,9 +1,9 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "RC Studio",
+    "short_name": "Podcast",
     "icons": [
         {
-            "src": "./src/Images/Meta/android-chrome-192x192.png",
+            "src": "src/Images/Meta/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         }

@@ -1,5 +1,3 @@
-//@ts-check
-
 import ReactDOM from "react-dom/client";
 import HomePage from "./src/Pages/Home";
 

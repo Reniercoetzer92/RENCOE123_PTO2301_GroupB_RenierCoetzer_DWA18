@@ -1,5 +1,3 @@
-//@ts-check
-
 import Navbar from "./Navbar";
 import Featured from "./Featured";
 

@@ -1,5 +1,3 @@
-//@ts-check
-
 export default function Footer() {
   return <div id="Footer">
             <h4>@2023 RC Studio Capstone project</h4>

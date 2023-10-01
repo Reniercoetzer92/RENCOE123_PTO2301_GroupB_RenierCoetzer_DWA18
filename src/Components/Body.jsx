@@ -1,5 +1,3 @@
-//@ts-check
-
 export default function Body() { 
   return <div id="Body-Description">
             <h3>Welcome to RC Studio, your premier destination for captivating podcast videos 

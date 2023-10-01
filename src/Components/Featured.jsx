@@ -1,5 +1,3 @@
-//@ts-check
-
 import ShowList from "../Helpers/ShowList";
 import ShowDisplay from "../Helpers/ShowDisplay";
 
