@@ -28,6 +28,7 @@ nav {
 }
 
 .left-content {
+  
   display: flex; 
   align-items: center; 
 }
