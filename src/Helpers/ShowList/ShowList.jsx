@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import './ShowList/ShowList.css';
-import Body from '../Components/Body'; // Import the Body component
+import './ShowList.css';
+import Hero from '../../Components/Hero/Hero'; // Import the Body component
 
 export default function ShowList() {
   const [shows, setShows] = useState([]);
@@ -101,7 +101,7 @@ export default function ShowList() {
               ))}
             </sl-carousel>
           )}
-          {showBody && <Body/>}
+          {showBody && <Hero/>}
         </div>
       )}
     </div>

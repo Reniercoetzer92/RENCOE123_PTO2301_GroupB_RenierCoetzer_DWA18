@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom/client";
-import HomePage from "../Pages/Home";
+import HomePage from "../Pages/Home/Home";
 
-export default function Dialog() {
+export default function Main() {
   return <div>
           <HomePage />
           </div>  
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<Dialog />);
+root.render(<Main />);

@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import HomePage from "./src/Pages/Home";
+import HomePage from "./src/Pages/Home/Home";
 
 export default function App() {
   return <div>
@@ -8,4 +8,4 @@ export default function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
-root.render(<App />);
+root.render(<App/>);

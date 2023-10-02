@@ -1,0 +1,149 @@
+* {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 80vh;
+  min-width: 100%;
+  color: var(--text-light);
+  background-size: cover;
+  background-image: url('./src/Images/background1.jpg'); /* Light mode background image */
+}
+
+body.dark-mode {
+  background-image: url('./src/Images/background2.jpg'); /* Dark mode background image */
+  color: white;
+}
+
+/* Navbar styles */
+nav {
+  background-color: #3333339c;
+  padding: 0px 10px 0px 0px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  height: 8vh;
+}
+
+#left-content {
+  display: flex; 
+  align-items: center;
+  margin-top: 40px; 
+  margin-left: -50px;
+  width: 200px;
+}
+
+@keyframes back {
+  100%{
+        background-position: 2000px 0;
+  }
+}
+
+#left-content img:hover{
+  cursor: pointer;
+}
+
+#right-content {
+  list-style-type: none;
+  padding: 0px 0px;
+}
+
+#right-content li {
+  display: inline;
+  margin-right: 10px;
+}
+
+#right-content a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+#right-content a:hover { 
+  background-clip: value;
+  background: url('./src/Images/Back.jpg');
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: back 100s linear infinite;
+}
+
+/* CSS for the footer container */
+.Footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* CSS for the logo image */
+.Footer img {
+  width: 120px;
+  height: 40px;
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .Footer {
+    text-align: center;
+  }
+}
+
+#Hero-Description {
+  text-align: center;
+  height: 25vh;
+  line-height: 30px;
+  margin-top: 100px;
+}
+
+/* Styles for the modal container */
+.modal-container {
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  height: 100vh; /* Full viewport height */
+}
+
+/* Styles for the modal content */
+.modal-content {
+  text-align: center; /* Center text within the container */
+  background-color: #ffffff00; /* Background color for the modal content */
+  padding: 20px; /* Add padding to the modal content */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+.modal-image {
+  max-width: 100%; /* Allow the image to be as wide as its container */
+  height: auto; /* Maintain the aspect ratio of the image */
+}
+
+/* Additional styles for h2, p, and button elements inside .modal-content */
+.modal-content h2 {
+  font-size: 24px; /* Adjust the font size for the heading */
+  margin-top: 10px; /* Add some top margin to the heading */
+}
+
+.modal-content p {
+  font-size: 18px; /* Adjust the font size for the paragraph */
+  margin: 10px 0; /* Add margin to the top and bottom of the paragraph */
+  word-spacing: 1px;
+}
+
+.modal-content button {
+  background-color: #14ca87; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  padding: 10px 20px; /* Add padding to the button */
+  border-radius: 5px; /* Add rounded corners to the button */
+  cursor: pointer; /* Show a pointer cursor on hover */
+}
+
+/* Style for the button on hover */
+.modal-content button:hover {
+  background-color: #077242; /* Change background color on hover */
+}
+

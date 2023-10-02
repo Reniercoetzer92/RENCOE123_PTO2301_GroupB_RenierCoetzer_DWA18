@@ -1,9 +1,7 @@
-import Navbar from "./Navbar";
-import Featured from "./Featured";
+import Navbar from "../Navbar/Navbar";
 
 export default function Header() {
   return  <div>
             <Navbar />
-            <Featured />
         </div>;
 }

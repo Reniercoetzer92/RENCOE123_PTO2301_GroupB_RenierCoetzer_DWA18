@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
       <nav>
         <div id="left-content">
-          <a href="index.html">
+          <a href="Home">
               <img src="./Meta/mstile-150x150.png" width="100%" alt="Logo"/>
           </a>
         </div>

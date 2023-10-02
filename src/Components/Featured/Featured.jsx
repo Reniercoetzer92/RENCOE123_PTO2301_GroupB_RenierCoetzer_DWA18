@@ -1,5 +1,5 @@
-import ShowList from "../Helpers/ShowList/ShowList";
-import ShowDisplay from "../Helpers/ShowDisplay/ShowDisplay";
+import ShowList from "../../Helpers/ShowList/ShowList";
+import ShowDisplay from "../../Components/Featured/";
 
 export default function Featured() {
   return (
