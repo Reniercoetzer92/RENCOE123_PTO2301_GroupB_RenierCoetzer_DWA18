@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import "../../../Meta/mstile-150x150.png"
 export default function Navbar() {
   
   const [mode, setMode] = useState('light');
