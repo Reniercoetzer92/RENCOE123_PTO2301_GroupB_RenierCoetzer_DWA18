@@ -1,12 +1,10 @@
 import { useState } from 'react';
-
+import "../../../Meta/mstile-150x150.png"
 export default function Navbar() {
   
   const [mode, setMode] = useState('light');
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light');
-    console.log('Mode set to:', mode);
-
     document.body.classList.toggle('dark-mode', mode === 'light');
 
   };
@@ -16,12 +14,12 @@ export default function Navbar() {
   };
   return (
       <nav>
-        <div id="left-content">
+        <div className="left-content">
           <a href="Home">
               <img src="./Meta/mstile-150x150.png" width="100%" alt="Logo"/>
           </a>
         </div>
-        <ul id="right-content">
+        <ul className="right-content">
           <li><a href="Sign-in">Sign in</a></li>
           <li onClick={handleAvatarClick}>
               <a href="Avatar"><sl-avatar label="User avatar"></sl-avatar></a>
