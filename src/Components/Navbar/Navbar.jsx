@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import "./Navbar.css"
 
 export default function Navbar() {
   
@@ -16,8 +17,14 @@ export default function Navbar() {
       <nav>
         <div className="left-content">
           <a href="Home">
-              <img src="./src/Components/Navbar/Navbarlogo.png" width="100%" alt="Home"/>
+              <img src="../src/Components/Navbar/Navbarlogo.png" width="100%" alt="Home"/>
           </a>
+        </div>
+        <div className="Search-bar">
+            <form className="form-wrapper cf">
+              <input type="text" placeholder="Search here..." />
+                <button type="submit">Search</button>
+            </form>
         </div>
         <ul className="right-content">
           <li><a href="Sign-in">Sign in</a></li>

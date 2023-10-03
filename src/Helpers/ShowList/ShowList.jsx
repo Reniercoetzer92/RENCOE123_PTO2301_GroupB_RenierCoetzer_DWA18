@@ -1,32 +1,26 @@
 import { useEffect, useState, useRef } from 'react';
 import './ShowList.css';
-import Hero from '../../Components/Hero/Hero'; // Import the Body component
+import Hero from '../../Components/Hero/Hero';
 
 export default function ShowList() {
   const [shows, setShows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCarousel, setShowCarousel] = useState(true);
   const [selectedSlide, setSelectedSlide] = useState(null);
-  const [showBody, setShowBody] = useState(true); // State to control the visibility of the Body section
+  const [showBody, setShowBody] = useState(true);
+  const [seasonData, setSeasonData] = useState([]);
+  const [selectedSeason, setSelectedSeason] = useState(null);
   const carouselRef = useRef(null);
 
   useEffect(() => {
     fetch('https://podcast-api.netlify.app/shows')
       .then((response) => response.json())
       .then((data) => {
-        const showIds = data.map((preview) => preview.id);
-
-        Promise.all(showIds.map((id) => fetch(`https://podcast-api.netlify.app/id/${id}`).then((response) => response.json())))
-          .then((detailedData) => {
-            setShows(detailedData);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error('Error fetching detailed data:', error);
-          });
+        setShows(data);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching PREVIEW data:', error);
+        console.error('Error fetching show data:', error);
       });
   }, []);
 
@@ -42,16 +36,37 @@ export default function ShowList() {
     };
   }, []);
 
-  const handleSlideClick = (index) => {
-    setShowCarousel(false); // Hide the carousel
+  const handleSlideClick = async (index) => {
+    setShowCarousel(false);
     setSelectedSlide(index);
-    setShowBody(false); // Hide the Body section
+    setShowBody(false);
+
+    // Fetch season data based on the selected show's ID
+    const showId = shows[index].id;
+    try {
+      const response = await fetch(`https://podcast-api.netlify.app/id/${showId}`);
+      if (response.ok) {
+        const seasonData = await response.json();
+        setSeasonData(seasonData.seasons); // Assuming the season data is in a "seasons" property
+      } else {
+        console.error('Failed to fetch season data');
+      }
+    } catch (error) {
+      console.error('Error fetching season data:', error);
+    }
+  };
+
+  const handleSeasonChange = (event) => {
+    const selectedSeason = event.target.value;
+    setSelectedSeason(selectedSeason);
   };
 
   const closeDialog = () => {
-    setShowCarousel(true); // Show the carousel again
+    setShowCarousel(true);
     setSelectedSlide(null);
-    setShowBody(true); // Show the Body section
+    setShowBody(true);
+    setSeasonData([]);
+    setSelectedSeason(null);
   };
 
   return (
@@ -67,11 +82,56 @@ export default function ShowList() {
               <img
                 src={shows[selectedSlide].image}
                 alt={`Slide ${selectedSlide + 1}`}
-                className={`modal-image smaller-image`} // Apply both classes
+                className={`modal-image smaller-image`}
               />
               <h2>{shows[selectedSlide].title}</h2>
               <p>{shows[selectedSlide].description}</p>
+              <p>Last Updated:{shows[selectedSlide].updated}</p>
               <button onClick={closeDialog}>Close</button>
+              <select
+                id="seasonSelect"
+                placeholder="Select a season"
+                value={selectedSeason || ''}
+                onChange={handleSeasonChange}
+              >
+                <option value="">Select a season</option>
+                {seasonData.map((season, index) => (
+                  <option key={index} value={season.season}>
+                    {season.season}
+                  </option>
+                ))}
+              </select>
+
+              
+              {showCarousel && (
+                
+            <sl-carousel
+              ref={carouselRef}
+              navigation
+              pagination
+              slides-per-page="5"
+              slides-per-move="3"
+              loop={true}
+            >
+              {shows.map((show, index) => (
+                <sl-carousel-item
+                  key={index}
+                  className="carousel-item"
+                  onClick={() => handleSlideClick(index)}
+                >
+                  <a href={show.link} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={show.image}
+                      alt={`Slide ${index + 1}`}
+                      className="carousel-image"
+                      loading="lazy"
+                    />
+                  </a>
+                </sl-carousel-item>
+              ))}
+            </sl-carousel>
+          )}
+
             </div>
           )}
           {showCarousel && (
@@ -101,7 +161,26 @@ export default function ShowList() {
               ))}
             </sl-carousel>
           )}
-          {showBody && <Hero/>}
+          {showBody && selectedSeason && (
+            <div className="episode-carousel">
+              {/* Display episodes for the selected season */}
+              <h2>Episodes for Season {selectedSeason}</h2>
+              {/* Map and display episode data here */}
+              {seasonData
+                .find((season) => season.season === selectedSeason)
+                .episodes.map((episode, index) => (
+                  <div key={index}>
+                    <h3>Episode {episode.episode}</h3>
+                    <p>{episode.title}</p>
+                    <audio controls>
+                      <source src={episode.file} type="audio/mpeg" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  </div>
+                ))}
+            </div>
+          )}
+          {showBody && !selectedSeason && <Hero />}
         </div>
       )}
     </div>
