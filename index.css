@@ -87,6 +87,7 @@ nav {
 }
 
 .Hero-Description {
+  display: flexbox;
   text-align: center;
   height: 25vh;
   line-height: 20px;
