@@ -21,3 +21,27 @@
   height: 75px;
   cursor: pointer;
 }
+
+.card {
+  align-items: center;
+  align-content: center; 
+}
+
+.card-overview {
+  width: 400px;
+  height: 400px; 
+}
+
+.card-overview small {
+  color: var(--sl-color-neutral-500);
+}
+
+.card-overview [slot='footer'] {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card img {
+  width: 400px;
+  height: auto;
+}

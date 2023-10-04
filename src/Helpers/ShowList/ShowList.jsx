@@ -11,7 +11,7 @@ export default function ShowList() {
   const [seasonData, setSeasonData] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const carouselRef = useRef(null);
-
+ 
   useEffect(() => {
     fetch('https://podcast-api.netlify.app/shows')
       .then((response) => response.json())
@@ -86,21 +86,42 @@ export default function ShowList() {
               />
               <h2>{shows[selectedSlide].title}</h2>
               <p>{shows[selectedSlide].description}</p>
-              <p>Last Updated:{shows[selectedSlide].updated}</p>
+              <p>Last Update:<sl-format-date date={shows[selectedSlide].updated}></sl-format-date></p>
               <button onClick={closeDialog}>Close</button>
+              <h2>{shows[selectedSlide].episode}</h2>
+            
               <select
-                id="seasonSelect"
-                placeholder="Select a season"
-                value={selectedSeason || ''}
-                onChange={handleSeasonChange}
-              >
-                <option value="">Select a season</option>
-                {seasonData.map((season, index) => (
-                  <option key={index} value={season.season}>
-                    {season.season}
-                  </option>
-                ))}
+                  id="seasonSelect"
+                  placeholder="Select a season"
+                  value={selectedSeason || ''}
+                  onChange={handleSeasonChange}
+                >
+                  <option value="">Select a season</option>
+                  {seasonData.map((season, index) => (
+                    <option key={index} value={season.season}>
+                      {season.season}
+                    </option>
+                  ))}
               </select>
+              
+              <div className="card">
+              <sl-card class="card-overview">
+              <img
+                slot="image"
+                src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
+                alt="A kitten sits patiently between a terracotta pot and decorative grasses."
+              />
+
+                <strong>Title</strong><br />
+                description<br />
+                <small>file</small>
+      
+                <div slot="footer">
+                  <sl-button variant="primary" pill>Play</sl-button>
+                  <sl-rating></sl-rating>
+                </div>
+              </sl-card>
+              </div>
 
               
               {showCarousel && (
