@@ -1,0 +1,28 @@
+import React, { useEffect, useState } from 'react';
+import data from './data'; // The API data format you provided
+import PreviewSeasons from './components/PreviewSeasons';
+import PreviewShows from './components/PreviewShows';
+
+export default function App() {
+  const [shows, setShows] = useState([]);
+  const [selectedShowId, setSelectedShowId] = useState(null);
+
+  useEffect(() => {
+    // Fetch the list of shows from the API
+    fetch('https://podcast-api.netlify.app/')
+      .then((response) => response.json())
+      .then((data) => setShows(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  const handleShowClick = (showId) => {
+    setSelectedShowId(showId);
+  };
+
+  return (
+    <div>
+      <PreviewShows shows={shows} onShowClick={handleShowClick} />
+      {selectedShowId && <PreviewSeasons showId={selectedShowId} />}
+    </div>
+  );
+}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Cards.css";
+import "./Components.css/Cards.css";
 
 
 export default function Card() {
@@ -46,7 +46,6 @@ export default function Card() {
           </sl-button>
         </div>
       )}
-        
       </sl-card>
     </div>
   );

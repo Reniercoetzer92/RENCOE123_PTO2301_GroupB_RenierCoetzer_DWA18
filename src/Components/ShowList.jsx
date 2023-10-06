@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
-import './ShowList.css';
-import Hero from '../Hero/Hero';
-import Card from '../Cards/Cards';
+import './Components.css/ShowList.css';
+import Hero from './Hero';
+import Card from './Cards';
 
 export default function ShowList() {
   const [shows, setShows] = useState([]);

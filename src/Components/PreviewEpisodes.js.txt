@@ -1,0 +1,30 @@
+import React, { useState } from 'react';
+
+function PreviewEpisodes({ episodes, seasonTitle, showImage }) {
+  const [selectedEpisode, setSelectedEpisode] = useState(null);
+
+  const handleListenClick = (episode) => {
+    setSelectedEpisode(episode);
+  };
+
+  return (
+    <div className="PreviewEpisodes">
+      <div>
+        {episodes.map((episode, index) => (
+          <div key={episode.episode}>
+            {index + 1}. {episode.title} -{' '}
+            <button onClick={() => handleListenClick(episode)}>Listen</button>
+            {selectedEpisode === episode && (
+              <audio controls>
+                <source src={episode.file} type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default PreviewEpisodes;

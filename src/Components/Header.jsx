@@ -1,6 +1,6 @@
-import ShowList from "../ShowList/ShowList";
-import ShowDisplay from "../ShowDisplay/ShowDisplay";
-import "./Header.css"
+import ShowList from "./ShowList";
+import ShowDisplay from "./ShowDisplay";
+import "./Components.css/Header.css"
 
 export default function Header() {
 
