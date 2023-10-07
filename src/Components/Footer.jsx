@@ -2,11 +2,9 @@ import "./Components.css/Footer.css"
 
 export default function Footer() {
   
-  return <div className="Footer">
+  return <div className="footer">
             <h4>@2023 RC Studio Capstone project</h4>
-            <div className="Footer-logo">
-            <img src="../../../Images/Rcstudiologo.jpg" width="10%" alt="Logo"/>
-            </div>
+            <img src="../../../Images/Rcstudiologo.jpg" alt="Logo"/>
             <h5>Created By Renier Coetzer</h5>
         </div>;
 }

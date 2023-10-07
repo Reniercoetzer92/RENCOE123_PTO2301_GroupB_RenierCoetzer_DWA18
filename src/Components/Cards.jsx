@@ -1,52 +1,94 @@
-import { useState } from "react";
-import "./Components.css/Cards.css";
+import { useEffect, useState, useRef } from "react";
+import PropTypes from "prop-types";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
+export default function Cards({ idsToShow, onOpenSeason }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageUrls, setImageUrls] = useState([]);
+  const carouselRef = useRef(null);
 
-export default function Card() {
-  const [isPlayDialogOpen, setIsPlayDialogOpen] = useState(false);
+  useEffect(() => {
+    // Fetch the images for each show ID individually
+    Promise.all(
+      idsToShow.map((id) => {
+        return fetch(`https://podcast-api.netlify.app/id/${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            return data.image;
+          })
+          .catch((error) => {
+            console.error(`Error fetching image for ID ${id}:`, error);
+            return null;
+          });
+      })
+    ).then((images) => {
+      setImageUrls(images.filter((url) => url !== null));
+    });
+  }, [idsToShow]);
 
-  const handlePlayButtonClick = () => {
-    // Open the play dialog by setting isPlayDialogOpen to true
-    setIsPlayDialogOpen(true);
+  useEffect(() => {
+    // Start the carousel timer to move to the next slide every 3 seconds
+    const timer = setInterval(() => {
+      if (carouselRef.current && imageUrls.length > 0) {
+        const nextSlide = (currentSlide + 1) % imageUrls.length;
+        setCurrentSlide(nextSlide);
+        carouselRef.current.select(nextSlide, true); // Move to the next slide
+      }
+    }, 4000);
+
+    // Clear the timer when the component unmounts
+    return () => {
+      clearInterval(timer);
+    };
+  }, [currentSlide, imageUrls]);
+
+  // Calculate the number of slides per page and move based on screen width
+  const calculateSlidesPerPage = () => {
+    if (window.innerWidth <= 768) {
+      return 2; // Show 2 slides per page on smaller screens
+    } else {
+      return 4; // Show 4 slides per page on larger screens
+    }
   };
-
-  const closePlayDialog = () => {
-    // Close the play dialog by setting isPlayDialogOpen to false
-    setIsPlayDialogOpen(false);
+  const calculateMovePerPage = () => {
+    if (window.innerWidth >= 768) {
+      return 3; // Show 2 slides per page on smaller screens
+    } else {
+      return 2; // Show 4 slides per page on larger screens
+    }
   };
 
   return (
-    <div className="card">
-      <sl-card class="card-overview">
-        <img
-          slot="image"
-          src="https://images.unsplash.com/photo-1559209172-0ff8f6d49ff7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
-          alt="A kitten sits patiently between a terracotta pot and decorative grasses."
-        />
-        <strong>Title</strong>
-        <br />
-        description
-        <br />
-        <small>file</small>
-
-        <div slot="footer">
-          <sl-button variant="primary" pill onClick={handlePlayButtonClick}>
-            Play
-          </sl-button>
-          <sl-rating></sl-rating>
-        </div>
-         {/* Render the play dialog if isPlayDialogOpen is true */}
-      {isPlayDialogOpen && (
-        <div className="play-dialog">
-          {/* Add your play dialog content here */}
-          <h2>Play Dialog</h2>
-          {/* You can add additional content for the play dialog */}
-          <sl-button variant="primary" onClick={closePlayDialog}>
-            Close
-          </sl-button>
-        </div>
+    <div>
+      {/* Slides Carousel */}
+      {imageUrls.length > 0 && (
+        <sl-carousel
+          autoplay
+          infinite
+          navigation
+          pagination
+          slides-per-page={calculateSlidesPerPage()}
+          slides-per-move={calculateMovePerPage()}
+          style={{ maxWidth: "95%" }} // Set a maximum width for the carousel
+        >
+          {imageUrls.map((imageUrl, index) => (
+            <sl-carousel-item key={index}>
+              {/* Add an onClick event to the image */}
+              <img
+                src={imageUrl}
+                alt={`Image for ID ${idsToShow[index]}`}
+                style={{ width: "60%", height: "100%", objectFit: "cover" }}
+                onClick={() => onOpenSeason(idsToShow[index])}
+              />
+            </sl-carousel-item>
+          ))}
+        </sl-carousel>
       )}
-      </sl-card>
     </div>
   );
 }
+
+Cards.propTypes = {
+  idsToShow: PropTypes.arrayOf(PropTypes.string).isRequired, // Array of show IDs
+  onOpenSeason: PropTypes.func.isRequired, // Function to handle opening the season
+};

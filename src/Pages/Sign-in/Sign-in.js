@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
           displayThankYouMessage("Thank you for signing in!");
           // Redirect to the Thank you page after a delay (e.g., 3 seconds)
           setTimeout(function () {
-              window.location.href = "thank-you.html"; // Replace with the actual URL of your "Thank you" page
+              window.location.href = "http://localhost:5173/"; // Replace with the actual URL of your "Thank you" page
           }, 3000); // 3000 milliseconds (3 seconds) delay
       } else {
           // Incorrect password handling (you can customize this)
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.setItem("users", JSON.stringify(users));
 
           setTimeout(function () {
-              window.location.href = "home.html"; // Replace with the URL of your home page
+              window.location.href = "http://localhost:5173/"; // Replace with the URL of your home page
           }, 3000); // 3000 milliseconds (3 seconds) delay
       } else {
           // Handle form validation errors

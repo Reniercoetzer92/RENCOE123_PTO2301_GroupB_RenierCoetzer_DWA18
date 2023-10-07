@@ -114,6 +114,6 @@ section {
     display:flex;
 }
 
-.PreviewSeasons Layout imgage{
+.PreviewSeasons Layout image{
     display:flex;
 }

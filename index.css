@@ -9,60 +9,10 @@ body {
   min-width: 100%;
   color: var(--text-light);
   background-size: cover;
-  background-image: url('/Images/background1.jpg'); /* Light mode background image */
+  background-image: url('/Images/background1.jpg'); 
 }
 
 body.dark-mode {
-  background-image: url('/Images/background2.jpg'); /* Dark mode background image */
+  background-image: url('/Images/background2.jpg'); 
   color: white;
-}
-
-/* Styles for the modal container */
-.modal-container {
-  display: flex;
-  justify-content: center; /* Horizontal centering */
-  align-items: center; /* Vertical centering */
-  height: 100vh; /* Full viewport height */
-}
-
-/* Styles for the modal content */
-.modal-content {
-  text-align: center; /* Center text within the container */
-  background-color: #ffffff00; /* Background color for the modal content */
-  padding: 20px; /* Add padding to the modal content */
-  border-radius: 5px; /* Add rounded corners */
-}
-
-/* Adjust the max-width of the modal image to make it bigger */
-.modal-content img {
-  max-width: 100%; /* Allow the image to be as wide as its container */
-  max-height: 100%; /* Adjust the maximum height as needed */
-  width: 200px;
-  height: 150px; /* Maintain the aspect ratio of the image */
-}
-
-/* Additional styles for h2, p, and button elements inside .modal-content */
-.modal-content h2 {
-  font-size: 24px; /* Adjust the font size for the heading */
-  margin-top: 10px; /* Add some top margin to the heading */
-}
-
-.modal-content p {
-  font-size: 18px; /* Adjust the font size for the paragraph */
-  margin: 10px 0; /* Add margin to the top and bottom of the paragraph */
-  word-spacing: 1px;
-}
-
-.modal-content button {
-  background-color: #14ca87; /* Button background color */
-  color: #fff; /* Button text color */
-  border: none; /* Remove button border */
-  padding: 3px 20px; /* Add padding to the button */
-  border-radius: 5px; /* Add rounded corners to the button */
-  cursor: pointer; /* Show a pointer cursor on hover */
-}
-
-/* Style for the button on hover */
-.modal-content button:hover {
-  background-color: #077242; /* Change background color on hover */
 }

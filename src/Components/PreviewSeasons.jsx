@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PreviewEpisodes from './PreviewEpisodes';
+import  { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import PreviewEpisodes from "./PreviewEpisodes";
+import "./Components.css/PreviewSeasons.css";
 
-function PreviewSeasons({ showId }) {
+export default function PreviewSeasons({ showId }) {
   const [showInfo, setShowInfo] = useState(null);
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
@@ -15,7 +17,7 @@ function PreviewSeasons({ showId }) {
           setShowInfo(data);
         }
       })
-      .catch((error) => console.error('Error fetching show data:', error));
+      .catch((error) => console.error("Error fetching show data:", error));
 
     // Fetch season data for the selected show
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
@@ -27,7 +29,7 @@ function PreviewSeasons({ showId }) {
           setSeasons([]);
         }
       })
-      .catch((error) => console.error('Error fetching season data:', error));
+      .catch((error) => console.error("Error fetching season data:", error));
 
     // Reset selected season when a different show is clicked
     setSelectedSeason(null);
@@ -35,7 +37,9 @@ function PreviewSeasons({ showId }) {
 
   const handleSeasonSelect = (event) => {
     const selectedSeasonId = parseInt(event.target.value);
-    const selectedSeasonData = seasons.find((season) => season.season === selectedSeasonId);
+    const selectedSeasonData = seasons.find(
+      (season) => season.season === selectedSeasonId
+    );
     setSelectedSeason(selectedSeasonData || null); // Set to null if no season is selected
   };
 
@@ -48,7 +52,7 @@ function PreviewSeasons({ showId }) {
         </div>
       )}
 
-      <select onChange={handleSeasonSelect}>
+      <select onChange={handleSeasonSelect} value={selectedSeason ? selectedSeason.season : ""}>
         <option value="">Select a Season</option>
         {seasons.map((season) => (
           <option key={season.season} value={season.season}>
@@ -73,4 +77,7 @@ function PreviewSeasons({ showId }) {
   );
 }
 
-export default PreviewSeasons;
+// Add PropTypes validation for the showId prop
+PreviewSeasons.propTypes = {
+  showId: PropTypes.string.isRequired,
+};

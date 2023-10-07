@@ -2,11 +2,15 @@
   text-align: center;
 }
 
-/* .Search-bar button {
+.Search-bar button {
   background-color: #14ca87; 
   color: #fff;
   border: none; 
-  padding: 5px 20px;
+  padding: 3px 20px;
   border-radius: 5px; 
   cursor: pointer; 
-} */
+}
+
+.Search-bar button:hover {
+  background-color: #19ac76;
+}

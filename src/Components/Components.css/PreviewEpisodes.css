@@ -1,0 +1,21 @@
+.PreviewSeasons{
+  width: fit-content;
+  height: fit-content;
+}
+
+.PreviewSeasons button {
+  display: flexbox;
+}
+
+.PreviewSeasons img {
+  height: 200px;
+  width: 200px;
+}
+
+.PreviewSeasons-Layout image{
+  display:flex;
+}
+
+.PreviewSeasons audio{
+  padding: 10px;
+}
