@@ -43,11 +43,3 @@ nav {
   font-weight: bold;
   transition: color 0.3s;
 }
-
-.right-content a:hover { 
-  background: url('../../../back.jpg');
-  -webkit-background-clip: text;
-  background-clip: value;
-  color: transparent;
-  animation: back 100s linear infinite;
-}

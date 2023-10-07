@@ -22,7 +22,6 @@ export default function PreviewShows({ shows, onShowClick }) {
   };
 
   useEffect(() => {
-    // Extract the IDs of shows from the data
     const ids = shows.map((show) => show.id);
     setShowIds(ids);
   }, [shows]);
@@ -39,7 +38,6 @@ export default function PreviewShows({ shows, onShowClick }) {
           <div>
             {selectedShow ? (
               <div className="PreviewShow-Image">
-                {/* Display the selected show's image */}
                 <img src={selectedShow.image} alt={selectedShow.title} />
                 <button onClick={handleBackClick}>Back</button>
               </div>

@@ -32,14 +32,12 @@ export default function PreviewEpisodes({ episodes }) {
   );
 }
 
-// Add PropTypes validation for the episodes prop
 PreviewEpisodes.propTypes = {
   episodes: PropTypes.arrayOf(
     PropTypes.shape({
       episode: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       file: PropTypes.string.isRequired,
-      // Add more PropTypes as needed for the episode object
     })
   ).isRequired,
 };

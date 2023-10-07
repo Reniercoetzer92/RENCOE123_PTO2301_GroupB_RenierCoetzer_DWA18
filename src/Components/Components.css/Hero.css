@@ -12,8 +12,8 @@
   .Hero-Description {
     display: flex;
     text-align: center;
-    height: 23vh;
-    line-height: 25px;
-    margin-top: 100px;
+    line-height: 22px;
+    margin-top: 10px;
+    height: 30vh;
   }
 }

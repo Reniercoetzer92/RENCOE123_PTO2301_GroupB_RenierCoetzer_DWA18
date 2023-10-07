@@ -9,7 +9,6 @@ export default function PreviewSeasons({ showId }) {
   const [selectedSeason, setSelectedSeason] = useState(null);
 
   useEffect(() => {
-    // Fetch show information
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -19,7 +18,6 @@ export default function PreviewSeasons({ showId }) {
       })
       .catch((error) => console.error("Error fetching show data:", error));
 
-    // Fetch season data for the selected show
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -31,7 +29,6 @@ export default function PreviewSeasons({ showId }) {
       })
       .catch((error) => console.error("Error fetching season data:", error));
 
-    // Reset selected season when a different show is clicked
     setSelectedSeason(null);
   }, [showId]);
 
@@ -40,7 +37,7 @@ export default function PreviewSeasons({ showId }) {
     const selectedSeasonData = seasons.find(
       (season) => season.season === selectedSeasonId
     );
-    setSelectedSeason(selectedSeasonData || null); // Set to null if no season is selected
+    setSelectedSeason(selectedSeasonData || null);
   };
 
   return (
@@ -77,7 +74,6 @@ export default function PreviewSeasons({ showId }) {
   );
 }
 
-// Add PropTypes validation for the showId prop
 PreviewSeasons.propTypes = {
   showId: PropTypes.string.isRequired,
 };

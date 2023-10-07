@@ -16,3 +16,11 @@ body.dark-mode {
   background-image: url('./background2.jpg'); 
   color: white;
 }
+
+.right-content a:hover { 
+  background: url('./back.jpg');
+  -webkit-background-clip: text;
+  background-clip: value;
+  color: transparent;
+  animation: back 100s linear infinite;
+}
