@@ -13,7 +13,7 @@ export default function Navbar() {
       <nav>
         <div className="left-content">
           <a href="Home">
-              <img src="../../../Images/Navbarlogo.png" width="100%" alt="Home"/>
+              <img src="../../../navbarlogo.png" width="100%" alt="Home"/>
           </a>
         </div>
         <ul className="right-content">

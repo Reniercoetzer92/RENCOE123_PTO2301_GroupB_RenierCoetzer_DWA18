@@ -1,6 +1,21 @@
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20vh;
+.PreviewShows ul {
+  text-align: center;
+}
+
+.PreviewShows img {
+ width: 200px;
+ height: 200px;
+}
+
+.PreviewShows button  {
+  background-color: #14ca87; 
+  color: #fff;
+  border: none; 
+  padding: 3px 20px;
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.PreviewShows button :hover {
+  background-color: #19ac76;
 }

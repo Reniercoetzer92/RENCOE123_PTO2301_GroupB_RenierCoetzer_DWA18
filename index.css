@@ -9,10 +9,10 @@ body {
   min-width: 100%;
   color: var(--text-light);
   background-size: cover;
-  background-image: url('/Images/background1.jpg'); 
+  background-image: url('./background1.jpg'); 
 }
 
 body.dark-mode {
-  background-image: url('/Images/background2.jpg'); 
+  background-image: url('./background2.jpg'); 
   color: white;
 }

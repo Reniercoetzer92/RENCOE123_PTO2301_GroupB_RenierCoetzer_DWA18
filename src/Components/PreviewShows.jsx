@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Cards from "./Cards";
+import "./Components.css/PreviewShows.css"
 
 export default function PreviewShows({ shows, onShowClick }) {
-  const [ setSelectedShow] = useState(null);
+  const [selectedShow, setSelectedShow] = useState(null);
   const [showAll, setShowAll] = useState(true);
   const [showIds, setShowIds] = useState([]);
 
@@ -30,14 +31,22 @@ export default function PreviewShows({ shows, onShowClick }) {
     <div className="PreviewShows">
       <h2>Featured:</h2>
       <ul>
-        {showAll && (
+        {showAll ? (
           <div>
             <Cards idsToShow={showIds} onOpenSeason={handleShowClick} />
           </div>
-        )}
-        {!showAll && (
+        ) : (
           <div>
-            <button onClick={handleBackClick}>Back</button>
+            {selectedShow ? (
+              <div className="PreviewShow-Image">
+                {/* Display the selected show's image */}
+                <img src={selectedShow.image} alt={selectedShow.title} />
+                <button onClick={handleBackClick}>Back</button>
+              </div>
+            ) : (
+              <div>
+              </div>
+            )}
           </div>
         )}
       </ul>

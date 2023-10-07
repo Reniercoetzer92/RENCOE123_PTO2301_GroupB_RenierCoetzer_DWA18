@@ -45,9 +45,9 @@ nav {
 }
 
 .right-content a:hover { 
-  background-clip: value;
-  background: url('/Images/Back.jpg');
+  background: url('../../../back.jpg');
   -webkit-background-clip: text;
+  background-clip: value;
   color: transparent;
   animation: back 100s linear infinite;
 }
