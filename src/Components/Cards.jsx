@@ -42,22 +42,6 @@ export default function Cards({ idsToShow, onOpenSeason }) {
     };
   }, [currentSlide, imageUrls]);
 
-  // Calculate the number of slides per page and move based on screen width
-  const calculateSlidesPerPage = () => {
-    if (window.innerWidth <= 768) {
-      return 2; // Show 2 slides per page on smaller screens
-    } else {
-      return 4; // Show 4 slides per page on larger screens
-    }
-  };
-  const calculateMovePerPage = () => {
-    if (window.innerWidth >= 768) {
-      return 3; // Show 2 slides per page on smaller screens
-    } else {
-      return 2; // Show 4 slides per page on larger screens
-    }
-  };
-
   return (
     <div>
       {/* Slides Carousel */}
@@ -67,8 +51,8 @@ export default function Cards({ idsToShow, onOpenSeason }) {
           infinite
           navigation
           pagination
-          slides-per-page={calculateSlidesPerPage()}
-          slides-per-move={calculateMovePerPage()}
+          slides-per-page= "2"
+          slides-per-move= "1"
           style={{ maxWidth: "95%" }} // Set a maximum width for the carousel
         >
           {imageUrls.map((imageUrl, index) => (
