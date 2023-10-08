@@ -47,9 +47,9 @@ export default function Cards({ idsToShow, onOpenSeason }) {
           infinite
           navigation
           pagination
-          slides-per-page= "2"
-          slides-per-move= "1"
-          style={{ maxWidth: "93%" }} 
+          slides-per-page= "3"
+          slides-per-move= "2"
+          style={{ maxWidth: "97%" }} 
         >
           {imageUrls.map((imageUrl, index) => (
             <sl-carousel-item key={index}>

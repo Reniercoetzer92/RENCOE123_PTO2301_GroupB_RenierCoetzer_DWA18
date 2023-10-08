@@ -4,11 +4,23 @@ import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import PreviewSeasons from '../../Components/PreviewSeasons';
 import PreviewShows from '../../Components/PreviewShows';
-import SearchBar from '../../Components/SearchBar'
+import SearchBar from '../../Components/SearchBar';
+import DialogBox from '../../Components/DialogBox';
 
 export default function HomePage() {
   const [shows, setShows] = useState([]);
   const [selectedShowId, setSelectedShowId] = useState(null);
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleSearch = () => {
+    // You can use the results from the search if needed
+    setIsDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+  };
   
   useEffect(() => {
     fetch('https://podcast-api.netlify.app/')
@@ -26,7 +38,12 @@ export default function HomePage() {
       <section className="Navbar">
         <Navbar />
       </section>
-      <SearchBar/>
+      <div className="App">
+        <SearchBar onSearch={handleSearch} />
+        {isDialogOpen && (
+          <DialogBox isOpen={isDialogOpen} onClose={handleCloseDialog} content={""} />
+        )}
+      </div>
       <div>
         <PreviewShows shows={shows} onShowClick={handleShowClick} />
         {selectedShowId ? (
@@ -43,4 +60,3 @@ export default function HomePage() {
     </div>
   );
 }
-

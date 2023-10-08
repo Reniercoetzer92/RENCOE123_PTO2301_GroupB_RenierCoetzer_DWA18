@@ -1,4 +1,22 @@
 .PreviewSeasons {
   text-align: center;
   width: 100%;
+  line-height: 20px;
+}
+
+.PreviewSeasons select{
+  margin-top: 25px;
+}
+
+.PreviewSeasons-SeasonDetails button {
+  background-color: #14ca87; 
+  color: #fff;
+  border: none; 
+  padding: 4px 10px;
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.PreviewSeasons-SeasonDetails button:hover {
+  background-color: #19ac76;
 }
