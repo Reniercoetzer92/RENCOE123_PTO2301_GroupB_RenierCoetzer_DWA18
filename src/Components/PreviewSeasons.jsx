@@ -43,7 +43,7 @@ export default function PreviewSeasons({ showId }) {
   return (
     <div className="PreviewSeasons">
       {showInfo && (
-        <div className="ShowInfo">
+        <div className="PreviewSeasons-ShowInfo">
           <h2>{showInfo.title}</h2>
           <p>{showInfo.description}</p>
         </div>
@@ -59,7 +59,7 @@ export default function PreviewSeasons({ showId }) {
       </select>
 
       {selectedSeason && (
-        <div className="SeasonDetails">
+        <div className="PreviewSeasons-SeasonDetails">
           <h3>{selectedSeason.title}</h3>
           <p>{selectedSeason.description}</p>
           <img src={selectedSeason.image} alt={selectedSeason.title} />

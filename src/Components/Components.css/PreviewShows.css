@@ -1,5 +1,10 @@
 .PreviewShows ul {
   text-align: center;
+  width: 100%;
+}
+
+.PreviewShow-display {
+  margin-right:40px; 
 }
 
 .PreviewShows img {
@@ -11,7 +16,7 @@
   background-color: #14ca87; 
   color: #fff;
   border: none; 
-  padding: 3px 20px;
+  padding: 4px 10px;
   border-radius: 5px; 
   cursor: pointer; 
 }

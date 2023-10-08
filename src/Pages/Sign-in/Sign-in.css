@@ -6,7 +6,7 @@ html, body, div, p, h5 {
 
 /* Apply a background color to the entire page */
 body {
-  background:url(../../../public/background2.jpg);
+  background:url(../../../background2.jpg);
   font-family: Arial, sans-serif;
   line-height: 50px;
 }
@@ -25,7 +25,7 @@ body {
 
 /* Style the login box */
 .login-box {
-  background:url(../../../public/background1.jpg);
+  background:url(../../../background1.jpg);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);

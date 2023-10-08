@@ -37,9 +37,13 @@ export default function PreviewShows({ shows, onShowClick }) {
         ) : (
           <div>
             {selectedShow ? (
+            <div className="PreviewShow-display">
               <div className="PreviewShow-Image">
                 <img src={selectedShow.image} alt={selectedShow.title} />
+                </div>
+                <div>
                 <button onClick={handleBackClick}>Back</button>
+              </div>
               </div>
             ) : (
               <div>
