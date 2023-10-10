@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./Components.css/Cards.css"
 
 export default function Cards({ idsToShow, onOpenSeason }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -49,7 +50,7 @@ export default function Cards({ idsToShow, onOpenSeason }) {
           pagination
           slides-per-page= "3"
           slides-per-move= "2"
-          style={{ maxWidth: "97%" }} 
+          style={{ maxWidth: "100%" }} 
         >
           {imageUrls.map((imageUrl, index) => (
             <sl-carousel-item key={index}>
