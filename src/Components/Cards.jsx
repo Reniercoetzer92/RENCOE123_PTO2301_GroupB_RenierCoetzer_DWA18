@@ -1,8 +1,17 @@
 import { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "./Components.css/Cards.css"
+import "./Components.css/Cards.css";
 
+/**
+ * Cards component displaying a carousel of podcast show images.
+ *
+ * @param {Object} props - The component's props.
+ * @param {string[]} props.idsToShow - An array of show IDs to display.
+ * @param {Function} props.onOpenSeason - A callback function to handle opening a season.
+ *
+ * @returns {JSX.Element} - A React component representing the Cards section.
+ */
 export default function Cards({ idsToShow, onOpenSeason }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageUrls, setImageUrls] = useState([]);
@@ -31,7 +40,7 @@ export default function Cards({ idsToShow, onOpenSeason }) {
       if (carouselRef.current && imageUrls.length > 0) {
         const nextSlide = (currentSlide + 1) % imageUrls.length;
         setCurrentSlide(nextSlide);
-        carouselRef.current.select(nextSlide, true); 
+        carouselRef.current.select(nextSlide, true);
       }
     }, 4000);
 
@@ -48,9 +57,10 @@ export default function Cards({ idsToShow, onOpenSeason }) {
           infinite
           navigation
           pagination
-          slides-per-page= "3"
-          slides-per-move= "2"
-          style={{ maxWidth: "100%" }} 
+          slides-per-page="3"
+          slides-per-move="2"
+          style={{ maxWidth: "100%" }}
+          ref={carouselRef}
         >
           {imageUrls.map((imageUrl, index) => (
             <sl-carousel-item key={index}>
@@ -69,6 +79,6 @@ export default function Cards({ idsToShow, onOpenSeason }) {
 }
 
 Cards.propTypes = {
-  idsToShow: PropTypes.arrayOf(PropTypes.string).isRequired, 
+  idsToShow: PropTypes.arrayOf(PropTypes.string).isRequired,
   onOpenSeason: PropTypes.func.isRequired,
 };

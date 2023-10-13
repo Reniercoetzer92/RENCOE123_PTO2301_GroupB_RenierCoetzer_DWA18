@@ -1,5 +1,10 @@
 import "./Components.css/Hero.css"
 
+/**
+ * Hero component for displaying a welcome message.
+ *
+ * @returns {JSX.Element} - A React component representing the Hero section.
+ */
 export default function Hero() {
   return (
     <div className="Hero-Description">

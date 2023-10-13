@@ -1,14 +1,22 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import PreviewEpisodes from "./PreviewEpisodes";
 import "./Components.css/PreviewSeasons.css";
 
+/**
+ * PreviewSeasons component displays information about a show's seasons and episodes.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.showId - The ID of the show to fetch season data for.
+ * @returns {JSX.Element} - A React component representing the PreviewSeasons.
+ */
 export default function PreviewSeasons({ showId }) {
   const [showInfo, setShowInfo] = useState(null);
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
 
   useEffect(() => {
+    // Fetch show information
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -18,6 +26,7 @@ export default function PreviewSeasons({ showId }) {
       })
       .catch((error) => console.error("Error fetching show data:", error));
 
+    // Fetch season information
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -32,6 +41,11 @@ export default function PreviewSeasons({ showId }) {
     setSelectedSeason(null);
   }, [showId]);
 
+  /**
+   * Handles the selection of a season from the dropdown.
+   *
+   * @param {Object} event - The event object.
+   */
   const handleSeasonSelect = (event) => {
     const selectedSeasonId = parseInt(event.target.value);
     const selectedSeasonData = seasons.find(
@@ -46,13 +60,15 @@ export default function PreviewSeasons({ showId }) {
         <div>
           <h2>{showInfo.title}</h2>
           <p>{showInfo.description}</p>
-            Last updated:
-          <sl-format-date date={showInfo.updated}/>
+          Last updated:
+          <sl-format-date date={showInfo.updated} />
         </div>
       )}
-      
-      <select onChange={handleSeasonSelect} value={selectedSeason ? selectedSeason.season : ""}>
-        
+
+      <select
+        onChange={handleSeasonSelect}
+        value={selectedSeason ? selectedSeason.season : ""}
+      >
         <option value="">Select a Season</option>
         {seasons.map((season) => (
           <option key={season.season} value={season.season}>

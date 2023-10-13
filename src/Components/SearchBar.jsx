@@ -1,32 +1,27 @@
-import  { useState } from 'react';
-import './Components.css/SearchBar.css';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import "./Components.css/SearchBar.css"
 
 export default function SearchBar({ onSearch }) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
-  const handleSearchButtonClick = () => {
-    // Pass the search query to the parent component for handling
-    onSearch(searchQuery);
+  const handleSearch = () => {
+    onSearch(searchTerm);
   };
 
   return (
-    <div className="Search-bar">
-      <div className="Search-bar">
-        <input
-          type="text"
-          placeholder="Search here..."
-          value={searchQuery}
-          onChange={handleSearchInputChange}
-        />
-        <button type="submit" onClick={handleSearchButtonClick}>
-          Search
-        </button>
-      </div>
+    <div className="Search-Bar">
+      <input
+        type="text"
+        placeholder="Search by title, genre, or description"
+        value={searchTerm}
+        onChange={handleInputChange}
+      />
+      <button onClick={handleSearch}>Search</button>
     </div>
   );
 }

@@ -1,12 +1,16 @@
-.Search-bar {
+.Search-Bar{
   text-align: center;
 }
 
-.Search-bar button {
+.Search-Bar input{
+  width: 250px;
+}
+
+.Search-Bar button {
   background-color: #14ca87; 
   color: #fff;
   border: none; 
-  padding: 3px 20px;
+  padding: 5px 20px;
   border-radius: 5px; 
   cursor: pointer; 
 }

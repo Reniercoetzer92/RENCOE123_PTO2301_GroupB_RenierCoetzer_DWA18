@@ -22,6 +22,24 @@ nav {
   }
 }
 
+.search-button  button  {
+  background-color: #14ca87; 
+  color: #fff;
+  border: none; 
+  padding: 4px 10px;
+  border-radius: 5px; 
+  cursor: pointer; 
+  margin-right: 30px;
+}
+
+.search-button :hover {
+  background-color: #19ac76;
+}
+
+.left-content img {
+  width: 100%;
+}
+
 .left-content img:hover{
   cursor: pointer;
 }
