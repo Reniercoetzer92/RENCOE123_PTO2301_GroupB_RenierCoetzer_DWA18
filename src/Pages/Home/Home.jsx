@@ -69,15 +69,15 @@ export default function HomePage() {
         <Footer />
       </section>
       {isSearchDialogOpen && (
-          <div className="modal">
-            <div className="modal-content">
-              <button onClick={closeSearchDialog}>Close</button>
-              <div className="modal-scrollable-content">
-                <SearchDialog onClose={closeSearchDialog} showData={searchData} />
-              </div>
+        <div className="modal">
+          <div className="modal-content">
+            <button onClick={closeSearchDialog}>Close</button>
+            <div className="modal-scrollable-content">
+              <SearchDialog isOpen={isSearchDialogOpen} onClose={closeSearchDialog} showData={searchData} />
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

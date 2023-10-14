@@ -77,17 +77,6 @@ body.dark-mode {
   background-color: #19ac76;
 }
 
-/* .modal-content button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #000000;
-} */
-
 .modal-scrollable-content {
   max-height: 70vh; 
   overflow-y: auto; 
@@ -101,4 +90,20 @@ ul {
   text-wrap: wrap;
   margin-left: -50px;
   margin-right: 0px;
+}
+
+.search-error p{
+width: 60vh;
+}
+
+.search-select-input {
+  margin-left: 40px;
+}
+
+.search-select-input input {
+  border-radius: 10px;
+}
+
+.search-select-input select {
+  border-radius: 10px;
 }

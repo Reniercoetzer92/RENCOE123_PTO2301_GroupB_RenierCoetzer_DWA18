@@ -40,9 +40,9 @@ export default function Cards({ idsToShow, onOpenSeason }) {
       if (carouselRef.current && imageUrls.length > 0) {
         const nextSlide = (currentSlide + 1) % imageUrls.length;
         setCurrentSlide(nextSlide);
-        carouselRef.current.select(nextSlide, true);
+        carouselRef.current.selected = nextSlide;
       }
-    }, 4000);
+    }, 5000);
 
     return () => {
       clearInterval(timer);

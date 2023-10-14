@@ -60,12 +60,11 @@ export default function PreviewSeasons({ showId }) {
         <div>
           <h2>{showInfo.title}</h2>
           <p>{showInfo.description}</p>
-          Last updated:
-          <sl-format-date date={showInfo.updated} />
         </div>
       )}
 
       <select
+        className="select-season"
         onChange={handleSeasonSelect}
         value={selectedSeason ? selectedSeason.season : ""}
       >

@@ -24,7 +24,7 @@ export default function PreviewEpisodes({ episodes }) {
   return (
     <div className="PreviewEpisodes">
       <div>
-        <h3>Episodes</h3>
+        <h3>Episodes:</h3>
         {episodes.map((episode, index) => (
           <div key={episode.episode}>
             {index + 1}. {episode.title} -{" "}
