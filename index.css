@@ -81,15 +81,13 @@ ul {
   background-color: #19ac76;
 }
 
-.modal-scrollable-content {
-  max-height: 70vh; 
-  overflow-y: auto; 
-}
-
 .modal-scrollable-content{
+  max-height: 80vh; 
+  overflow-y: auto;
+  overflow-x: hidden; 
   text-wrap: wrap;
   margin-left: -50px;
-  margin-right: 0px;
+  padding-right: 5px;
 }
 
 .search-error p{
