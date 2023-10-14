@@ -53,7 +53,7 @@ export default function HomePage() {
   return (
     <div>
       <Navbar onSearchClick={openSearchDialog} />
-      <div>
+      <section className="Home-Preview">
         <PreviewShows shows={shows} onShowClick={handleShowClick} />
         {selectedShowId ? (
           <div>
@@ -64,14 +64,13 @@ export default function HomePage() {
             <Hero />
           </section>
         )}
-      </div>
+      </section>
       <section className="Footer">
         <Footer />
       </section>
       {isSearchDialogOpen && (
         <div className="modal">
           <div className="modal-content">
-            <button onClick={closeSearchDialog}>Close</button>
             <div className="modal-scrollable-content">
               <SearchDialog isOpen={isSearchDialogOpen} onClose={closeSearchDialog} showData={searchData} />
             </div>

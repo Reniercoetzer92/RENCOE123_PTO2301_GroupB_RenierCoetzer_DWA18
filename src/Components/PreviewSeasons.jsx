@@ -14,6 +14,7 @@ export default function PreviewSeasons({ showId }) {
   const [showInfo, setShowInfo] = useState(null);
   const [seasons, setSeasons] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
+  const [isLoadingImage, setIsLoadingImage] = useState(true); // Add loading state for the image
 
   useEffect(() => {
     // Fetch show information
@@ -39,6 +40,7 @@ export default function PreviewSeasons({ showId }) {
       .catch((error) => console.error("Error fetching season data:", error));
 
     setSelectedSeason(null);
+    setIsLoadingImage(true);
   }, [showId]);
 
   /**
@@ -52,6 +54,12 @@ export default function PreviewSeasons({ showId }) {
       (season) => season.season === selectedSeasonId
     );
     setSelectedSeason(selectedSeasonData || null);
+
+    // Simulate a 2-second delay before loading the image
+    setIsLoadingImage(true);
+    setTimeout(() => {
+      setIsLoadingImage(false);
+    }, 2000);
   };
 
   return (
@@ -60,6 +68,7 @@ export default function PreviewSeasons({ showId }) {
         <div>
           <h2>{showInfo.title}</h2>
           <p>{showInfo.description}</p>
+          <button className="add-to-favorites">Add To Favorites</button>
         </div>
       )}
 
@@ -80,7 +89,11 @@ export default function PreviewSeasons({ showId }) {
         <div className="PreviewSeasons-SeasonDetails">
           <h3>{selectedSeason.title}</h3>
           <p>{selectedSeason.description}</p>
-          <img src={selectedSeason.image} alt={selectedSeason.title} />
+          {isLoadingImage ? (
+            <sl-spinner></sl-spinner>
+          ) : (
+            <img src={selectedSeason.image} alt={selectedSeason.title} />
+          )}
           <PreviewEpisodes
             episodes={selectedSeason.episodes}
             seasonTitle={selectedSeason.title}

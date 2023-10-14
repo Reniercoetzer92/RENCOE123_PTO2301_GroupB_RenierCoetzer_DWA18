@@ -17,6 +17,10 @@ body.dark-mode {
   color: white;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .right-content a:hover { 
   background: url('/back.jpg');
   -webkit-background-clip: text;
@@ -80,10 +84,6 @@ body.dark-mode {
 .modal-scrollable-content {
   max-height: 70vh; 
   overflow-y: auto; 
-}
-
-ul {
-  list-style-type: none; /* Removes the marker bullet point */
 }
 
 .modal-scrollable-content{

@@ -1,18 +1,23 @@
-.PreviewShows ul {
+.preview-shows h3{
+  height: 30px;
+  margin-top: 5px;
+}
+
+.preview-shows ul {
   text-align: center;
   width: 100%;
 }
 
-.PreviewShow-display {
+.preview-show-display {
   margin-right:40px; 
 }
 
-.PreviewShows img {
+.preview-show-Image img {
  width: 200px;
  height: 200px;
 }
 
-.PreviewShows button  {
+.preview-show-back-button {
   background-color: #14ca87; 
   color: #fff;
   border: none; 
@@ -21,6 +26,10 @@
   cursor: pointer; 
 }
 
-.PreviewShows button :hover {
-  background-color: #19ac76;
+.preview-show-back-button :hover {
+  background-color: #1e835e;
+}
+
+.preview-show-display sl-spinner{
+  margin-right: -50px;
 }

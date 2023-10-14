@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Cards from "./Cards";
-import "./Components.css/PreviewShows.css"
+import CarouselCards from "./CarouselCards";
+import "./Components.css/PreviewShows.css";
 
 /**
  * PreviewShows component displays a list of featured shows and allows users to click on a show to see more details.
@@ -15,6 +15,7 @@ export default function PreviewShows({ shows, onShowClick }) {
   const [selectedShow, setSelectedShow] = useState(null);
   const [showAll, setShowAll] = useState(true);
   const [showIds, setShowIds] = useState([]);
+  const [imageLoading, setImageLoading] = useState(false);
 
   /**
    * Handles a click event on a show, displaying show details.
@@ -22,11 +23,17 @@ export default function PreviewShows({ shows, onShowClick }) {
    * @param {string} showId - The ID of the clicked show.
    */
   const handleShowClick = (showId) => {
+    setImageLoading(true);
     onShowClick(showId);
     setSelectedShow((prevSelected) =>
       prevSelected?.id === showId ? null : shows.find((show) => show.id === showId)
     );
     setShowAll(false);
+    
+    // Simulate a 2-second loading time
+    setTimeout(() => {
+      setImageLoading(false);
+    }, 2000);
   };
 
   /**
@@ -43,27 +50,33 @@ export default function PreviewShows({ shows, onShowClick }) {
   }, [shows]);
 
   return (
-    <div className="PreviewShows">
-      <h2>Featured:</h2>
+    <div className="preview-shows">
+      <h3>Featured:</h3>
       <ul>
         {showAll ? (
           <div>
-            <Cards idsToShow={showIds} onOpenSeason={handleShowClick} />
+            <CarouselCards idsToShow={showIds} onOpenSeason={handleShowClick} />
           </div>
         ) : (
           <div>
             {selectedShow ? (
-              <div className="PreviewShow-display">
-                <div className="PreviewShow-Image">
-                  <img src={selectedShow.image} alt={selectedShow.title} />
-                </div>
+              <div className="preview-show-display">
+                {imageLoading ? (
+                  <sl-spinner></sl-spinner>
+                ) : (
+                  <div className="preview-show-Image">
+                    <img
+                      src={selectedShow.image}
+                      alt={selectedShow.title}
+                    />
+                  </div>
+                )}
                 <div>
-                  <button onClick={handleBackClick}>Back</button>
+                  <button className="preview-show-back-button" onClick={handleBackClick}>Back</button>
                 </div>
               </div>
             ) : (
-              <div>
-              </div>
+              <div></div>
             )}
           </div>
         )}

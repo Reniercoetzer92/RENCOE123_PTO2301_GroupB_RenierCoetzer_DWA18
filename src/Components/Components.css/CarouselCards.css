@@ -1,0 +1,10 @@
+sl-carousel {
+  margin-left: -24PX;
+  width: 100%;
+}
+
+sl-spinner {
+  --indicator-color:#19ac76;
+  text-align: center;
+  margin-left: -50px;
+}

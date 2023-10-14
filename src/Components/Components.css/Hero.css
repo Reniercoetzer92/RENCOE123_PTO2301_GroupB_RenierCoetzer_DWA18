@@ -1,4 +1,4 @@
-.Hero-Description {
+.hero-description {
   display: flex;
   text-align: center;
   height: 10vh;
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 768px) {
-  .Hero-Description {
+  .hero-description {
     display: flex;
     text-align: center;
     line-height: 22px;

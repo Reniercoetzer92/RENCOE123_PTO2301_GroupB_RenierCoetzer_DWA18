@@ -37,3 +37,7 @@
   cursor: pointer;
   color: #888;
 }
+
+.search-dialog-content button:hover {
+  background-color: #151c19;
+}
