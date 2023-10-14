@@ -65,6 +65,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
         imageUrls.length > 0 && (
           <sl-carousel
             autoplay
+            mouse-dragging
             infinite
             navigation
             pagination
@@ -78,7 +79,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
                 <img
                   src={imageUrl}
                   alt={`Image for ID ${idsToShow[index]}`}
-                  style={{ width: "60%", height: "100%", objectFit: "cover" }}
+                  style={{ width: "80%", height: "100%", objectFit: "fill" }}
                   onClick={() => onOpenSeason(idsToShow[index])}
                 />
               </sl-carousel-item>

@@ -5,6 +5,7 @@ import Navbar from '../../Components/Navbar.jsx';
 import PreviewSeasons from '../../Components/PreviewSeasons.jsx';
 import PreviewShows from '../../Components/PreviewShows.jsx';
 import SearchDialog from '../../Components/SearchDialog.jsx';
+import Favorites from '../../Components/Favorites.jsx';
 
 /**
  * The main component representing the home page of the application.
@@ -52,12 +53,15 @@ export default function HomePage() {
 
   return (
     <div>
-      <Navbar onSearchClick={openSearchDialog} />
-      <section className="Home-Preview">
+      <section className="Navbar">
+        <Navbar onSearchClick={openSearchDialog} />
+      </section>
+      <section className="HomePreview">
         <PreviewShows shows={shows} onShowClick={handleShowClick} />
         {selectedShowId ? (
           <div>
             <PreviewSeasons showId={selectedShowId} />
+            <Favorites />
           </div>
         ) : (
           <section className="Hero">
@@ -68,6 +72,7 @@ export default function HomePage() {
       <section className="Footer">
         <Footer />
       </section>
+      <section className="SearchDialog">
       {isSearchDialogOpen && (
         <div className="modal">
           <div className="modal-content">
@@ -77,6 +82,7 @@ export default function HomePage() {
           </div>
         </div>
       )}
+      </section>
     </div>
   );
 }

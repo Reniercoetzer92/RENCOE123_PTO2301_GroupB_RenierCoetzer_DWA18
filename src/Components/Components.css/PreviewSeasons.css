@@ -37,3 +37,11 @@
 .PreviewSeasons-SeasonDetails sl-spinner {
   margin-right: -40px;
 }
+
+.add-to-favorites.favorited .bi-star-fill {
+  color: yellow;
+}
+
+.add-to-favorites .bi-star-fill {
+  color: white;
+}

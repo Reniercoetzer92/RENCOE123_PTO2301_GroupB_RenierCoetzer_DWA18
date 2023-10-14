@@ -21,22 +21,14 @@ ul {
   list-style-type: none;
 }
 
-.right-content a:hover { 
-  background: url('/back.jpg');
-  -webkit-background-clip: text;
-  background-clip: value;
-  color: transparent;
-  animation: back 100s linear infinite;
-}
-
 .information img {
   height: 100px;
   width: 100px;
 }
 
 .search-dialog-image {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 }
 
 .modal {

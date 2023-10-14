@@ -8,14 +8,6 @@ nav {
   height: 8vh;
 }
 
-.left-content {
-  display: flex; 
-  align-items: center;
-  margin-top: 40px; 
-  margin-left: -50px;
-  width: 200px;
-}
-
 @keyframes back {
   100%{
         background-position: 2000px 0;
@@ -36,12 +28,28 @@ nav {
   background-color: #19ac76;
 }
 
+.left-content {
+  display: flex; 
+  align-items: center;
+  margin-top: 40px; 
+  margin-left: -50px;
+  width: 200px;
+}
+
 .left-content img {
   width: 100%;
 }
 
 .left-content img:hover{
   cursor: pointer;
+}
+
+.right-content a:hover { 
+  background: url('/back.jpg');
+  -webkit-background-clip: text;
+  background-clip: value;
+  color: transparent;
+  animation: back 100s linear infinite;
 }
 
 .right-content {

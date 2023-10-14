@@ -11,7 +11,7 @@ import "./Components.css/Modal.css"
  *
  * @returns {JSX.Element|null} - The rendered modal or `null` if not open.
  */
-function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
 
   return (
@@ -29,5 +29,3 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
 };
-
-export default Modal;
