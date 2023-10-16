@@ -4,7 +4,7 @@ import Footer from '../../Components/Footer.jsx';
 import Navbar from '../../Components/Navbar.jsx';
 import PreviewSeasons from '../../Components/PreviewSeasons.jsx';
 import PreviewShows from '../../Components/PreviewShows.jsx';
-import SearchDialog from '../../Components/SearchDialog.jsx';
+import SearchDialog from '../SearchDialog/SearchDialog.jsx';
 import Favorites from '../../Components/Favorites.jsx';
 
 /**

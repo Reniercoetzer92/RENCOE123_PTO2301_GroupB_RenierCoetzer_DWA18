@@ -1,32 +1,39 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import "./Components.css/Navbar.css"
+import "./Components.css/Navbar.css";
+import SignUpModal from "../Pages/Signup/SignUpModal";
+import LoginModal from "../Pages/LogIn/LogInModal";
 
-/**
- * Navbar component for displaying navigation and search functionality.
- *
- * @param {Object} props - Component props.
- * @param {Function} props.onSearchClick - A function to handle search button click events.
- * @returns {JSX.Element} - A React component representing the Navbar.
- */
 export default function Navbar({ onSearchClick }) {
   const [mode, setMode] = useState('light');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
-  /**
-   * Toggles the display mode (light/dark) when the settings button is clicked.
-   */
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light');
     document.body.classList.toggle('dark-mode', mode === 'light');
   };
 
-  /**
-   * Handles the click event when the search button is clicked.
-   */
   const handleSearchClick = () => {
     if (onSearchClick) {
       onSearchClick();
     }
+  };
+
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
+
+  const openSignUpModal = () => {
+    setIsSignUpModalOpen(true);
+  };
+
+  const closeSignUpModal = () => {
+    setIsSignUpModalOpen(false);
   };
 
   return (
@@ -42,13 +49,25 @@ export default function Navbar({ onSearchClick }) {
         </button>
       </div>
       <ul className="right-content">
-        <li><a href="./src/Pages/Sign-in/Sign-in.html">Sign in</a></li>
+        <button variant="default" onClick={openLoginModal}>Login</button>
+        <button variant="default" onClick={openSignUpModal}>Sign Up</button>
         <li>
           <sl-button variant="default" size="small" circle onClick={toggleMode}>
             <sl-icon name="gear" label="Settings"></sl-icon>
           </sl-button>
         </li>
       </ul>
+
+      {isLoginModalOpen && (
+        <LoginModal
+          onLogin={(email, password) => {
+            // Implement your login logic here
+            console.log('Login with email:', email, 'and password:', password);
+          }}
+          onClose={closeLoginModal}
+        />
+      )}
+      {isSignUpModalOpen && <SignUpModal onClose={closeSignUpModal} />}
     </nav>
   );
 }

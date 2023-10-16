@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import "./SearchDialog.css"
 
 /**
  * Represents a search dialog component that displays a list of show data.
@@ -101,6 +102,7 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
   return (
     <div className={`search-dialog ${isOpen ? 'open' : ''}`}>
       <div className="search-dialog-content">
+        <img className="search-dialog-picture" src={"/rcstudiologo.jpg"}/>  
         <button onClick={onClose}>Close</button>
         <div className="search-select-input">
           <input
