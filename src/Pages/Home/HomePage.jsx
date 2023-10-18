@@ -6,6 +6,7 @@ import PreviewSeasons from '../../Components/PreviewSeasons.jsx';
 import PreviewShows from '../../Components/PreviewShows.jsx';
 import SearchDialog from '../SearchDialog/SearchDialog.jsx';
 import Favorites from '../../Components/Favorites.jsx';
+import "./HomePage.css"
 
 /**
  * The main component representing the home page of the application.

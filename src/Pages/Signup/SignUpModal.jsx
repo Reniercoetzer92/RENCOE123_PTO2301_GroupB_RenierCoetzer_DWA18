@@ -22,11 +22,9 @@ export default function SignUpModal({ onClose }) {
     // For example, you can make an API call to register the user
     console.log('Form data submitted:', formData);
 
-    // Close the modal after form submission
     onClose();
   };
 
-  // Function to close the modal when clicked outside of it
   const handleOutsideClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       onClose();
@@ -34,15 +32,13 @@ export default function SignUpModal({ onClose }) {
   };
 
   useEffect(() => {
-    // Attach the event listener when the component mounts
     document.addEventListener('mousedown', handleOutsideClick);
-    // Remove the event listener when the component unmounts to avoid memory leaks
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   });
 
-  const modalRef = useRef(); // Create a ref for the modal
+  const modalRef = useRef(); 
 
   return (
     <div className="signup-modal">
@@ -97,5 +93,5 @@ export default function SignUpModal({ onClose }) {
 }
 
 SignUpModal.propTypes = {
-  onClose: PropTypes.func.isRequired, // Ensure that onClose is a function and required
+  onClose: PropTypes.func.isRequired,
 };

@@ -6,7 +6,6 @@ export default function LoginModal({ onLogin, onClose, onSignUpClick }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Function to close the modal when clicked outside of it
   const handleOutsideClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       onClose();
@@ -14,22 +13,19 @@ export default function LoginModal({ onLogin, onClose, onSignUpClick }) {
   };
 
   useEffect(() => {
-    // Attach the event listener when the component mounts
     document.addEventListener('mousedown', handleOutsideClick);
-    // Remove the event listener when the component unmounts
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   });
 
   const handleLogin = () => {
-    // Implement your login logic here
     if (email && password) {
       onLogin(email, password);
     }
   };
 
-  const modalRef = React.createRef(); // Create a ref for the modal
+  const modalRef = React.createRef();
 
   return (
     <div className="login-modal">
@@ -65,5 +61,3 @@ LoginModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSignUpClick: PropTypes.func.isRequired,
 };
-
-

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import "./Components.css/Navbar.css";
-import SignUpModal from "../Pages/Signup/SignUpModal";
-import LoginModal from "../Pages/LogIn/LogInModal";
+import SettingsModal from "../Pages/Setting/SettingsModal";
+import HamburgerMenu from './HamburgerMenu';
 
 export default function Navbar({ onSearchClick }) {
   const [mode, setMode] = useState('light');
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light');
@@ -20,20 +20,18 @@ export default function Navbar({ onSearchClick }) {
     }
   };
 
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true);
+  const openSettingsModal = () => {
+    setIsSettingsModalOpen(true);
+    setIsButtonEnabled(false); // Disable the button when the dialog is open
   };
 
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false);
+  const closeSettingsModal = () => {
+    setIsSettingsModalOpen(false);
+    setIsButtonEnabled(true); // Re-enable the button when the dialog is closed
   };
 
-  const openSignUpModal = () => {
-    setIsSignUpModalOpen(true);
-  };
-
-  const closeSignUpModal = () => {
-    setIsSignUpModalOpen(false);
+  const resetHamburger = () => {
+    setIsSettingsModalOpen(false);
   };
 
   return (
@@ -49,25 +47,11 @@ export default function Navbar({ onSearchClick }) {
         </button>
       </div>
       <ul className="right-content">
-        <button variant="default" onClick={openLoginModal}>Login</button>
-        <button variant="default" onClick={openSignUpModal}>Sign Up</button>
-        <li>
-          <sl-button variant="default" size="small" circle onClick={toggleMode}>
-            <sl-icon name="gear" label="Settings"></sl-icon>
-          </sl-button>
-        </li>
+        {isSettingsModalOpen && (
+        <SettingsModal onClose={closeSettingsModal} toggleMode={toggleMode} />
+        )}
+        <HamburgerMenu onSettingsClick={openSettingsModal} isButtonEnabled={isButtonEnabled} isMenuOpen={isSettingsModalOpen} resetHamburger={resetHamburger} />
       </ul>
-
-      {isLoginModalOpen && (
-        <LoginModal
-          onLogin={(email, password) => {
-            // Implement your login logic here
-            console.log('Login with email:', email, 'and password:', password);
-          }}
-          onClose={closeLoginModal}
-        />
-      )}
-      {isSignUpModalOpen && <SignUpModal onClose={closeSignUpModal} />}
     </nav>
   );
 }

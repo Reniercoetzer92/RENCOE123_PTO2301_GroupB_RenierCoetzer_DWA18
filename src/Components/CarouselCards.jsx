@@ -14,11 +14,10 @@ import "./Components.css/CarouselCards.css";
 export default function CarouselCards({ idsToShow, onOpenSeason }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageUrls, setImageUrls] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [isLoading, setIsLoading] = useState(true); 
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    // Simulate a 2-second delay before loading images
     const delay = setTimeout(() => {
       Promise.all(
         idsToShow.map((id) => {
@@ -34,12 +33,12 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
         })
       ).then((images) => {
         setImageUrls(images.filter((url) => url !== null));
-        setIsLoading(false); // Set loading state to false
+        setIsLoading(false); 
       });
     }, 2000);
 
     return () => {
-      clearTimeout(delay); // Clear the delay timer if the component unmounts
+      clearTimeout(delay);
     }
   }, [idsToShow]);
 
