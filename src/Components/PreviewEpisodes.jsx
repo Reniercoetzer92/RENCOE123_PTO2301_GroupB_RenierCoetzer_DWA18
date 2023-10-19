@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/PreviewEpisodes.css";
 
@@ -10,7 +10,7 @@ import "./Components.css/PreviewEpisodes.css";
  * @returns {JSX.Element} - A React component representing the PreviewEpisodes.
  */
 export default function PreviewEpisodes({ episodes }) {
-  const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [selectedEpisode, setSelectedEpisode] = React.useState(null);
 
   /**
    * Handles a click event to listen to the selected episode.

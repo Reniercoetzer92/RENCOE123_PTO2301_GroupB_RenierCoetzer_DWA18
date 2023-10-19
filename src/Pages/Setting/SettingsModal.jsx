@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import SignUpModal from "../Signup/SignUpModal";
 import LoginModal from "../LogIn/LogInModal";
 import './SettingsModal.css';
 
 export default function SettingsModal({ onClose, toggleMode, onLogout }) {
-  const [currentMode, setCurrentMode] = useState('night');
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [currentMode, setCurrentMode] = React.useState('night');
+  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = React.useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = React.useState(false);
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -31,7 +31,6 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
   };
 
   const confirmLogout = () => {
-    // Implement your logout logic here (clearing sessions, etc.)
     closeConfirmation();
     onClose();
     onLogout();
@@ -58,13 +57,13 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
         <sl-icon name="gear" label="Settings"></sl-icon>
         {currentMode === 'night' ? 'Dark mode' : 'Light mode'}
       </button>
-      <p></p>
+      <p/>
       <button variant="default" onClick={openLoginModal}>Log in</button>
-      <p></p>
+      <p/>
       <button variant="default" onClick={openSignUpModal}>Sign Up</button>
-      <p></p>
+      <p/>
       <button onClick={handleLogout}>Log Out</button>
-      <p></p>
+      <p/>
       <button onClick={onClose}>Close</button>
       {isLoginModalOpen && (
         <LoginModal

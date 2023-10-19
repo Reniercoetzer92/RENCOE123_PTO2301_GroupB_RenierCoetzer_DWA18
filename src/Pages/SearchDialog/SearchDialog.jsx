@@ -1,5 +1,5 @@
+import React from 'react';  
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import "./SearchDialog.css"
 
 /**
@@ -24,10 +24,10 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
     9: "Kids and Family"
   };
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('title'); // Default sort by title
-  const [isAZSort, setIsAZSort] = useState(false); // Track if "A-Z" option is selected
-  const [lastUpdatedSortDirection, setLastUpdatedSortDirection] = useState('asc'); // Track the sorting direction
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [sortBy, setSortBy] = React.useState('title'); // Default sort by title
+  const [isAZSort, setIsAZSort] = React.useState(false); // Track if "A-Z" option is selected
+  const [lastUpdatedSortDirection, setLastUpdatedSortDirection] = React.useState('asc'); // Track the sorting direction
 
   /**
    * Formats a date string to the specified format.

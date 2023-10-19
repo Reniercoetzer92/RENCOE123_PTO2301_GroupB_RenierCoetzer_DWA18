@@ -1,10 +1,9 @@
 .hero-description {
   display: flex;
   text-align: center;
-  height: 10vh;
-  line-height: 22px;
-  margin-top: auto;
-  margin-bottom: auto;
+  line-height: 25px;
+  margin-left: 30px;
+  margin-right: 30px;
   font-size: 18px;
 }
 

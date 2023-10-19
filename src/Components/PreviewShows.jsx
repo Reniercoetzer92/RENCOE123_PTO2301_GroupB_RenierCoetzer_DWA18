@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import CarouselCards from "./CarouselCards";
 import "./Components.css/PreviewShows.css";
@@ -12,10 +12,10 @@ import "./Components.css/PreviewShows.css";
  * @returns {JSX.Element} - A React component representing the PreviewShows.
  */
 export default function PreviewShows({ shows, onShowClick }) {
-  const [selectedShow, setSelectedShow] = useState(null);
-  const [showAll, setShowAll] = useState(true);
-  const [showIds, setShowIds] = useState([]);
-  const [imageLoading, setImageLoading] = useState(false);
+  const [selectedShow, setSelectedShow] = React.useState(null);
+  const [showAll, setShowAll] = React.useState(true);
+  const [showIds, setShowIds] = React.useState([]);
+  const [imageLoading, setImageLoading] = React.useState(false);
 
   /**
    * Handles a click event on a show, displaying show details.
@@ -44,7 +44,7 @@ export default function PreviewShows({ shows, onShowClick }) {
     setShowAll(true);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const ids = shows.map((show) => show.id);
     setShowIds(ids);
   }, [shows]);

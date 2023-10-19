@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import "./Signup.css"
 
 export default function SignUpModal({ onClose }) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = React.useState({
     name: '',
     email: '',
     password: '',
@@ -31,14 +31,14 @@ export default function SignUpModal({ onClose }) {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
   });
 
-  const modalRef = useRef(); 
+  const modalRef = React.useRef(); 
 
   return (
     <div className="signup-modal">

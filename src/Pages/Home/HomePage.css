@@ -16,3 +16,7 @@ body.dark-mode {
   background-image: url('/background2.jpg'); 
   color: white;
 }
+
+.Footer {
+  margin-top: 100px;
+}

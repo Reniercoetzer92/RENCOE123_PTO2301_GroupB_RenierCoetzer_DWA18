@@ -6,10 +6,9 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 20px;
-  max-width: 190px; 
-  width: 100%;
+  max-width: 200px; 
+  
   z-index: 1000; 
-  align-items: center;
 }
 
 .settings-modal h2 {

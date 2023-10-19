@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import React from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/CarouselCards.css";
+import '@shoelace-style/shoelace/dist/components/carousel/carousel.js';
 
 /**
  * CarouselCards component displaying a carousel of podcast show images.
@@ -12,12 +13,12 @@ import "./Components.css/CarouselCards.css";
  * @returns {JSX.Element} - A React component representing the Cards section.
  */
 export default function CarouselCards({ idsToShow, onOpenSeason }) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [imageUrls, setImageUrls] = useState([]);
-  const [isLoading, setIsLoading] = useState(true); 
-  const carouselRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [imageUrls, setImageUrls] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true); 
+  const carouselRef = React.useRef(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const delay = setTimeout(() => {
       Promise.all(
         idsToShow.map((id) => {
@@ -42,7 +43,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
     }
   }, [idsToShow]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timer = setInterval(() => {
       if (carouselRef.current && imageUrls.length > 0) {
         const nextSlide = (currentSlide + 1) % imageUrls.length;
@@ -78,7 +79,6 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
                 <img
                   src={imageUrl}
                   alt={`Image for ID ${idsToShow[index]}`}
-                  style={{ width: "80%", height: "100%", objectFit: "fill" }}
                   onClick={() => onOpenSeason(idsToShow[index])}
                 />
               </sl-carousel-item>
