@@ -4,7 +4,7 @@ import "./Components.css/Navbar.css";
 import SettingsModal from "../Pages/Setting/SettingsModal";
 import HamburgerMenu from './HamburgerMenu';
 
-export default function Navbar({ onSearchClick }) {
+export default function Navbar({ onSearchClick, onLogout, onClose }) {
   const [mode, setMode] = useState('light');
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(true);
@@ -34,6 +34,14 @@ export default function Navbar({ onSearchClick }) {
     setIsSettingsModalOpen(false);
   };
 
+  const handleLogout = () => {
+    // Implement your logout logic here
+    // For example, you can perform logout actions (clearing sessions, etc.)
+  
+    // Close the modal
+    onClose(onLogout);
+  };
+
   return (
     <nav>
       <div className="left-content">
@@ -48,7 +56,7 @@ export default function Navbar({ onSearchClick }) {
       </div>
       <ul className="right-content">
         {isSettingsModalOpen && (
-        <SettingsModal onClose={closeSettingsModal} toggleMode={toggleMode} />
+        <SettingsModal onClose={closeSettingsModal} toggleMode={toggleMode} onLogout={handleLogout}/>
         )}
         <HamburgerMenu onSettingsClick={openSettingsModal} isButtonEnabled={isButtonEnabled} isMenuOpen={isSettingsModalOpen} resetHamburger={resetHamburger} />
       </ul>
@@ -58,4 +66,6 @@ export default function Navbar({ onSearchClick }) {
 
 Navbar.propTypes = {
   onSearchClick: PropTypes.func,
+  onLogout: PropTypes.func,
+  onClose: PropTypes.func,
 };

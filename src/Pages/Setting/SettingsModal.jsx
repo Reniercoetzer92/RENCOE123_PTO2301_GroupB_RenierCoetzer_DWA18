@@ -1,20 +1,40 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import SignUpModal from "../Signup/SignUpModal";
 import LoginModal from "../LogIn/LogInModal";
 import './SettingsModal.css';
 
-export default function SettingsModal({ onClose, toggleMode, onLogout,}) {
+export default function SettingsModal({ onClose, toggleMode, onLogout }) {
   const [currentMode, setCurrentMode] = useState('night');
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
-  
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
   };
 
   const closeLoginModal = () => {
     setIsLoginModalOpen(false);
+  };
+
+  const openConfirmation = () => {
+    setIsConfirmationOpen(true);
+  };
+
+  const closeConfirmation = () => {
+    setIsConfirmationOpen(false);
+  };
+
+  const handleLogout = () => {
+    openConfirmation();
+  };
+
+  const confirmLogout = () => {
+    // Implement your logout logic here (clearing sessions, etc.)
+    closeConfirmation();
+    onClose();
+    onLogout();
   };
 
   const handleToggleMode = () => {
@@ -43,7 +63,7 @@ export default function SettingsModal({ onClose, toggleMode, onLogout,}) {
       <p></p>
       <button variant="default" onClick={openSignUpModal}>Sign Up</button>
       <p></p>
-      <button onClick={onLogout}>Log Out</button>
+      <button onClick={handleLogout}>Log Out</button>
       <p></p>
       <button onClick={onClose}>Close</button>
       {isLoginModalOpen && (
@@ -56,6 +76,13 @@ export default function SettingsModal({ onClose, toggleMode, onLogout,}) {
         />
       )}
       {isSignUpModalOpen && <SignUpModal onClose={closeSignUpModal} />}
+      {isConfirmationOpen && (
+        <div className="confirmation-modal">
+          <p>Are you sure you want to log out?</p>
+          <button onClick={confirmLogout}>Yes</button>
+          <button onClick={closeConfirmation}>No</button>
+        </div>
+      )}
     </div>
   );
 }
