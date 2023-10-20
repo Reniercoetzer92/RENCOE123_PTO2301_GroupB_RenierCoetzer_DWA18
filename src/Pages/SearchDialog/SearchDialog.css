@@ -85,3 +85,13 @@ width: 60vh;
   border-radius: 10px;
   height: 25px;
 }
+
+
+.grow-on-hover {
+  transform: scale(1); 
+  transition: transform 0.2s;
+}
+
+.grow-on-hover:hover {
+  transform: scale(1.3);
+}

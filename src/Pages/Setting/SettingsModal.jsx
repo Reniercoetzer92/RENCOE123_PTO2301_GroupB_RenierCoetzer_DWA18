@@ -54,7 +54,6 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
     <div className="settings-modal">
       <h2>Settings</h2>
       <button onClick={handleToggleMode} className={currentMode === 'night' ? 'night-button' : 'day-button'}>
-        <sl-icon name="gear" label="Settings"></sl-icon>
         {currentMode === 'night' ? 'Dark mode' : 'Light mode'}
       </button>
       <p/>

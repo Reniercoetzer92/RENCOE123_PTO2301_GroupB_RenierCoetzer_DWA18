@@ -18,3 +18,8 @@ sl-spinner {
   text-align: center;
   margin-left: -50px;
 }
+
+.carousel-card-img:hover {
+  transform: scale(0.95); 
+  transition: transform 0.2s ease; 
+}

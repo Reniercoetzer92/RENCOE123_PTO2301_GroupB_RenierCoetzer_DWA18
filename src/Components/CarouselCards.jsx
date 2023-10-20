@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/CarouselCards.css";
 import '@shoelace-style/shoelace/dist/components/carousel/carousel.js';
@@ -13,37 +13,38 @@ import '@shoelace-style/shoelace/dist/components/carousel/carousel.js';
  * @returns {JSX.Element} - A React component representing the Cards section.
  */
 export default function CarouselCards({ idsToShow, onOpenSeason }) {
-  const [currentSlide, setCurrentSlide] = React.useState(0);
-  const [imageUrls, setImageUrls] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(true); 
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageUrls, setImageUrls] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const carouselRef = React.useRef(null);
 
-  React.useEffect(() => {
-    const delay = setTimeout(() => {
-      Promise.all(
-        idsToShow.map((id) => {
-          return fetch(`https://podcast-api.netlify.app/id/${id}`)
-            .then((response) => response.json())
-            .then((data) => {
-              return data.image;
-            })
-            .catch((error) => {
-              console.error(`Error fetching image for ID ${id}:`, error);
-              return null;
-            });
-        })
-      ).then((images) => {
-        setImageUrls(images.filter((url) => url !== null));
-        setIsLoading(false); 
-      });
-    }, 2000);
+  useEffect(() => {
+    const imagePromises = idsToShow.map((id) =>
+      fetch(`https://podcast-api.netlify.app/id/${id}`)
+        .then((response) => response.json())
+        .then((data) => data.image)
+        .catch(() => null)
+    );
 
-    return () => {
-      clearTimeout(delay);
-    }
+    // Set a minimum loading time for the spinner
+    const loadingTimeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+
+    Promise.all(imagePromises)
+      .then((images) => {
+        clearTimeout(loadingTimeout); // Cancel the loading timeout
+        setImageUrls(images.filter((url) => url !== null));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        clearTimeout(loadingTimeout); // Cancel the loading timeout
+        console.error(error);
+        setIsLoading(false);
+      });
   }, [idsToShow]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       if (carouselRef.current && imageUrls.length > 0) {
         const nextSlide = (currentSlide + 1) % imageUrls.length;
@@ -60,7 +61,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
   return (
     <div>
       {isLoading ? (
-        <sl-spinner></sl-spinner>
+        <sl-spinner/>
       ) : (
         imageUrls.length > 0 && (
           <sl-carousel
@@ -80,6 +81,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
                   src={imageUrl}
                   alt={`Image for ID ${idsToShow[index]}`}
                   onClick={() => onOpenSeason(idsToShow[index])}
+                  className="carousel-card-img"
                 />
               </sl-carousel-item>
             ))}

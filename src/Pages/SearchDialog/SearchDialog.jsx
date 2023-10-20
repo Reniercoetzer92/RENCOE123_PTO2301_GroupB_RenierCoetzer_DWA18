@@ -139,7 +139,14 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
             {filteredAndSortedData.map((show, index) => (
               <li key={index}>
                 <h2>{show.title}</h2>
-                <img className="search-dialog-image" src={show.image} alt="Show Image" />
+                <img
+                    className="search-dialog-image grow-on-hover"
+                    src={show.image}
+                    alt="Show Image"
+                    srcSet={`${show.image} 1x, ${show.image2x} 2x`}
+                    sizes="(max-width: 600px) 200px, 400px"
+                    loading="lazy"
+                  />                
                 <p>{show.description}</p>
                 <p>Genres: {getGenres(show.genres)}</p>
                 <p>Seasons: {show.seasons}</p>
