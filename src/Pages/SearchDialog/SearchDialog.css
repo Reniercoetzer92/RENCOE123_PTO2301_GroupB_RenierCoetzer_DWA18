@@ -55,7 +55,7 @@ ul {
   right: 10px;
 }
 
-.modal-content button :hover {
+.modal-content button:hover {
   background-color: #19ac76;
 }
 

@@ -7,12 +7,6 @@ nav {
   height: 8vh;
 }
 
-@keyframes back {
-  100%{
-        background-position: 2000px 0;
-  }
-}
-
 .search-button  button  {
   background-color: #14ca87; 
   color: #fff;
@@ -43,28 +37,7 @@ nav {
   cursor: pointer;
 }
 
-.right-content a:hover { 
-  background: url('/back.jpg');
-  -webkit-background-clip: text;
-  background-clip: value;
-  color: transparent;
-  animation: back 100s linear infinite;
-}
-
 .right-content {
   list-style-type: none;
   padding: 0px 0px;
-}
-
-.right-content li {
-  display: inline-block;
-  margin-right: 0px; 
-  padding:0px 5px;
-}
-
-.right-content a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-  transition: color 0.3s;
 }

@@ -1,0 +1,50 @@
+.dynamic-carousel {
+  --aspect-ratio: 3 / 2;
+}
+
+.dynamic-carousel ~ .carousel-options {
+  display: flex;
+  justify-content: center;
+  gap: var(--sl-spacing-x-small);
+  margin-top: var(--sl-spacing-large);
+}
+
+.dynamic-carousel sl-carousel-item {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--sl-font-size-2x-large);
+}
+
+.carousel-options {
+  padding: 10px;
+  text-align: center;
+  
+}
+
+#dynamic-remove {
+  background-color: #14ca87; 
+  color: #fff;
+  border: none; 
+  padding: 4px 10px;
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+#dynamic-add {
+  background-color: #14ca87; 
+  color: #fff;
+  border: none; 
+  padding: 4px 10px;
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+#dynamic-remove :hover {
+  background-color: #19ac76;
+}
+
+#dynamic-add :hover {
+  background-color: #19ac76;
+}

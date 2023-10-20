@@ -1,11 +1,8 @@
 import React from 'react';
-import Hero from '../../Components/Hero.jsx';
+import HomePreviewSection from "../../Components/HomePreviewSection"
 import Footer from '../../Components/Footer.jsx';
 import Navbar from '../../Components/Navbar.jsx';
-import PreviewSeasons from '../../Components/PreviewSeasons.jsx';
-import PreviewShows from '../../Components/PreviewShows.jsx';
 import SearchDialog from '../SearchDialog/SearchDialog.jsx';
-import Favorites from '../../Components/Favorites.jsx';
 import "./HomePage.css"
 
 /**
@@ -58,17 +55,7 @@ export default function HomePage() {
         <Navbar onSearchClick={openSearchDialog} />
       </section>
       <section className="HomePreview">
-        <PreviewShows shows={shows} onShowClick={handleShowClick} />
-        {selectedShowId ? (
-          <div>
-            <PreviewSeasons showId={selectedShowId} />
-            <Favorites />
-          </div>
-        ) : (
-          <section className="Hero">
-            <Hero />
-          </section>
-        )}
+      <HomePreviewSection shows={shows} selectedShowId={selectedShowId} handleShowClick={handleShowClick} />
       </section>
       <section className="Footer">
         <Footer />
