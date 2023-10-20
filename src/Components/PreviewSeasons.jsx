@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import PreviewEpisodes from "./PreviewEpisodes";
 import "./Components.css/PreviewSeasons.css";
@@ -11,13 +11,13 @@ import "./Components.css/PreviewSeasons.css";
  * @returns {JSX.Element} - A React component representing the PreviewSeasons.
  */
 export default function PreviewSeasons({ showId }) {
-  const [showInfo, setShowInfo] = React.useState(null);
-  const [seasons, setSeasons] = React.useState([]);
-  const [selectedSeason, setSelectedSeason] = React.useState(null);
-  const [isLoadingImage, setIsLoadingImage] = React.useState(true); // Add loading state for the image
-  const [isFavorited, setIsFavorited] = React.useState(false);
+  const [showInfo, setShowInfo] = useState(null);
+  const [seasons, setSeasons] = useState([]);
+  const [selectedSeason, setSelectedSeason] = useState(null);
+  const [isLoadingImage, setIsLoadingImage] = useState(true); // Add loading state for the image
+  const [isFavorited, setIsFavorited] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Fetch show information
     fetch(`https://podcast-api.netlify.app/id/${showId}`)
       .then((response) => response.json())

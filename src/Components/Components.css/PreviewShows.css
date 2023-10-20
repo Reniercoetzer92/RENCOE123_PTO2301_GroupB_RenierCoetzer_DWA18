@@ -1,35 +1,22 @@
-.preview-shows h3{
-  height: 30px;
-  margin-top: 5px;
-}
-
 .preview-shows ul {
   text-align: center;
   width: 100%;
 }
 
-.preview-show-display {
-  margin-right:40px; 
-}
-
 .preview-show-Image img {
- width: 200px;
- height: 200px;
+  width: 200px;
+  height: 200px;
 }
 
-.preview-show-back-button {
+.preview-show-display button{
   background-color: #14ca87; 
   color: #fff;
   border: none; 
   padding: 4px 10px;
   border-radius: 5px; 
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-.preview-show-back-button :hover {
-  background-color: #1e835e;
-}
-
-.preview-show-display sl-spinner{
-  margin-right: -50px;
+.preview-show-display button:hover {
+  background-color: #19ac76;
 }

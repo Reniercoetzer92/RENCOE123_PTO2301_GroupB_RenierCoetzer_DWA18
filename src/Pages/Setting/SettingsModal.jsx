@@ -1,14 +1,14 @@
-import React from 'react';
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import SignUpModal from "../Signup/SignUpModal";
 import LoginModal from "../LogIn/LogInModal";
 import './SettingsModal.css';
 
 export default function SettingsModal({ onClose, toggleMode, onLogout }) {
-  const [currentMode, setCurrentMode] = React.useState('night');
-  const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = React.useState(false);
-  const [isConfirmationOpen, setIsConfirmationOpen] = React.useState(false);
+  const [currentMode, setCurrentMode] = useState('night');
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);

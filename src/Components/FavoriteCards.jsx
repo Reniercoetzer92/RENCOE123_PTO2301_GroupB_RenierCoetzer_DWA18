@@ -20,11 +20,12 @@ export default function FavoriteCards() {
   return (
     <div className="dynamic-carousel">
       <sl-carousel
+        mouse-dragging
+        infinite
         navigation
         pagination
         slides-per-page="3"
         slides-per-move="2"
-        style={{ maxWidth: "100%" }}
       >
         {slides.map((slide, index) => (
           <sl-carousel-item key={index}>
@@ -36,10 +37,10 @@ export default function FavoriteCards() {
       </sl-carousel>
       
       <div className="carousel-options">
-        <button id="dynamic-add" onClick={addSlide}>
+        <button className="dynamic-add" onClick={addSlide}>
           Add slide
         </button>
-        <button id="dynamic-remove" onClick={removeSlide} disabled={slides.length <= 1}>
+        <button className="dynamic-remove" onClick={removeSlide} disabled={slides.length <= 1}>
           Remove From Favorites
         </button>
       </div>

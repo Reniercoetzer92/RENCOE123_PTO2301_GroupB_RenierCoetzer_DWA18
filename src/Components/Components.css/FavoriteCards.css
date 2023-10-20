@@ -1,16 +1,6 @@
-.dynamic-carousel {
-  --aspect-ratio: 3 / 2;
-}
-
-.dynamic-carousel ~ .carousel-options {
-  display: flex;
-  justify-content: center;
-  gap: var(--sl-spacing-x-small);
-  margin-top: var(--sl-spacing-large);
-}
 
 .dynamic-carousel sl-carousel-item {
-  flex: 0 0 100%;
+  flex: 10PX;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,10 +10,9 @@
 .carousel-options {
   padding: 10px;
   text-align: center;
-  
 }
 
-#dynamic-remove {
+.carousel-options button {
   background-color: #14ca87; 
   color: #fff;
   border: none; 
@@ -32,19 +21,6 @@
   cursor: pointer; 
 }
 
-#dynamic-add {
-  background-color: #14ca87; 
-  color: #fff;
-  border: none; 
-  padding: 4px 10px;
-  border-radius: 5px; 
-  cursor: pointer; 
-}
-
-#dynamic-remove :hover {
-  background-color: #19ac76;
-}
-
-#dynamic-add :hover {
-  background-color: #19ac76;
+.carousel-options button:hover {
+  background-color: #19ac76; 
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import HomePreviewSection from "../../Components/HomePreviewSection"
 import Footer from '../../Components/Footer.jsx';
 import Navbar from '../../Components/Navbar.jsx';
@@ -11,10 +11,10 @@ import "./HomePage.css"
  * @component
  */
 export default function HomePage() {
-  const [shows, setShows] = React.useState([]);
-  const [selectedShowId, setSelectedShowId] = React.useState(null);
-  const [searchData, setSearchData] = React.useState([]);
-  const [isSearchDialogOpen, setSearchDialogOpen] = React.useState(false);
+  const [shows, setShows] = useState([]);
+  const [selectedShowId, setSelectedShowId] = useState(null);
+  const [searchData, setSearchData] = useState([]);
+  const [isSearchDialogOpen, setSearchDialogOpen] = useState(false);
 
   /**
    * Open the search dialog.
@@ -30,7 +30,7 @@ export default function HomePage() {
     setSearchDialogOpen(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Fetch data and set the states
     fetch('https://podcast-api.netlify.app/')
       .then((response) => response.json())

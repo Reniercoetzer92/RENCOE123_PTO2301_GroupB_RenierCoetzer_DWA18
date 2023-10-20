@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState, useRef } from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/CarouselCards.css";
 import '@shoelace-style/shoelace/dist/components/carousel/carousel.js';
@@ -16,7 +16,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageUrls, setImageUrls] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const carouselRef = React.useRef(null);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     const imagePromises = idsToShow.map((id) =>
@@ -26,19 +26,18 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
         .catch(() => null)
     );
 
-    // Set a minimum loading time for the spinner
     const loadingTimeout = setTimeout(() => {
       setIsLoading(false);
     }, 4000);
 
     Promise.all(imagePromises)
       .then((images) => {
-        clearTimeout(loadingTimeout); // Cancel the loading timeout
+        clearTimeout(loadingTimeout); 
         setImageUrls(images.filter((url) => url !== null));
         setIsLoading(false);
       })
       .catch((error) => {
-        clearTimeout(loadingTimeout); // Cancel the loading timeout
+        clearTimeout(loadingTimeout); 
         console.error(error);
         setIsLoading(false);
       });
@@ -61,7 +60,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
   return (
     <div>
       {isLoading ? (
-        <sl-spinner/>
+        <sl-spinner />
       ) : (
         imageUrls.length > 0 && (
           <sl-carousel
@@ -72,7 +71,6 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
             pagination
             slides-per-page="3"
             slides-per-move="2"
-            style={{ maxWidth: "100%" }}
             ref={carouselRef}
           >
             {imageUrls.map((imageUrl, index) => (

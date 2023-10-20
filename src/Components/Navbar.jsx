@@ -1,13 +1,13 @@
-import React from 'react';
+import { useState } from "react"
 import PropTypes from 'prop-types';
 import "./Components.css/Navbar.css";
 import SettingsModal from "../Pages/Setting/SettingsModal";
 import HamburgerMenu from './HamburgerMenu';
 
 export default function Navbar({ onSearchClick }) {
-  const [mode, setMode] = React.useState('light');
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = React.useState(false);
-  const [isButtonEnabled, setIsButtonEnabled] = React.useState(true);
+  const [mode, setMode] = useState('light');
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
   const toggleMode = () => {
     setMode(mode === 'light' ? 'dark' : 'light');

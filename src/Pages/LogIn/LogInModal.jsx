@@ -1,10 +1,10 @@
-import React from 'react';
+import {useState, useEffect, createRef} from 'react';
 import PropTypes from 'prop-types';
 import "./LogIn.css";
 
 export default function LoginModal({ onLogin, onClose, onSignUpClick }) {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleOutsideClick = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -12,7 +12,7 @@ export default function LoginModal({ onLogin, onClose, onSignUpClick }) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
@@ -25,7 +25,7 @@ export default function LoginModal({ onLogin, onClose, onSignUpClick }) {
     }
   };
 
-  const modalRef = React.createRef();
+  const modalRef = createRef();
 
   return (
     <div className="login-modal">

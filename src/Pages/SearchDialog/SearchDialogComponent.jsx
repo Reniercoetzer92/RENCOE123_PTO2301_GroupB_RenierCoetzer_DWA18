@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import SearchDialog from './SearchDialog'; // Import the SearchDialog component
+import SearchDialog from './SearchDialog'; 
 
 export default function YourComponent({ isSearchDialogOpen, closeSearchDialog, searchData }) {
   return (
@@ -18,7 +18,7 @@ export default function YourComponent({ isSearchDialogOpen, closeSearchDialog, s
 }
 
 YourComponent.propTypes = {
-  isSearchDialogOpen: PropTypes.bool.isRequired, // Add PropTypes validation for the "isSearchDialogOpen" prop
-  closeSearchDialog: PropTypes.func.isRequired, // Add PropTypes validation for the "closeSearchDialog" prop
-  searchData: PropTypes.array.isRequired, // Add PropTypes validation for the "searchData" prop
+  isSearchDialogOpen: PropTypes.bool.isRequired,
+  closeSearchDialog: PropTypes.func.isRequired, 
+  searchData: PropTypes.array.isRequired, 
 };

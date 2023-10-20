@@ -1,6 +1,5 @@
-sl-carousel {
-  margin-left: -24PX;
-  width: 100%;
+.preview-shows ul {
+  margin-left: -24px;
 }
 
 sl-carousel-item {
@@ -13,13 +12,13 @@ sl-carousel-item img{
   height: 100%;
 }
 
-sl-spinner {
-  --indicator-color:#19ac76;
-  text-align: center;
-  margin-left: -50px;
-}
-
 .carousel-card-img:hover {
   transform: scale(0.95); 
   transition: transform 0.2s ease; 
+}
+
+sl-spinner {
+  --indicator-color: #19ac76;
+  font-size: 3rem;
+  --track-width: 5px;
 }

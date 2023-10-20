@@ -71,8 +71,8 @@ export default function PreviewShows({ shows, onShowClick }) {
                     />
                   </div>
                 )}
-                <div>
-                  <button className="preview-show-back-button" onClick={handleBackClick}>Back</button>
+                <div className="preview-show-display">
+                  <button onClick={handleBackClick}>Back</button>
                 </div>
               </div>
             ) : (
