@@ -37,12 +37,12 @@
   background-color: #19ac76;
 }
 
-#login-form {
+form {
   display: flexbox;
   width: 300px;
 }
 
-#login-form  input {
+form  input {
   border-radius: 10px;
   width: 90%;
   height: 25px;
@@ -50,6 +50,26 @@
   margin-top: 10px;
 }
 
-#login-form button {
+form button {
   margin-top: 10px;
+}
+
+input[type='checkbox'] {
+  display: flex;
+  width:50px;
+  height:15px;
+}
+
+form label{
+  margin-left: 20px;
+  margin-top: -17.5px;
+  padding-bottom: 10px;
+  font-size: 12px;
+  color: #a5a0a0;
+ 
+}
+
+label {
+  display: flex;
+  padding-left: 20px;
 }

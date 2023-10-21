@@ -51,7 +51,7 @@ export default function PreviewShows({ shows, onShowClick }) {
 
   return (
     <div className="preview-shows">
-      <h3>Featured:</h3>
+      <h3>Our Shows:</h3>
       <ul>
         {showAll ? (
           <div>
