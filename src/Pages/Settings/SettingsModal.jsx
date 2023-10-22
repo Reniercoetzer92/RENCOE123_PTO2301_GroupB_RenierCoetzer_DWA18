@@ -52,18 +52,19 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
 
   return (
     <div className="settings-modal">
+      <button className="close-button" onClick={onClose}>
+        X
+      </button>
       <h2>Settings</h2>
       <button onClick={handleToggleMode} className={currentMode === 'night' ? 'night-button' : 'day-button'}>
         {currentMode === 'night' ? 'Dark mode' : 'Light mode'}
       </button>
-      <p/>
+      <p />
       <button variant="default" onClick={openLoginModal}>Log in</button>
-      <p/>
+      <p />
       <button variant="default" onClick={openSignUpModal}>Sign Up</button>
-      <p/>
+      <p />
       <button onClick={handleLogout}>Log Out</button>
-      <p/>
-      <button onClick={onClose}>Close</button>
       {isLoginModalOpen && (
         <LoginModal
           onLogin={(email, password) => {

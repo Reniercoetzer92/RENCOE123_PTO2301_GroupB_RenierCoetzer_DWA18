@@ -32,24 +32,3 @@
   border-radius: 5px; 
   cursor: pointer; 
 }
-
-.signup-modal-content button :hover {
-  background-color: #19ac76;
-}
-
-#signup-form {
-  display: flexbox;
-  width: 300px;
-}
-
-#signup-form  input {
-  border-radius: 10px;
-  width: 90%;
-  height: 25px;
-  line-height: 10px;
-  margin-top: 10px;
-}
-
-#signup-form button {
-  margin-top: 30px;
-}

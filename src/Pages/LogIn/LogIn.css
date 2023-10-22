@@ -51,7 +51,7 @@ form  input {
 }
 
 form button {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 input[type='checkbox'] {
@@ -72,4 +72,14 @@ form label{
 label {
   display: flex;
   padding-left: 20px;
+}
+
+.exit-button {
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+  color: #ffffff; 
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }

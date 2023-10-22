@@ -7,7 +7,6 @@
   border-radius: 5px;
   padding: 20px;
   max-width: 200px; 
-  
   z-index: 1000; 
 }
 
@@ -31,13 +30,16 @@
   }
 }
 
-.settings-modal .close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
 .settings-modal p{
  padding: 1px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+  color: #ffffff; 
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
