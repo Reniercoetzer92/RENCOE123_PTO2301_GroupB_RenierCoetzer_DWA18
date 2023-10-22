@@ -1,7 +1,7 @@
 import { useState } from "react"
 import PropTypes from 'prop-types';
 import "./Components.css/Navbar.css";
-import SettingsModal from "../Pages/Setting/SettingsModal";
+import SettingsModal from "../Pages/Settings/SettingsModal";
 import HamburgerMenu from './HamburgerMenu';
 
 export default function Navbar({ onSearchClick }) {

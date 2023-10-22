@@ -40,6 +40,7 @@ export default function FavoriteCards() {
         <button className="dynamic-add" onClick={addSlide}>
           Add slide
         </button>
+        <br />
         <button className="dynamic-remove" onClick={removeSlide} disabled={slides.length <= 1}>
           Remove From Favorites
         </button>

@@ -103,7 +103,7 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
     <div className={`search-dialog ${isOpen ? 'open' : ''}`}>
       <div className="search-dialog-content">
         <img className="search-dialog-picture" src={"/rcstudiologo.jpg"}/>  
-        <button onClick={onClose}>Close</button>
+        <button onClick={onClose}>X</button>
         <div className="search-select-input">
           <input
             type="text"

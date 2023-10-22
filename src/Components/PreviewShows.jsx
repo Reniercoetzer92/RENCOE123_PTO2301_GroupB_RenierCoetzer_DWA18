@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import CarouselCards from "./CarouselCards";
 import "./Components.css/PreviewShows.css";
@@ -12,10 +12,11 @@ import "./Components.css/PreviewShows.css";
  * @returns {JSX.Element} - A React component representing the PreviewShows.
  */
 export default function PreviewShows({ shows, onShowClick }) {
-  const [selectedShow, setSelectedShow] = React.useState(null);
-  const [showAll, setShowAll] = React.useState(true);
-  const [showIds, setShowIds] = React.useState([]);
-  const [imageLoading, setImageLoading] = React.useState(false);
+  const [selectedShow, setSelectedShow] = useState(null);
+  const [showAll, setShowAll] = useState(true);
+  const [showIds, setShowIds] = useState([]);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   /**
    * Handles a click event on a show, displaying show details.
@@ -44,10 +45,14 @@ export default function PreviewShows({ shows, onShowClick }) {
     setShowAll(true);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const ids = shows.map((show) => show.id);
     setShowIds(ids);
   }, [shows]);
+
+  const toggleFavorite = () => {
+    setIsFavorited((prevIsFavorited) => !prevIsFavorited);
+  };
 
   return (
     <div className="preview-shows">
@@ -71,6 +76,14 @@ export default function PreviewShows({ shows, onShowClick }) {
                     />
                   </div>
                 )}
+                <br />
+                 <button className={`add-to-favorites ${isFavorited ? 'favorited' : ''}`} onClick={toggleFavorite}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className={`bi bi-star-fill ${isFavorited ? 'yellow' : 'white'}`} viewBox="0 0 16 14">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.950l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                  </svg>
+                  Add To Favorites
+                </button>
+                <br />
                 <div className="preview-show-display">
                   <button onClick={handleBackClick}>Back</button>
                 </div>

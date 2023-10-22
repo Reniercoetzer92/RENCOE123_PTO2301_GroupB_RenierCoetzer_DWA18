@@ -20,24 +20,3 @@
 .PreviewSeasons-SeasonDetails button:hover {
   background-color: #19ac76;
 }
-
-.add-to-favorites {
-  background-color: #14ca87; 
-  color: #fff;
-  border: none; 
-  padding: 4px 10px;
-  border-radius: 5px; 
-  cursor: pointer; 
-}
-
-.add-to-favorites:hover {
-  background-color: #19ac76;
-}
-
-.add-to-favorites.favorited .bi-star-fill {
-  color: yellow;
-}
-
-.add-to-favorites .bi-star-fill {
-  color: white;
-}
