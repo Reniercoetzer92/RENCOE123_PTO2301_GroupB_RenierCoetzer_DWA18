@@ -16,6 +16,6 @@ export default function Favorites({ favoriteShows, addToFavorites }) {
 }
 
 Favorites.propTypes = {
-  favoriteShows: PropTypes.array.isRequired,
-  addToFavorites: PropTypes.func.isRequired,
+  favoriteShows: PropTypes.array,
+  addToFavorites: PropTypes.func,
 };

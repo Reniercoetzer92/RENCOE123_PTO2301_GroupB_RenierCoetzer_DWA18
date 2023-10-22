@@ -24,6 +24,6 @@ export default function HomePreviewSection({ shows, selectedShowId, handleShowCl
 
 HomePreviewSection.propTypes = {
   shows: PropTypes.array.isRequired, 
-  selectedShowId: PropTypes.number, 
+  selectedShowId: PropTypes.string, 
   handleShowClick: PropTypes.func.isRequired, 
 };

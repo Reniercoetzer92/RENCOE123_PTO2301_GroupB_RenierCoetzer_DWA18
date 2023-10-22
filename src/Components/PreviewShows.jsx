@@ -73,6 +73,8 @@ export default function PreviewShows({ shows, onShowClick }) {
                     <img
                       src={selectedShow.image}
                       alt={selectedShow.title}
+                      rel="preload"
+                      loading="lazy"
                     />
                   </div>
                 )}

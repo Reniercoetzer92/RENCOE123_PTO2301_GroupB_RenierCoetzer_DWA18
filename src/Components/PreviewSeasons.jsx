@@ -92,7 +92,7 @@ export default function PreviewSeasons({ showId }) {
           {isLoadingImage ? (
             <sl-spinner></sl-spinner>
           ) : (
-            <img src={selectedSeason.image} alt={selectedSeason.title} />
+            <img src={selectedSeason.image} alt={selectedSeason.title} rel="preload" loading="faster"/>
           )}
           <PreviewEpisodes
             episodes={selectedSeason.episodes}

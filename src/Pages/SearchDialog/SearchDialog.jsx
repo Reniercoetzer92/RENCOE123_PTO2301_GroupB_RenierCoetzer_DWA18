@@ -25,9 +25,9 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
   };
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('title'); // Default sort by title
-  const [isAZSort, setIsAZSort] = useState(false); // Track if "A-Z" option is selected
-  const [lastUpdatedSortDirection, setLastUpdatedSortDirection] = useState('asc'); // Track the sorting direction
+  const [sortBy, setSortBy] = useState('title'); 
+  const [isAZSort, setIsAZSort] = useState(false); 
+  const [lastUpdatedSortDirection, setLastUpdatedSortDirection] = useState('asc');
 
   /**
    * Formats a date string to the specified format.
@@ -140,11 +140,9 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
               <li key={index}>
                 <h2>{show.title}</h2>
                 <img
-                    className="search-dialog-image grow-on-hover"
+                    className="search-dialog-image"
                     src={show.image}
                     alt="Show Image"
-                    srcSet={`${show.image} 1x, ${show.image2x} 2x`}
-                    sizes="(max-width: 600px) 200px, 400px"
                     loading="lazy"
                   />                
                 <p>{show.description}</p>

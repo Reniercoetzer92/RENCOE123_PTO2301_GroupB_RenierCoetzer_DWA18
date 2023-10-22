@@ -1,7 +1,6 @@
 import  { useEffect, useState, useRef } from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/CarouselCards.css";
-import '@shoelace-style/shoelace/dist/components/carousel/carousel.js';
 
 /**
  * CarouselCards component displaying a carousel of podcast show images.
@@ -76,10 +75,12 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
             {imageUrls.map((imageUrl, index) => (
               <sl-carousel-item key={index}>
                 <img
+                  rel="preload"
                   src={imageUrl}
                   alt={`Image for ID ${idsToShow[index]}`}
                   onClick={() => onOpenSeason(idsToShow[index])}
                   className="carousel-card-img"
+                  loading="lazy"
                 />
               </sl-carousel-item>
             ))}
