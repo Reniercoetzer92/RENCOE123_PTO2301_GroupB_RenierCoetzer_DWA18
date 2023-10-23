@@ -32,3 +32,16 @@
   border-radius: 5px; 
   cursor: pointer; 
 }
+
+.signup-modal-content p {
+  color: #a5a0a0;
+  font-size: small;
+}
+
+.signup-modal-content a {
+  color: #14ca87;
+}
+
+.signup-modal-content a:hover {
+  color: #19ac76;
+}

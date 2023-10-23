@@ -1,22 +1,14 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import SignUpModal from "../Signup/SignUpModal";
-import LoginModal from "../LogIn/LogInModal";
+import LoginModal from '../LogIn/LogInModal'; 
+import SignUpModal from '../Signup/SignUpModal'; 
 import './SettingsModal.css';
 
 export default function SettingsModal({ onClose, toggleMode, onLogout }) {
   const [currentMode, setCurrentMode] = useState('night');
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-
-  const openLoginModal = () => {
-    setIsLoginModalOpen(true);
-  };
-
-  const closeLoginModal = () => {
-    setIsLoginModalOpen(false);
-  };
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State to control the login dialog
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false); // State to control the signup dialog
 
   const openConfirmation = () => {
     setIsConfirmationOpen(true);
@@ -42,6 +34,14 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
     toggleMode(newMode);
   };
 
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
+
   const openSignUpModal = () => {
     setIsSignUpModalOpen(true);
   };
@@ -60,21 +60,11 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
         {currentMode === 'night' ? 'Dark mode' : 'Light mode'}
       </button>
       <p />
-      <button variant="default" onClick={openLoginModal}>Log in</button>
+      <button onClick={openLoginModal}>Log in</button>
       <p />
-      <button variant="default" onClick={openSignUpModal}>Sign Up</button>
+      <button onClick={openSignUpModal}>Sign Up</button>
       <p />
       <button onClick={handleLogout}>Log Out</button>
-      {isLoginModalOpen && (
-        <LoginModal
-          onLogin={(email, password) => {
-            // Implement your login logic here
-            console.log('Login with email:', email, 'and password:', password);
-          }}
-          onClose={closeLoginModal}
-        />
-      )}
-      {isSignUpModalOpen && <SignUpModal onClose={closeSignUpModal} />}
       {isConfirmationOpen && (
         <div className="confirmation-modal">
           <p>Are you sure you want to log out?</p>
@@ -82,6 +72,8 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
           <button onClick={closeConfirmation}>No</button>
         </div>
       )}
+      {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
+      {isSignUpModalOpen && <SignUpModal onClose={closeSignUpModal} />}
     </div>
   );
 }
