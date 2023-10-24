@@ -43,3 +43,56 @@
   padding: 5px 10px;
   cursor: pointer;
 }
+
+.toggler {
+  display: flex;
+  align-items: center;
+}
+
+.toggler p {
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.toggler--slider {
+  width: 30px;
+  height: 13px;
+  background-color: #2B283A;
+  border-radius: 2rem;
+  margin-inline: 7px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  box-sizing: content-box;
+  transition: all 0.3s;
+}
+
+.toggler--slider--circle {
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+/* Light Mode Styles */
+.toggler--light {
+  color: #D5D4D8;
+}
+
+
+/* Dark Mode Styles */
+.toggler--dark {
+  
+  color: #2B283A;
+}
+
+/* Toggler Slider Position */
+.toggler--slider.left {
+  justify-content: flex-start;
+}
+
+.toggler--slider.right {
+  justify-content: flex-end;
+}

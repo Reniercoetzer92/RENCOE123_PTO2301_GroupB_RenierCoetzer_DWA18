@@ -5,10 +5,10 @@ import SignUpModal from '../Signup/SignUpModal';
 import './SettingsModal.css';
 
 export default function SettingsModal({ onClose, toggleMode, onLogout }) {
-  const [currentMode, setCurrentMode] = useState('night');
+  const [currentMode, setCurrentMode] = useState('light');
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // State to control the login dialog
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false); // State to control the signup dialog
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); 
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false); 
 
   const openConfirmation = () => {
     setIsConfirmationOpen(true);
@@ -29,10 +29,15 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
   };
 
   const handleToggleMode = () => {
-    const newMode = currentMode === 'night' ? 'day' : 'night';
+    const newMode = currentMode === 'light' ? 'dark' : 'light';
     setCurrentMode(newMode);
     toggleMode(newMode);
+    
+    const slider = document.querySelector('.toggler--slider');
+    slider.classList.toggle('left');
+    slider.classList.toggle('right');
   };
+  
 
   const openLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -56,9 +61,15 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
         X
       </button>
       <h2>Settings</h2>
-      <button onClick={handleToggleMode} className={currentMode === 'night' ? 'night-button' : 'day-button'}>
-        {currentMode === 'night' ? 'Dark mode' : 'Light mode'}
-      </button>
+  
+      <div className="toggler">
+        <p className={`toggler--light ${currentMode === 'light' ? 'light' : 'dark'}`}>Light</p>
+        <div className="toggler--slider" onClick={handleToggleMode}>
+          <div className="toggler--slider--circle"></div>
+        </div>
+        <p className={`toggler--dark ${currentMode === 'light' ? 'dark' : 'light'}`}>Dark</p>
+      </div>
+
       <p />
       <button onClick={openLoginModal}>Log in</button>
       <p />

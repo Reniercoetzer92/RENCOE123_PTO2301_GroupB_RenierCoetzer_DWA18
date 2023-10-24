@@ -22,12 +22,12 @@ export default function Navbar({ onSearchClick }) {
 
   const openSettingsModal = () => {
     setIsSettingsModalOpen(true);
-    setIsButtonEnabled(false); // Disable the button when the dialog is open
+    setIsButtonEnabled(false); 
   };
 
   const closeSettingsModal = () => {
     setIsSettingsModalOpen(false);
-    setIsButtonEnabled(true); // Re-enable the button when the dialog is closed
+    setIsButtonEnabled(true);
   };
 
   const resetHamburger = () => {
