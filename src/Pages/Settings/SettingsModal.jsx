@@ -83,8 +83,10 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
           <button onClick={closeConfirmation}>No</button>
         </div>
       )}
+      
       {isLoginModalOpen && <LoginModal onClose={closeLoginModal} />}
       {isSignUpModalOpen && <SignUpModal onClose={closeSignUpModal} />}
+      
     </div>
   );
 }

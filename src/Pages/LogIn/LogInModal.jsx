@@ -1,8 +1,12 @@
-import {useState} from 'react'; // Import React
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import "./LogIn.css";
+import SignUpModal from '../SignUp/SignUpModal'; 
+import LogInModal from './LogInModal'; 
 
 export default function LoginModal({ onClose }) {
+  const [showLogInModal, setShowLogInModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,13 +23,18 @@ export default function LoginModal({ onClose }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // submitToApi(formData)
     console.log(formData);
     onClose();
   }
 
-  // Function to handle the exit action
+  function openSignUpDialog() {
+    setShowLogInModal(false);
+    setShowSignUpModal(true);
+  }
+
   function handleExit() {
+    setShowLogInModal(false);
+    setShowSignUpModal(false);
     onClose();
   }
 
@@ -41,7 +50,7 @@ export default function LoginModal({ onClose }) {
         <h3>Login</h3>
         <form onSubmit={handleSubmit}>
           <input
-            required="required"
+            required
             type="email"
             placeholder="Email"
             onChange={handleChange}
@@ -49,7 +58,7 @@ export default function LoginModal({ onClose }) {
             value={formData.email}
           />
           <input
-            required="required"
+            required
             type="password"
             placeholder="Password"
             onChange={handleChange}
@@ -68,7 +77,18 @@ export default function LoginModal({ onClose }) {
           </div>
           <button>Log in</button>
         </form>
+        <p>Do not have an account? {" "}
+          <span className="sign-up-link" onClick={openSignUpDialog} >
+            Sign Up
+          </span>
+        </p>
       </div>
+      {showSignUpModal && (
+        <SignUpModal onClose={() => setShowSignUpModal(false)} />
+      )}
+      {showLogInModal && (
+        <LogInModal onClose={() => setShowLogInModal(false)} />
+      )}
     </div>
   );
 }

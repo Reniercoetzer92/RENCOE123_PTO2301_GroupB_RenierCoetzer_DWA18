@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { supabase } from './client';
-import { Link } from 'react-router-dom';
+import LogInModal from '../LogIn/LogInModal';
 import './Signup.css';
 
 export default function SignUpModal({ onClose }) {
+  const [showLogInModal, setShowLogInModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,7 +34,7 @@ export default function SignUpModal({ onClose }) {
           password: formData.password,
           joinedNewsletter: formData.joinedNewsletter,
         });
-  
+
         if (error) {
           console.error('Sign-up error:', error);
           // Handle the error, e.g., display an error message to the user.
@@ -48,28 +50,36 @@ export default function SignUpModal({ onClose }) {
       console.log('Passwords do not match');
       return;
     }
-  
+
     if (formData.joinedNewsletter) {
       console.log('Thanks for signing up for our newsletter!');
     }
     onClose();
   }
 
-  function handleExit() {
+  function openLoginDialog() {
+    setShowLogInModal(true);
+    setShowSignUpModal(false); // Close the SignUpModal
+  }
+
+  function closeModals() {
+    setShowLogInModal(false);
+    setShowSignUpModal(false); // Close the SignUpModal
     onClose();
   }
 
   return (
     <div className="signup-modal">
-      <div className="signup-modal-content">
-        <button className="exit-button" onClick={handleExit}>
-          X
-        </button>
-        <h1>Welcome</h1>
-        <h1>To</h1>
-        <img src="/rcstudiologo.jpg" alt="Studio Logo" />
-        <h2>Sign Up</h2>
-        <form onSubmit={handleSubmit}>
+      {showSignUpModal && (
+        <div className="signup-modal-content">
+          <button className="exit-button" onClick={closeModals}>
+            X
+          </button>
+          <h1>Welcome</h1>
+          <h1>To</h1>
+          <img src="/rcstudiologo.jpg" alt="Studio Logo" />
+          <h2>Sign Up</h2>
+          <form onSubmit={handleSubmit}>
           <input
             required
             type="text"
@@ -111,11 +121,20 @@ export default function SignUpModal({ onClose }) {
               checked={formData.joinedNewsletter}
             />
             <label htmlFor="okayToEmail">I want to join the newsletter</label>
-            <p>already have an account? <Link to="/">Login</Link></p>
           </div>
           <button>Sign up</button>
-        </form>
-      </div>
+            <p>
+              Already have an account?{' '}
+              <span className="Log-In-link" onClick={openLoginDialog}>
+                Login
+              </span>
+            </p>
+          </form>
+        </div>
+      )}
+      {showLogInModal && (
+        <LogInModal onClose={closeModals} />
+      )}
     </div>
   );
 }
