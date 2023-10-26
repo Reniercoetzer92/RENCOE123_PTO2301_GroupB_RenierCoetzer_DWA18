@@ -1,17 +1,38 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { supabase } from '../SignUp/client';
 import "./LogIn.css";
-import SignUpModal from '../SignUp/SignUpModal'; 
-import LogInModal from './LogInModal'; 
 
 export default function LoginModal({ onClose }) {
-  const [showLogInModal, setShowLogInModal] = useState(false);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
     rememberMe: false,
   });
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+        rememberMe: formData.rememberMe,
+      });
+      if (error) {
+        console.log("Full error object:", error); 
+        if (error.message.includes('email')) {
+          console.log("Invalid email address. Please check your email.");
+        } else if (error.message.includes('password')) {
+          console.log("Invalid password. Please check your password.");
+        } 
+      } else {
+        console.log("You're logged in!", data);
+      }
+    } catch (error) {
+      console.log("An unexpected error occurred. Please try again later.");
+    }
+    onClose();
+  }
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -21,20 +42,7 @@ export default function LoginModal({ onClose }) {
     }));
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(formData);
-    onClose();
-  }
-
-  function openSignUpDialog() {
-    setShowLogInModal(false);
-    setShowSignUpModal(true);
-  }
-
   function handleExit() {
-    setShowLogInModal(false);
-    setShowSignUpModal(false);
     onClose();
   }
 
@@ -78,17 +86,9 @@ export default function LoginModal({ onClose }) {
           <button>Log in</button>
         </form>
         <p>Do not have an account? {" "}
-          <span className="sign-up-link" onClick={openSignUpDialog} >
             Sign Up
-          </span>
         </p>
       </div>
-      {showSignUpModal && (
-        <SignUpModal onClose={() => setShowSignUpModal(false)} />
-      )}
-      {showLogInModal && (
-        <LogInModal onClose={() => setShowLogInModal(false)} />
-      )}
     </div>
   );
 }

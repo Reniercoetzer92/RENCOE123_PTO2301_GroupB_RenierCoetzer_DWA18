@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { supabase } from './client';
-import LogInModal from '../LogIn/LogInModal';
 import './Signup.css';
 
 export default function SignUpModal({ onClose }) {
-  const [showLogInModal, setShowLogInModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
@@ -58,13 +56,10 @@ export default function SignUpModal({ onClose }) {
   }
 
   function openLoginDialog() {
-    setShowLogInModal(true);
-    setShowSignUpModal(false); // Close the SignUpModal
   }
 
   function closeModals() {
-    setShowLogInModal(false);
-    setShowSignUpModal(false); // Close the SignUpModal
+    setShowSignUpModal(false); 
     onClose();
   }
 
@@ -131,9 +126,6 @@ export default function SignUpModal({ onClose }) {
             </p>
           </form>
         </div>
-      )}
-      {showLogInModal && (
-        <LogInModal onClose={closeModals} />
       )}
     </div>
   );

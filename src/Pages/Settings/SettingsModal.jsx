@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import LoginModal from '../LogIn/LogInModal'; 
-import SignUpModal from '../Signup/SignUpModal'; 
+import SignUpModal from '../SignUp/SignUpModal'; 
 import './SettingsModal.css';
 
 export default function SettingsModal({ onClose, toggleMode, onLogout }) {
