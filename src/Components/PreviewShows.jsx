@@ -1,6 +1,6 @@
 import {useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import CarouselCards from "./CarouselCards";
+import { CarouselCards } from "../Helpers/Index_Components";
 import "./Components.css/PreviewShows.css";
 
 /**

@@ -1,10 +1,12 @@
 import { useState } from "react"
 import PropTypes from 'prop-types';
+import { SettingsModal } from "../Helpers/Index_Pages";
+import { HamburgerMenu } from '../Helpers/Index_Components';
+import { useNavigate  } from "react-router-dom"
 import "./Components.css/Navbar.css";
-import SettingsModal from "../Pages/Settings/SettingsModal";
-import HamburgerMenu from './HamburgerMenu';
 
 export default function Navbar({ onSearchClick }) {
+  let navigate = useNavigate() 
   const [mode, setMode] = useState('light');
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
   const [isButtonEnabled, setIsButtonEnabled] = useState(true);
@@ -35,16 +37,15 @@ export default function Navbar({ onSearchClick }) {
   };
 
   const handleLogout = () => {
-    // Implement your logout logic here
-    // For example, you can perform logout actions (clearing sessions, etc.)
-    // Close the modal
+    sessionStorage.removeItem('token');
+    navigate('/')
   };
 
   return (
     <nav>
       <div className="left-content">
-        <a href="Home">
-          <img src="/navbarlogo.png" alt="Home" />
+        <a href="homepage">
+          <img src="/navbarlogo.png" alt="" />
         </a>
       </div>
       <div className="search-button">

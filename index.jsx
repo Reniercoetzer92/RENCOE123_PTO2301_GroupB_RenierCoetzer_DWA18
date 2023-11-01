@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom/client";
 import React from "react";
-import HomePage from "./src/Pages/Home/HomePage";
 import Modal from 'react-modal';
 import { BrowserRouter } from "react-router-dom";
+import App from "./src/App";
 
 /**
  * Set the root element for the modal in the DOM.
@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
 <React.StrictMode>
   <BrowserRouter>
-    <HomePage />
+    <App/>
   </BrowserRouter>
 </React.StrictMode>
 );

@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import HomePreviewSection from "../../Components/HomePreviewSection"
-import Footer from '../../Components/Footer.jsx';
-import Navbar from '../../Components/Navbar.jsx';
-import SearchDialog from '../SearchDialog/SearchDialog.jsx';
+import { SearchDialog } from "../../Helpers/Index_Pages";
+import { HomePreviewSection, Footer, Navbar } from "../../Helpers/Index_Components"
 import "./HomePage.css"
 
 /**

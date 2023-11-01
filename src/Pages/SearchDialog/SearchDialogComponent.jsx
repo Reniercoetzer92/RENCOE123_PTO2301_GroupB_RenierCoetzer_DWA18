@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import SearchDialog from './SearchDialog'; 
 
-export default function YourComponent({ isSearchDialogOpen, closeSearchDialog, searchData }) {
+export default function SearchDialogComponent({ isSearchDialogOpen, closeSearchDialog, searchData }) {
   return (
     <section className="SearchDialog">
       {isSearchDialogOpen && (
@@ -17,7 +17,7 @@ export default function YourComponent({ isSearchDialogOpen, closeSearchDialog, s
   );
 }
 
-YourComponent.propTypes = {
+SearchDialogComponent.propTypes = {
   isSearchDialogOpen: PropTypes.bool.isRequired,
   closeSearchDialog: PropTypes.func.isRequired, 
   searchData: PropTypes.array.isRequired, 

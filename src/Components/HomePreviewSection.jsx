@@ -1,8 +1,5 @@
-import PreviewShows from './PreviewShows'; 
+import {PreviewShows, PreviewSeasons, Favorites, Hero } from '../Helpers/Index_Components'; 
 import PropTypes from 'prop-types'; 
-import PreviewSeasons from './PreviewSeasons';
-import Favorites from './Favorites';
-import Hero from './Hero';
 
 export default function HomePreviewSection({ shows, selectedShowId, handleShowClick }) {
   return (

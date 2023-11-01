@@ -42,7 +42,7 @@ form {
   width: 300px;
 }
 
-form  input {
+form input {
   border-radius: 10px;
   width: 90%;
   height: 25px;
@@ -82,4 +82,17 @@ label {
   border: none;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.login-modal-content p {
+  color: #a5a0a0;
+  font-size: small;
+}
+
+.login-modal-content a {
+  color: #14ca87;
+}
+
+.login-modal-content a:hover {
+  color: #19ac76;
 }

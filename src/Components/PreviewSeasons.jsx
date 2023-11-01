@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import PreviewEpisodes from "./PreviewEpisodes";
+import { PreviewEpisodes } from "../Helpers/Index_Components";
 import "./Components.css/PreviewSeasons.css";
 
 /**

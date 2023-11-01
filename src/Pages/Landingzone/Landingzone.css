@@ -1,0 +1,20 @@
+.Landing_zone {
+  text-align: center;
+  padding: 20px;
+}
+
+.Login_button,
+.Signup_button {
+  background-color: #14ca87;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.Login_button:hover,
+.Signup_button:hover {
+  background-color: #19ac76;
+}

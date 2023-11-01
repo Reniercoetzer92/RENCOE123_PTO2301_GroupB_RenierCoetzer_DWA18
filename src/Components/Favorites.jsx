@@ -1,6 +1,6 @@
 import "./Components.css/Favorites.css";
 import PropTypes from 'prop-types';
-import FavoriteCards from "./FavoriteCards";
+import { FavoriteCards } from "../Helpers/Index_Components";
 
 export default function Favorites({ favoriteShows, addToFavorites }) {
   return (
