@@ -41,6 +41,7 @@ export default function HomePage() {
 
   /**
    * Handle the click on a show card.
+   *
    * @param {string} showId - The ID of the selected show.
    */
   const handleShowClick = (showId) => {

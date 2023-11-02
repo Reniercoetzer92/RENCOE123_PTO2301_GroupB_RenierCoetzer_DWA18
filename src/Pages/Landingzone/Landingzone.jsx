@@ -2,7 +2,12 @@ import { Link } from 'react-router-dom';
 import './Landingzone.css';
 import { Footer } from '../../Helpers/Index_Components';
 
-function LandingPage() {
+/**
+ * The main component representing the landing page of the application.
+ *
+ * @component
+ */
+export default function LandingPage() {
   return (
      <div className='Landing_zone'>
         <h1>Welcome to Rc Studio</h1>
@@ -21,5 +26,3 @@ function LandingPage() {
     
   );
 }
-
-export default LandingPage;

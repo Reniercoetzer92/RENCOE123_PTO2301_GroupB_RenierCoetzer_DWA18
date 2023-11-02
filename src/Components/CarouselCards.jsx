@@ -1,4 +1,4 @@
-import  { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/CarouselCards.css";
 
@@ -12,11 +12,16 @@ import "./Components.css/CarouselCards.css";
  * @returns {JSX.Element} - A React component representing the Cards section.
  */
 export default function CarouselCards({ idsToShow, onOpenSeason }) {
+  // State for the currently displayed slide
   const [currentSlide, setCurrentSlide] = useState(0);
+  // State to store image URLs
   const [imageUrls, setImageUrls] = useState([]);
+  // State to track loading state
   const [isLoading, setIsLoading] = useState(true);
+  // Reference to the carousel component
   const carouselRef = useRef(null);
 
+  // Fetch and load image URLs for the specified show IDs
   useEffect(() => {
     const imagePromises = idsToShow.map((id) =>
       fetch(`https://podcast-api.netlify.app/id/${id}`)
@@ -25,23 +30,26 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
         .catch(() => null)
     );
 
+    // Set a loading timeout for better user experience
     const loadingTimeout = setTimeout(() => {
       setIsLoading(false);
     }, 4000);
 
     Promise.all(imagePromises)
       .then((images) => {
-        clearTimeout(loadingTimeout); 
+        clearTimeout(loadingTimeout);
+        // Filter out null URLs and update state
         setImageUrls(images.filter((url) => url !== null));
         setIsLoading(false);
       })
       .catch((error) => {
-        clearTimeout(loadingTimeout); 
+        clearTimeout(loadingTimeout);
         console.error(error);
         setIsLoading(false);
       });
   }, [idsToShow]);
 
+  // Automatically switch to the next slide at regular intervals
   useEffect(() => {
     const timer = setInterval(() => {
       if (carouselRef.current && imageUrls.length > 0) {
@@ -91,6 +99,7 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
   );
 }
 
+// Prop type validation for component props
 CarouselCards.propTypes = {
   idsToShow: PropTypes.arrayOf(PropTypes.string).isRequired,
   onOpenSeason: PropTypes.func.isRequired,

@@ -10,6 +10,11 @@ import PreviewEpisodes from '../Components/PreviewEpisodes';
 import PreviewSeasons from '../Components/PreviewSeasons';
 import PreviewShows from '../Components/PreviewShows';
 
+/**
+ * Module that exports multiple components used in the application.
+ *
+ * @module Index_Components
+ */
 export {
   CarouselCards,
   FavoriteCards,

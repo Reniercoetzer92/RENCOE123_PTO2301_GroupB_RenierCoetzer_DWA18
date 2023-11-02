@@ -11,11 +11,17 @@ import "./Components.css/PreviewSeasons.css";
  * @returns {JSX.Element} - A React component representing the PreviewSeasons.
  */
 export default function PreviewSeasons({ showId }) {
+  // State for show information
   const [showInfo, setShowInfo] = useState(null);
+
+  // State for season data
   const [seasons, setSeasons] = useState([]);
+
+  // State for the selected season
   const [selectedSeason, setSelectedSeason] = useState(null);
-  const [isLoadingImage, setIsLoadingImage] = useState(true); // Add loading state for the image
-  
+
+  // State to track loading state of the season image
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   useEffect(() => {
     // Fetch show information
@@ -105,6 +111,7 @@ export default function PreviewSeasons({ showId }) {
   );
 }
 
+// Prop type validation for component props
 PreviewSeasons.propTypes = {
   showId: PropTypes.string.isRequired,
 };

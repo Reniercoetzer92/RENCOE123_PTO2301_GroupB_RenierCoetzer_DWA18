@@ -10,6 +10,7 @@ import "./Components.css/PreviewEpisodes.css";
  * @returns {JSX.Element} - A React component representing the PreviewEpisodes.
  */
 export default function PreviewEpisodes({ episodes }) {
+  // State to track the selected episode for listening
   const [selectedEpisode, setSelectedEpisode] = useState(null);
 
   /**
@@ -44,6 +45,7 @@ export default function PreviewEpisodes({ episodes }) {
   );
 }
 
+// Prop type validation for component props
 PreviewEpisodes.propTypes = {
   episodes: PropTypes.arrayOf(
     PropTypes.shape({
