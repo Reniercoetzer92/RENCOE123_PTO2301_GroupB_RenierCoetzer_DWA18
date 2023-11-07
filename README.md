@@ -64,7 +64,3 @@ Commit your changes.
 Push to the branch.
 Open a pull request.
 We welcome contributions from the community!
-
-vbnet
-
-You can replace `<repository-url>`, `<your-project-folder>`, and add more details about your project if needed. This README provides an overview of your React application built with Vite, how to install and use it, its structure, license, acknowledgments, contact information, and how to contribute.
