@@ -30,20 +30,13 @@ export default function CarouselCards({ idsToShow, onOpenSeason }) {
         .catch(() => null)
     );
 
-    // Set a loading timeout for better user experience
-    const loadingTimeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 4000);
-
     Promise.all(imagePromises)
       .then((images) => {
-        clearTimeout(loadingTimeout);
         // Filter out null URLs and update state
         setImageUrls(images.filter((url) => url !== null));
         setIsLoading(false);
       })
       .catch((error) => {
-        clearTimeout(loadingTimeout);
         console.error(error);
         setIsLoading(false);
       });
