@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../Helpers/Supabase_client";
-import { Link, useNavigate} from "react-router-dom"
-import './Signup.css'
+import { Link, useNavigate } from "react-router-dom";
+import './Signup.css';
 
 /**
  * The component for user signup.
@@ -9,7 +9,7 @@ import './Signup.css'
  * @component
  */
 export default function Signup() {
-  let navigate = useNavigate() 
+  let navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,19 +17,19 @@ export default function Signup() {
     confirmPassword: '',
     joinedNewsletter: false,
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   /**
    * Handles changes in the form input fields.
    *
    * @param {Event} event - The input change event.
    */
-  function handleChange(event){
-    setFormData((prevFormData)=>{
-      return {
-        ...prevFormData,
-        [event.target.name]: event.target.value
-      }
-    });
+  function handleChange(event) {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [event.target.name]: event.target.value,
+    }));
   }
 
   /**
@@ -37,8 +37,11 @@ export default function Signup() {
    *
    * @param {Event} event - The form submit event.
    */
-  async function handleSubmit(event){
-    event.preventDefault()
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
     try {
       const { data, error } = await supabase.auth.signUp({
         name: formData.name,
@@ -47,11 +50,16 @@ export default function Signup() {
         confirmPassword: formData.confirmPassword,
         joinedNewsletter: formData.joinedNewsletter,
       });
-      if (error) throw error
-      console.log(data)
+
+      if (error) throw error;
+
+      console.log(data);
       alert('Check your email for a verification link');
+      navigate('/login'); // Redirect to login page after successful signup
     } catch (error) {
-      alert(error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -107,22 +115,25 @@ export default function Signup() {
           />
           <div className="form--marketing">
             <input
-              id="okayToEmail"
+              id="joinedNewsletter"
               type="checkbox"
               name="joinedNewsletter"
               onChange={handleChange}
               checked={formData.joinedNewsletter}
             />
-            <label htmlFor="okayToEmail">I want to join the newsletter</label>
+            <label htmlFor="joinedNewsletter">I want to join the newsletter</label>
           </div>
-          <button onClick={handleChange}>Sign up</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing up..." : "Sign up"}
+          </button>
           <p>
             Already have an account?{' '}
             <span className="Log-In-link">
-              <Link to="/Login">Login</Link>
+              <Link to="/login">Login</Link>
             </span>
           </p>
         </form>
+        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   );

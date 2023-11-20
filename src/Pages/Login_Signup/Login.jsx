@@ -18,6 +18,8 @@ export default function Login({ setToken }) {
     password: '',
     rememberMe: false,
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   /**
    * Handles changes in the form input fields.
@@ -29,8 +31,7 @@ export default function Login({ setToken }) {
       return {
         ...prevFormData,
         [event.target.name]: event.target.value
-      }
-    });
+      }});
   }
 
   /**
@@ -40,6 +41,9 @@ export default function Login({ setToken }) {
    */
   async function handleSubmit(event){
     event.preventDefault()
+    setLoading(true);
+    setError(null);
+
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
@@ -47,12 +51,13 @@ export default function Login({ setToken }) {
         rememberMe: formData.rememberMe,
       });
       if (error) throw error
-      console.log(data)
-      alert('You are logged in successfully');
+
       setToken(data);
-      navigate('/homepage');
+      navigate("/homepage");
     } catch (error) {
-      alert(error);
+      setError("Invalid email or password. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -101,8 +106,11 @@ export default function Login({ setToken }) {
             />
             <label htmlFor="rememberMe">Remember Me?</label>
           </div>
-          <button>Log in</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Log in"}
+          </button>
         </form>
+        {error && <p className="error-message">{error}</p>}
         <p>
           Do not have an account?{' '}
           <span className="Log-In-link">
