@@ -27,10 +27,11 @@ export default function App() {
     <div>
       <Routes>
         <Route path={'/'} element={<Landingzone />} />
-        {token ? <Route path={'/Homepage'} element={<Homepage token={token} />} /> : ""}
+        {token ? <Route path={'/Homepage'} element={<Homepage token={token} />} /> : null}
         <Route path={'/signup'} element={<Signup />} />
         <Route path={'/login'} element={<Login setToken={setToken} />} />
       </Routes>
+
     </div>
   );
 }

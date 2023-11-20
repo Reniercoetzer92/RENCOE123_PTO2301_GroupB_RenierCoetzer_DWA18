@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import { SettingsModal } from "../Helpers/Index_Pages";
 import { HamburgerMenu } from '../Helpers/Index_Components';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Components.css/Navbar.css";
 
 /**
@@ -77,9 +77,9 @@ export default function Navbar({ onSearchClick }) {
   return (
     <nav>
       <div className="left-content">
-        <a href="homepage">
-          <img src="/navbarlogo.png" alt="" />
-        </a>
+      <Link to="/Homepage">
+        <img src="/navbarlogo.png" alt="" />
+      </Link>
       </div>
       <div className="search-button">
         <button variant="default" onClick={handleSearchClick}>
