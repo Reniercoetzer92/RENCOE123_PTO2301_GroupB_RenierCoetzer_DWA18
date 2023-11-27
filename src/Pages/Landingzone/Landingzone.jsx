@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Landingzone.css';
-import { Footer } from '../../Helpers/Index_Components';
+import { Footer, LandingPageCards} from '../../Helpers/Index_Components';
 
 /**
  * The main component representing the landing page of the application.
@@ -18,6 +18,10 @@ export default function LandingPage() {
           <Link to="/signup">
             <button className='Signup_button'>Sign Up</button>
           </Link>
+
+        <section className="LandingPageCards">
+          <LandingPageCards />
+        </section>
         
         <section className="Footer">
           <Footer />

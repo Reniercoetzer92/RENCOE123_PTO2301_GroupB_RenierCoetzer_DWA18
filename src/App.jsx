@@ -25,13 +25,12 @@ export default function App() {
 
   return (
     <div>
-      <Routes>
-        <Route path={'/'} element={<Landingzone />} />
-        {token ? <Route path={'/Homepage'} element={<Homepage token={token} />} /> : null}
-        <Route path={'/signup'} element={<Signup />} />
-        <Route path={'/login'} element={<Login setToken={setToken} />} />
-      </Routes>
-
+        <Routes>
+          <Route path={'/'} element={<Landingzone />} />
+          {token ? <Route path={'/Homepage'} element={<Homepage token={token} />} /> : null}
+          <Route path={'/signup'} element={<Signup />} />
+          <Route path={'/login'} element={<Login setToken={setToken} />} />
+        </Routes>
     </div>
   );
 }

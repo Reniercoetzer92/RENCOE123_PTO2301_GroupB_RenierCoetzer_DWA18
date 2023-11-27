@@ -12,46 +12,36 @@ import "./Components.css/CarouselCards.css";
  * @returns {JSX.Element} - A React component representing the Cards section.
  */
 export default function CarouselCards({ idsToShow, onOpenSeason }) {
-  // State for the currently displayed slide
   const [currentSlide, setCurrentSlide] = useState(0);
-  // State to store image URLs
   const [imageUrls, setImageUrls] = useState([]);
-  // State to track loading state
   const [isLoading, setIsLoading] = useState(true);
-  // Reference to the carousel component
   const carouselRef = useRef(null);
 
-  // Fetch and load image URLs for the specified show IDs
   useEffect(() => {
-    const imagePromises = idsToShow.map((id) =>
-      fetch(`https://podcast-api.netlify.app/id/${id}`)
-        .then((response) => response.json())
-        .then((data) => data.image)
-        .catch(() => null)
-    );
-
-    Promise.all(imagePromises)
-      .then((images) => {
-        // Filter out null URLs and update state
-        setImageUrls(images.filter((url) => url !== null));
+    const fetchImageUrls = async () => {
+      try {
+        const responses = await Promise.all(idsToShow.map(id => fetch(`https://podcast-api.netlify.app/id/${id}`)));
+        const data = await Promise.all(responses.map(response => response.json()));
+        const images = data.map(d => d.image);
+        setImageUrls(images.filter(url => url !== null));
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchImageUrls();
   }, [idsToShow]);
 
-  // Automatically switch to the next slide at regular intervals
   useEffect(() => {
     const timer = setInterval(() => {
       if (carouselRef.current && imageUrls.length > 0) {
-        const nextSlide = (currentSlide + 1) % imageUrls.length;
-        setCurrentSlide(nextSlide);
-        carouselRef.current.selected = nextSlide;
+        setCurrentSlide((prevSlide) => (prevSlide + 1) % imageUrls.length);
+        carouselRef.current.selected = (currentSlide + 1) % imageUrls.length;
       }
     }, 5000);
-
+  
     return () => {
       clearInterval(timer);
     };

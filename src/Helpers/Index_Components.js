@@ -1,6 +1,4 @@
 import CarouselCards from '../Components/CarouselCards';
-import FavoriteCards from '../Components/FavoriteCards';
-import Favorites from '../Components/Favorites';
 import Footer from '../Components/Footer';
 import HamburgerMenu from '../Components/HamburgerMenu';
 import Hero from '../Components/Hero';
@@ -9,6 +7,8 @@ import Navbar from '../Components/Navbar';
 import PreviewEpisodes from '../Components/PreviewEpisodes';
 import PreviewSeasons from '../Components/PreviewSeasons';
 import PreviewShows from '../Components/PreviewShows';
+import LandingPageCards from '../Components/LandingPageCards'
+import FavouriteCarousel from '../Components/FavouriteCarousel';
 
 /**
  * Module that exports multiple components used in the application.
@@ -17,9 +17,8 @@ import PreviewShows from '../Components/PreviewShows';
  */
 export {
   CarouselCards,
-  FavoriteCards,
-  Favorites,
   Footer,
+  FavouriteCarousel,
   HamburgerMenu,
   Hero,
   HomePreviewSection,
@@ -27,4 +26,5 @@ export {
   PreviewEpisodes,
   PreviewSeasons,
   PreviewShows,
+  LandingPageCards,
 };

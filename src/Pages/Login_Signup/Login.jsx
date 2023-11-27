@@ -95,17 +95,6 @@ export default function Login({ setToken }) {
             name="password"
             value={formData.password}
           />
-          <div>
-            <input
-              type="checkbox"
-              id="rememberMe"
-              checked={formData.rememberMe}
-              onChange={handleChange}
-              name="rememberMe"
-              value={formData.rememberMe}
-            />
-            <label htmlFor="rememberMe">Remember Me?</label>
-          </div>
           <button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Log in"}
           </button>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from "prop-types";
 import "./Components.css/PreviewEpisodes.css";
+import  FavouriteCarousel from './FavouriteCarousel'
 
 /**
  * PreviewEpisodes component displays a list of episodes with the option to listen to each episode.
@@ -41,6 +42,7 @@ export default function PreviewEpisodes({ episodes }) {
           </div>
         ))}
       </div>
+      <FavouriteCarousel />
     </div>
   );
 }

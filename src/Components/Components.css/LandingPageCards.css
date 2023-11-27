@@ -1,0 +1,28 @@
+.Landing-Login-modal {
+  background-color: #529d43;
+  background-image: linear-gradient(147deg, #d7d7d7 0%, #353535 74%);
+  max-width: 50%;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.976);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.slick-slider{
+  margin-top: 120px;
+  margin-bottom: 10px;
+}
+
+.hero-description h4{
+  display: flex;
+  margin-top: 20px;
+  text-align: center;
+  line-height: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+}

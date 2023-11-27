@@ -3,13 +3,8 @@ import { supabase } from "../../Helpers/Supabase_client";
 import { Link, useNavigate } from "react-router-dom";
 import './Signup.css';
 
-/**
- * The component for user signup.
- *
- * @component
- */
-export default function Signup() {
-  let navigate = useNavigate();
+const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,24 +15,14 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  /**
-   * Handles changes in the form input fields.
-   *
-   * @param {Event} event - The input change event.
-   */
-  function handleChange(event) {
+  const handleChange = (event) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [event.target.name]: event.target.value,
     }));
-  }
+  };
 
-  /**
-   * Handles the form submission, attempts to sign up the user.
-   *
-   * @param {Event} event - The form submit event.
-   */
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
@@ -55,20 +40,17 @@ export default function Signup() {
 
       console.log(data);
       alert('Check your email for a verification link');
-      navigate('/login'); // Redirect to login page after successful signup
+      navigate('/login'); 
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  /**
-   * Handles the user's exit action from the signup modal.
-   */
-  function handleExit() {
+  const handleExit = () => {
     navigate('/');
-  }
+  };
 
   return (
     <div className="signup-modal">
@@ -113,16 +95,6 @@ export default function Signup() {
             name="confirmPassword"
             value={formData.confirmPassword}
           />
-          <div className="form--marketing">
-            <input
-              id="joinedNewsletter"
-              type="checkbox"
-              name="joinedNewsletter"
-              onChange={handleChange}
-              checked={formData.joinedNewsletter}
-            />
-            <label htmlFor="joinedNewsletter">I want to join the newsletter</label>
-          </div>
           <button type="submit" disabled={loading}>
             {loading ? "Signing up..." : "Sign up"}
           </button>
@@ -137,4 +109,6 @@ export default function Signup() {
       </div>
     </div>
   );
-}
+};
+
+export default Signup;

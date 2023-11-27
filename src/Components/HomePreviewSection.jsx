@@ -1,4 +1,4 @@
-import { PreviewShows, PreviewSeasons, Favorites, Hero } from '../Helpers/Index_Components';
+import { PreviewShows, PreviewSeasons, FavouriteCarousel } from '../Helpers/Index_Components';
 import PropTypes from 'prop-types';
 
 /**
@@ -21,12 +21,11 @@ export default function HomePreviewSection({ shows, selectedShowId, handleShowCl
           {/* Component to preview seasons for the selected show */}
           <PreviewSeasons showId={selectedShowId} />
           {/* Component to display favorite shows */}
-          <Favorites />
         </div>
       ) : (
-        <section className="Hero">
+        <section className="FavouriteCarousel">
           {/* Component to display a welcome message */}
-          <Hero />
+          <FavouriteCarousel />
         </section>
       )}
     </section>

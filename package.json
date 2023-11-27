@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.10.0",
-    "@supabase/supabase-js": "^2.38.2",
+    "@supabase/auth-ui-react": "^0.4.6",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/supabase-js": "^2.38.5",
     "axios": "^1.5.1",
     "fuse.js": "^6.6.2",
     "react": "^18.2.0",
@@ -19,6 +21,8 @@
     "react-modal": "^3.16.1",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.18.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.0"
   },
   "devDependencies": {
