@@ -53,7 +53,7 @@ export default function Login({ setToken }) {
       if (error) throw error
 
       setToken(data);
-      navigate("/Homepage");
+      navigate("/homepage");
     } catch (error) {
       setError("Invalid email or password. Please try again.");
     } finally {

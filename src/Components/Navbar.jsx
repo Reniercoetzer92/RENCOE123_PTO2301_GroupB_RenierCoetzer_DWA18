@@ -77,7 +77,7 @@ export default function Navbar({ onSearchClick }) {
   return (
     <nav>
       <div className="left-content">
-      <Link to="/Homepage">
+      <Link to="/homepage">
         <img src="/navbarlogo.png" alt="" />
       </Link>
       </div>

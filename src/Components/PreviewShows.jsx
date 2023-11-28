@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { CarouselCards, FavouriteCarousel } from "../Helpers/Index_Components";
+import { CarouselCards } from "../Helpers/Index_Components";
 import { supabase } from "../Helpers/Supabase_client";
 import "./Components.css/PreviewShows.css";
 
@@ -10,6 +10,7 @@ export default function PreviewShows({ shows, onShowClick }) {
   const [showIds, setShowIds] = useState([]);
   const [imageLoading, setImageLoading] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
+
 
   useEffect(() => {
     setShowIds(shows.map((show) => show.id));
@@ -80,9 +81,9 @@ export default function PreviewShows({ shows, onShowClick }) {
             .delete()
             .eq("id", showId);
         }
-      } catch (error) {
-        console.error("Error updating favorited status:", error);
-      }
+        } catch (error) {
+          console.error("Error updating favorited status:", error);
+        }
     }
   };  
 
@@ -135,12 +136,6 @@ export default function PreviewShows({ shows, onShowClick }) {
                 <div className="preview-show-display">
                   <button onClick={handleBackClick}>Back</button>
                 </div>
-              </div>
-            )}
-            {!selectedShow && (
-              <div>
-                {/* Display the FavouriteCarousel for favorited images */}
-                <FavouriteCarousel />
               </div>
             )}
           </div>

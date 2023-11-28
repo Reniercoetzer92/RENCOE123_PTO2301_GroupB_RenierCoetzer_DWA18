@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { SearchDialog } from "../../Helpers/Index_Pages";
-import { HomePreviewSection, Footer, Navbar } from "../../Helpers/Index_Components"
+import { HomePreviewSection, Footer, Navbar, FavouriteCarousel } from "../../Helpers/Index_Components"
 import "./HomePage.css"
 
 /**
@@ -55,6 +55,10 @@ export default function HomePage() {
       </section>
       <section className="HomePreview">
       <HomePreviewSection shows={shows} selectedShowId={selectedShowId} handleShowClick={handleShowClick} />
+      </section>
+      <section className="FavouriteCarousel">
+      {/* Display the FavouriteCarousel for favorited images */}
+      <FavouriteCarousel />
       </section>
       <section className="Footer">
         <Footer />
