@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import PropTypes from "prop-types";
-import "./Components.css/PreviewEpisodes.css";
+import PropTypes from 'prop-types';
+import './Components.css/PreviewEpisodes.css';
 
 /**
  * PreviewEpisodes component displays a list of episodes with the option to listen to each episode.
@@ -28,10 +28,18 @@ export default function PreviewEpisodes({ episodes }) {
         <h3>Episodes:</h3>
         {episodes.map((episode, index) => (
           <div key={episode.episode}>
-            {index + 1}. {episode.title} -{" "}
-            <button onClick={() => handleListenClick(episode)}>Listen</button>
+            <div>
+              {index + 1}. {episode.title} -{' '}
+              <button onClick={() => handleListenClick(episode)}>Listen</button>
+            </div>
             {selectedEpisode === episode && (
               <div className="PreviewEpisodes-audio">
+                <p>
+                  <strong>Description:</strong> 
+                </p>
+                <p>
+                 {episode.description}
+                </p>
                 <audio controls>
                   <source src={episode.file} type="audio/mpeg" />
                   Your browser does not support the audio element.
@@ -52,6 +60,7 @@ PreviewEpisodes.propTypes = {
       episode: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       file: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

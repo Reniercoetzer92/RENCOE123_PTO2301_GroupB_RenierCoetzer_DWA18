@@ -43,12 +43,8 @@ export default function FavouriteCarousel() {
     try {
       const response = await fetch(`https://podcast-api.netlify.app/id/${show.id}`);
       const data = await response.json();
-      console.log('Fetched Show Information:', data);
-
-      // Check if the clicked show is already a favorite
       const isFavorite = favoriteShows.some((favShow) => favShow.id === show.id);
 
-      // If it's not a favorite, add it; if it's already a favorite, do nothing
       if (!isFavorite) {
         await supabase.from('shows').upsert([{ id: show.id }]);
       }

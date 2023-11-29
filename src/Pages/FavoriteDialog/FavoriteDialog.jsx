@@ -10,6 +10,7 @@ export default function FavoriteDialog({ show, onClose }) {
   useEffect(() => {
     if (selectedSeason) {
       setSeasonEpisodes(selectedSeason.episodes);
+      setSelectedEpisode(null);
     }
   }, [selectedSeason]);
 
@@ -23,7 +24,6 @@ export default function FavoriteDialog({ show, onClose }) {
   };
 
   const handlePlayerEnded = () => {
-    // Handle the end of the episode, reset selectedEpisode
     setSelectedEpisode(null);
   };
 
@@ -31,9 +31,9 @@ export default function FavoriteDialog({ show, onClose }) {
     <div className="favorite-dialog">
       <div className="favorite-dialog-content">
         <button className="exit-button" onClick={onClose}>
-          Close
+          X
         </button>
-        <h4>{show.title}</h4>
+        <h2>{show.title}</h2>
         <p>{show.description}</p>
 
         <div className="season-selector">
@@ -41,22 +41,24 @@ export default function FavoriteDialog({ show, onClose }) {
           <select
             className="select-season"
             onChange={handleSeasonChange}
-            value={selectedSeason ? selectedSeason.season : ""}
+            value={selectedSeason ? selectedSeason.seasons : ""}
           >
-            <option value="" disabled>Select a Season</option>
+            <option value="" disabled>
+              Select a Season
+            </option>
             {show.seasons.map((season, index) => (
               <option key={index} value={index}>
-                {season.name}
+                {season.title}
               </option>
             ))}
           </select>
-
         </div>
 
         {selectedSeason && (
           <div className="season">
+            <p></p>
             <img src={selectedSeason.image} alt={`${selectedSeason.title} Image`} />
-            <h5>{selectedSeason.title}</h5>
+            <h4>{selectedSeason.title}</h4>
             <p>{selectedSeason.description}</p>
 
             <ul>
@@ -64,19 +66,25 @@ export default function FavoriteDialog({ show, onClose }) {
                 <li key={episode.title}>
                   {episode.title} -{' '}
                   <button onClick={() => handleListenClick(episode)}>Listen</button>
+                  {selectedEpisode === episode && (
+                    <div className="episode-details">
+                      <p>
+                        <strong>Description:</strong> 
+                      </p>
+                      <p>
+                      {episode.description}
+                      </p>
+                      <div className="audio-player">
+                        <audio controls onEnded={handlePlayerEnded}>
+                          <source src={selectedEpisode.file} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
-
-            {selectedEpisode && (
-              <div className="audio-player">
-                <h6>{selectedEpisode.title}</h6>
-                <audio controls onEnded={handlePlayerEnded}>
-                  <source src={selectedEpisode.file} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
-            )}
           </div>
         )}
       </div>
