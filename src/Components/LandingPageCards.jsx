@@ -23,8 +23,8 @@ export default function LandingPageCards() {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToShow: 6,
+    slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 3000,
   };

@@ -1,75 +1,94 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../Helpers/Supabase_client';
-import './Components.css/FavouriteCarousel.css';
+import { FavoriteDialog } from '../Helpers/Index_Pages'; 
+import '../Components/Components.css/FavouriteCarousel.css';
 
-/**
- * FavouriteCarousel component for displaying a list of favorite images.
- *
- * @returns {JSX.Element} - A React component representing the FavouriteCarousel.
- */
 export default function FavouriteCarousel() {
-  const [favoriteImages, setFavoriteImages] = useState([]);
+  const [favoriteShows, setFavoriteShows] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedShow, setSelectedShow] = useState(null);
 
   useEffect(() => {
-    const fetchAndSetFavoriteImages = async () => {
+    const fetchAndSetFavoriteShows = async () => {
       try {
         const { data, error } = await supabase
           .from('shows')
-          .select('image_url');
+          .select('id, image_url');
 
         if (error) {
-          console.error('Error fetching favorite images:', error);
+          console.error('Error fetching favorite shows:', error);
           return;
         }
 
-        // Extract image URLs from the fetched data
-        const images = data.map((item) => item.image_url);
-
-        setFavoriteImages(images);
-        setCurrentSlide(0); // Reset the current slide to 0 when updating images
+        setFavoriteShows(data);
+        setCurrentSlide(0);
       } catch (error) {
-        console.error('Error fetching favorite images:', error);
+        console.error('Error fetching favorite shows:', error);
       }
     };
 
-    // Fetch and set favorite images initially
-    fetchAndSetFavoriteImages();
+    fetchAndSetFavoriteShows();
 
-    // Set up an interval to fetch and update favorite images every 2000 milliseconds (2 seconds)
     const intervalId = setInterval(() => {
-      fetchAndSetFavoriteImages();
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % favoriteImages.length);
+      fetchAndSetFavoriteShows();
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % favoriteShows.length);
     }, 2000);
 
-    // Clear the interval on component unmount
     return () => clearInterval(intervalId);
-  }, [favoriteImages.length]); // Dependency on favoriteImages.length to prevent unnecessary interval restarts
+  }, [favoriteShows.length]);
+
+
+
+  const handleShowClick = async (show) => {
+    try {
+      const response = await fetch(`https://podcast-api.netlify.app/id/${show.id}`);
+      const data = await response.json();
+      console.log('Fetched Show Information:', data);
+
+      // Check if the clicked show is already a favorite
+      const isFavorite = favoriteShows.some((favShow) => favShow.id === show.id);
+
+      // If it's not a favorite, add it; if it's already a favorite, do nothing
+      if (!isFavorite) {
+        await supabase.from('shows').upsert([{ id: show.id }]);
+      }
+
+      setSelectedShow(data);
+    } catch (error) {
+      console.error('Error fetching show information:', error);
+    }
+  };
+
+  const handleDialogClose = () => {
+    setSelectedShow(null);
+  };
 
   return (
     <div>
       <h3>My Favorites:</h3>
-      {favoriteImages.length > 0 && (
-        <sl-carousel
-          autoplay
-          mouse-dragging
-          infinite
-          navigation
-          pagination
-          slides-per-page="3"
-          slides-per-move="1"
-          current-slide={currentSlide}
-          direction={currentSlide % 2 === 0 ? 'horizontal' : 'horizontal-reverse'}
-        >
-          {favoriteImages.map((image, index) => (
-            <sl-carousel-item key={index}>
-              <img
-                src={image}
-                alt={`Favorite ${index}`}
-              />
-            </sl-carousel-item>
-          ))}
-        </sl-carousel>
+      {favoriteShows.length > 0 && (
+        <div>
+          <sl-carousel
+            autoplay
+            mouse-dragging
+            infinite
+            navigation
+            pagination
+            slides-per-page="3"
+            slides-per-move="1"
+            current-slide={currentSlide}
+            direction={currentSlide % 2 === 0 ? 'horizontal' : 'horizontal-reverse'}
+          >
+            {favoriteShows.map((show, index) => (
+              <sl-carousel-item key={index} onClick={() => handleShowClick(show)}>
+                <img src={show.image_url} alt={`Favorite ${index}`} />
+              </sl-carousel-item>
+            ))}
+          </sl-carousel>
+        </div>
+      )}
+      {selectedShow && (
+        <FavoriteDialog show={selectedShow} onClose={handleDialogClose} />
       )}
     </div>
   );

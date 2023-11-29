@@ -10,7 +10,7 @@ import "./Components.css/PreviewSeasons.css";
  * @param {string} props.showId - The ID of the show to fetch season data for.
  * @returns {JSX.Element} - A React component representing the PreviewSeasons.
  */
-export default function PreviewSeasons({ showId }) {
+export default function PreviewSeasons({ showId, onSeasonsChange }) {
   // State for show information
   const [showInfo, setShowInfo] = useState(null);
 
@@ -61,12 +61,15 @@ export default function PreviewSeasons({ showId }) {
       (season) => season.season === selectedSeasonId
     );
     setSelectedSeason(selectedSeasonData || null);
-
+  
     // Simulate a 2-second delay before loading the image
     setIsLoadingImage(true);
     setTimeout(() => {
       setIsLoadingImage(false);
     }, 2000);
+  
+    // Notify the parent component about the selected season
+    onSeasonsChange(selectedSeasonData ? selectedSeasonData.title : null);
   };
 
   return (
@@ -114,4 +117,5 @@ export default function PreviewSeasons({ showId }) {
 // Prop type validation for component props
 PreviewSeasons.propTypes = {
   showId: PropTypes.string.isRequired,
+  onSeasonsChange: PropTypes.func.isRequired,
 };

@@ -4,6 +4,7 @@ import Homepage from '../Pages/Home/HomePage';
 import Landingzone from '../Pages/Landingzone/Landingzone';
 import SearchDialog from '../Pages/SearchDialog/SearchDialog';
 import SettingsModal from '../Pages/Settings/SettingsModal';
+import FavoriteDialog from '../Pages/FavoriteDialog/FavoriteDialog';
 
 /**
  * Module that exports multiple pages used in the application.
@@ -16,5 +17,6 @@ export {
   Homepage, 
   Landingzone, 
   SearchDialog, 
-  SettingsModal 
+  SettingsModal,
+  FavoriteDialog 
 };
