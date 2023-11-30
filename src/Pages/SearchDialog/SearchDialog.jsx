@@ -1,16 +1,8 @@
-import { useState } from 'react';  
+// SearchDialog.js
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import "./SearchDialog.css"
+import './SearchDialog.css';
 
-/**
- * Represents a search dialog component that displays a list of show data.
- *
- * @param {object} props - The component's props.
- * @param {function} props.onClose - A function to close the search dialog.
- * @param {array} props.showData - An array of show data to display in the dialog.
- * @param {boolean} props.isOpen - Indicates whether the dialog is open.
- * @returns {JSX.Element} - The rendered component.
- */
 export default function SearchDialog({ onClose, showData, isOpen }) {
   const Genres = {
     1: "Personal Growth",
@@ -24,17 +16,23 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
     9: "Kids and Family"
   };
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('title'); 
-  const [isAZSort, setIsAZSort] = useState(false); 
+  const Genres_array = [
+    "Personal Growth",
+    "Fiction",
+    "True Crime and Investigative Journalism",
+    "Kids and Family",
+    "History",
+    "Comedy",
+    "Entertainment",
+    "Business",
+    "News",
+  ];
+
+  const [searchQuery, setSearchQueryState] = useState('');
+  const [sortBy, setSortBy] = useState('title');
+  const [isAZSort, setIsAZSort] = useState(false);
   const [lastUpdatedSortDirection, setLastUpdatedSortDirection] = useState('asc');
 
-  /**
-   * Formats a date string to the specified format.
-   *
-   * @param {string} inputDate - The input date string to format.
-   * @returns {string} - The formatted date string.
-   */
   function formatDate(inputDate) {
     const date = new Date(inputDate);
     const day = date.getDate();
@@ -44,17 +42,14 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
     return `${day}/${month}/${year}`;
   }
 
-  /**
-   * Gets a string representation of genres based on genre numbers.
-   *
-   * @param {array} genreNumbers - An array of genre numbers.
-   * @returns {string} - A comma-separated string of genre names.
-   */
   const getGenres = (genreNumbers) => {
     return genreNumbers.map((number) => Genres[number]).join(', ');
   };
 
-  // Function to get the dynamic placeholder based on sortBy
+  const setSearchQuery = (value) => {
+    setSearchQueryState(value);
+  };
+
   const getPlaceholder = () => {
     if (sortBy === 'title') {
       return 'Search by title';
@@ -65,14 +60,19 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
     }
   };
 
-  // Filter and sort the showData based on searchQuery and sortBy
+  const toggleLastUpdatedSortDirection = () => {
+    setLastUpdatedSortDirection(lastUpdatedSortDirection === 'asc' ? 'desc' : 'asc');
+  };
+
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
   const filteredAndSortedData = showData
     .filter((show) => {
       if (isAZSort) {
         const showFirstLetter = show.title.charAt(0).toLowerCase();
         return showFirstLetter === searchQuery.toLowerCase().charAt(0);
       } else if (sortBy === 'genres') {
-        const showGenres = getGenres(show.genres).toLowerCase(); // Get the comma-separated genres as a lowercase string
+        const showGenres = getGenres(show.genres).toLowerCase();
         return showGenres.includes(searchQuery.toLowerCase());
       } else {
         const showTitle = show.title.toLowerCase();
@@ -94,16 +94,21 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
       return 0;
     });
 
-  // Function to toggle the Last Updated sorting direction
-  const toggleLastUpdatedSortDirection = () => {
-    setLastUpdatedSortDirection(lastUpdatedSortDirection === 'asc' ? 'desc' : 'asc');
-  };
-
   return (
     <div className={`search-dialog ${isOpen ? 'open' : ''}`}>
       <div className="search-dialog-content">
-        <img className="search-dialog-picture" src={"/rcstudiologo.jpg"}/>  
-        <button onClick={onClose}>X</button>
+        <div className="alphabet-buttons">
+          {alphabet.split('').map((letter) => (
+            <button
+              key={letter}
+              onClick={() => setSearchQuery(letter)}
+              className={searchQuery.toLowerCase() === letter.toLowerCase() ? 'selected' : ''}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
+        <button onClick={onClose} className="close-button">X</button>
         <div className="search-select-input">
           <input
             type="text"
@@ -134,17 +139,30 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
             </button>
           )}
         </div>
+        {sortBy === 'genres' && (
+          <div className="genres-buttons">
+            {Genres_array.map((genre, index) => (
+              <button
+                key={index}
+                onClick={() => setSearchQuery(genre)}
+                className={searchQuery.toLowerCase() === genre.toLowerCase() ? 'selected' : ''}
+              >
+                {genre}
+              </button>
+            ))}
+          </div>
+        )}
         {filteredAndSortedData.length > 0 ? (
           <ul>
             {filteredAndSortedData.map((show, index) => (
               <li key={index}>
                 <h2>{show.title}</h2>
                 <img
-                    className="search-dialog-image"
-                    src={show.image}
-                    alt="Show Image"
-                    loading="lazy"
-                  />                
+                  className="search-dialog-image"
+                  src={show.image}
+                  alt="Show Image"
+                  loading="lazy"
+                />
                 <p>{show.description}</p>
                 <p>Genres: {getGenres(show.genres)}</p>
                 <p>Seasons: {show.seasons}</p>
@@ -163,9 +181,6 @@ export default function SearchDialog({ onClose, showData, isOpen }) {
   );
 }
 
-/**
- * PropTypes for the SearchDialog component.
- */
 SearchDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   showData: PropTypes.array.isRequired,

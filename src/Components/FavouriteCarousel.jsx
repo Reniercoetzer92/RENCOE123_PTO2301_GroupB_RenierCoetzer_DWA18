@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../Helpers/Supabase_client';
-import { FavoriteDialog } from '../Helpers/Index_Pages'; 
+import { FavoriteDialog } from '../Helpers/Index_Pages';
 import '../Components/Components.css/FavouriteCarousel.css';
 
 export default function FavouriteCarousel() {
@@ -8,6 +8,7 @@ export default function FavouriteCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedShow, setSelectedShow] = useState(null);
   const [isFavorited, setIsFavorited] = useState(false);
+  const [selectedAlphabet, setSelectedAlphabet] = useState(null);
 
   const handleRemoveFromFavorites = async (showId) => {
     try {
@@ -21,9 +22,7 @@ export default function FavouriteCarousel() {
   useEffect(() => {
     const fetchAndSetFavoriteShows = async () => {
       try {
-        const { data, error } = await supabase
-          .from('shows')
-          .select('id, image_url');
+        const { data, error } = await supabase.from('shows').select('id, image_url, title');
 
         if (error) {
           console.error('Error fetching favorite shows:', error);
@@ -67,10 +66,42 @@ export default function FavouriteCarousel() {
     setSelectedShow(null);
   };
 
+  const handleAlphabetClick = (alphabet) => {
+    setSelectedAlphabet(alphabet === 'All' ? null : alphabet);
+  };
+
+  const filterShowsByAlphabet = () => {
+    if (!selectedAlphabet) {
+      return favoriteShows; // No alphabet selected, return all favorite shows
+    }
+    return favoriteShows.filter((s) => s.title.toLowerCase().startsWith(selectedAlphabet.toLowerCase()));
+  };
+
+  const filteredFavoriteShows = filterShowsByAlphabet();
+
   return (
     <div>
       <h3>My Favorites:</h3>
-      {favoriteShows.length > 0 ? (
+
+      <div className="alphabet-buttons">
+        <button
+          onClick={() => handleAlphabetClick('All')}
+          className={selectedAlphabet === null ? 'selected' : ''}
+        >
+          All
+        </button>
+        {Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i)).map((letter) => (
+          <button
+            key={letter}
+            onClick={() => handleAlphabetClick(letter)}
+            className={selectedAlphabet === letter ? 'selected' : ''}
+          >
+            {letter}
+          </button>
+        ))}
+      </div>
+
+      {filteredFavoriteShows.length > 0 ? (
         <div>
           <sl-carousel
             autoplay
@@ -83,7 +114,7 @@ export default function FavouriteCarousel() {
             current-slide={currentSlide}
             direction={currentSlide % 2 === 0 ? 'horizontal' : 'horizontal-reverse'}
           >
-            {favoriteShows.map((show, index) => (
+            {filteredFavoriteShows.map((show, index) => (
               <sl-carousel-item key={index} onClick={() => handleShowClick(show)}>
                 <img src={show.image_url} alt={`Favorite ${index}`} />
               </sl-carousel-item>
@@ -93,15 +124,16 @@ export default function FavouriteCarousel() {
       ) : (
         <p>There is nothing in your favorites.</p>
       )}
+
       {selectedShow && (
-    <FavoriteDialog
-    show={selectedShow}
-    onClose={handleDialogClose}
-    onRemoveFromFavorites={handleRemoveFromFavorites}
-    isFavorited={isFavorited}
-    toggleFavorite={() => setIsFavorited((prev) => !prev)}
-  />
-  )}
+        <FavoriteDialog
+          show={selectedShow}
+          onClose={handleDialogClose}
+          onRemoveFromFavorites={handleRemoveFromFavorites}
+          isFavorited={isFavorited}
+          toggleFavorite={() => setIsFavorited((prev) => !prev)}
+        />
+      )}
     </div>
   );
 }

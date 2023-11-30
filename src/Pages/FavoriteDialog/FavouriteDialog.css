@@ -1,9 +1,16 @@
+/* Variables */
+:root {
+  --primary-bg-color: #14ca87;
+  --secondary-bg-color: #d7d7d7;
+  --accent-color: #19ac76;
+}
+
+/* Favorite Dialog */
 .favorite-dialog {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  position: fixed;
+  transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.51);
   display: flex;
   justify-content: center;
@@ -13,21 +20,24 @@
   text-align: center;
 }
 
+/* Dialog Content */
 .favorite-dialog-content {
-  background-color: #d7d7d7;
-  background-image: linear-gradient(147deg, #d7d7d7 0%, #353535 74%);
-  max-width: 90%;
+  background-color: var(--secondary-bg-color);
+  background-image: linear-gradient(147deg, var(--secondary-bg-color) 0%, #353535 74%);
+  max-width: 100%;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.976);
   position: relative;
-  margin-left: 0px;
-  overflow-y: auto; /* Make the content scrollable */
-  max-height: 80vh; /* Set a maximum height for the content */
+  margin: auto;
+  overflow-y: auto;
+  max-height: 80vh;
+  text-align: center;
 }
 
+/* Button Styles */
 .favorite-dialog-content button {
-  background-color: #14ca87;
+  background-color: var(--primary-bg-color);
   color: #fff;
   border: none;
   padding: 4px 10px;
@@ -36,22 +46,10 @@
 }
 
 .favorite-dialog-content button:hover {
-  background-color: #19ac76;
+  background-color: var(--accent-color);
 }
 
-.favorite-dialog-content p {
-  color: black;
-  font-size: small;
-}
-
-.favorite-dialog-content a {
-  color: #14ca87;
-}
-
-.favorite-dialog-content a:hover {
-  color: #19ac76;
-}
-
+/* Exit Button */
 .exit-button {
   position: absolute;
   top: 10px;
@@ -62,6 +60,7 @@
   cursor: pointer;
 }
 
+/* List Styles */
 .favorite-dialog-content ul {
   list-style: none;
   padding: 0;
@@ -71,12 +70,13 @@
   margin-bottom: 10px;
 }
 
+/* Season Image */
 .season img {
   height: 150px;
   width: 150px;
 }
 
-/* Adjust the text color in the select dropdown */
+/* Select Dropdown Text Color */
 .favorite-dialog-content select {
   color: black;
 }

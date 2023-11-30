@@ -1,22 +1,15 @@
-ul {
+/* Variables */
+:root {
+  --primary-bg-color: #14ca87;
+  --secondary-bg-color: #d7d7d7;
+  --accent-color: #19ac76;
+}
+
+ul{
   list-style-type: none;
 }
 
-.information img {
-  height: 100px;
-  width: 100px;
-}
-
-.search-dialog-image {
-  width: 10%;
-  height: 10%;
-}
-
-.search-dialog-picture {
-  padding: 5px;
-  margin-left: 50px;
-}
-
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -32,10 +25,11 @@ ul {
   text-align: center;
 }
 
+/* Modal Content */
 .modal-content {
-  background-color: #d7d7d7;
-  background-image: linear-gradient(147deg, #d7d7d7 0%, #353535 74%);
-  max-width: 90%;
+  background-color: var(--secondary-bg-color);
+  background-image: linear-gradient(147deg, var(--secondary-bg-color) 0%, #353535 74%);
+  max-width: 100%;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.976);
@@ -43,23 +37,20 @@ ul {
   margin-left: 0px;
 }
 
-.modal-content button  {
-  background-color: #14ca87; 
+/* Close Button */
+.close-button {
+  background-color: var(--primary-bg-color); 
   color: #fff;
-  border: none; 
-  padding: 4px 10px;
   border-radius: 5px; 
-  cursor: pointer; 
-  position: absolute;
-  top: 5px;
-  right:23px;
+  cursor: pointer;
 }
 
-.modal-content button:hover {
-  background-color: #19ac76;
+.close-button:hover {
+  background-color: var(--accent-color);
 }
 
-.modal-scrollable-content{
+/* Scrollable Content */
+.modal-scrollable-content {
   max-height: 80vh; 
   overflow-y: auto;
   overflow-x: hidden; 
@@ -68,25 +59,25 @@ ul {
   padding-right: 5px;
 }
 
-.search-error p{
-width: 60vh;
+/* Search Error */
+.search-error p {
+  display: flex;
+  
+  justify-content: center;
 }
 
+/* Search Select Input */
 .search-select-input {
   margin-left: 40px;
 }
 
-.search-select-input input {
-  border-radius: 10px;
-  height: 25px;
-}
-
+.search-select-input input,
 .search-select-input select {
   border-radius: 10px;
   height: 25px;
 }
 
-
+/* Search Dialog Image */
 .search-dialog-image {
   display: block;
   margin: 0 auto; 
@@ -94,12 +85,94 @@ width: 60vh;
   height: 120px;
   max-width: 100%; 
   transition: transform 0.3s; 
-
-  /* Set a maximum height for the image, adjust the value as needed */
   max-height: 250px;
 }
 
-/* Apply the zoom effect on hover */
+/* Zoom Effect on Hover */
 .search-dialog-image:hover {
   transform: scale(1.1); /* Adjust the scale factor to control the zoom level */
+}
+
+/* Alphabet Buttons */
+.alphabet-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.alphabet-buttons button {
+  background-color: var(--primary-bg-color);
+  color: white;
+  border: none;
+  padding: 4px 6px;
+  font-size: 14px;
+  margin: 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 1px;
+}
+
+.alphabet-buttons button.selected {
+  background-color: var(--accent-color);
+}
+
+.lastUpdated-button {
+  background-color: var(--primary-bg-color);
+  color: #fff;
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.lastUpdated-button:hover {
+  background-color: var(--accent-color);
+}
+
+/* Genres Buttons */
+.genres-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.genres-buttons button {
+  background-color: var(--primary-bg-color);
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  font-size: 14px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.genres-buttons button.selected {
+  background-color: var(--accent-color);
+}
+
+.genres-buttons button:hover {
+  background-color: var(--accent-color);
+}
+
+/* SeasonInfo.css */
+.season-info-dialog {
+  /* Add your styling for the overall dialog container */
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.hello-world-message {
+  /* Add your styling for the "Hello, World!" message */
+  margin-top: 20px;
+  text-align: center;
+  color: green;
+  font-size: 18px;
 }
