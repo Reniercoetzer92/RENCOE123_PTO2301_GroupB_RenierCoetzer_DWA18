@@ -14,7 +14,6 @@ import './SettingsModal.css';
 export default function SettingsModal({ onClose, toggleMode, onLogout }) {
   const [currentMode, setCurrentMode] = useState('light');
   const [isConfirmationLogoutOpen, setIsConfirmationLogoutOpen] = useState(false);
-  const [isConfirmationDeleteOpen, setIsConfirmationDeleteOpen] = useState(false);
 
   const openLogoutConfirmation = () => {
     setIsConfirmationLogoutOpen(true);
@@ -24,30 +23,12 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
     setIsConfirmationLogoutOpen(false);
   };
 
-  const openResetConfirmation = () => {
-    setIsConfirmationDeleteOpen(true);
-  };
-
-  const closeDeleteConfirmation = () => {
-    setIsConfirmationDeleteOpen(false);
-  };
-
   const handleLogout = () => {
     openLogoutConfirmation();
   };
 
-  const handleDelete = () => {
-    openResetConfirmation();
-  };
-
   const confirmLogout = () => {
     closeLogoutConfirmation();
-    onClose();
-    onLogout();
-  };
-
-  const confirmDelete = () => {
-    closeDeleteConfirmation();
     onClose();
     onLogout();
   };
@@ -76,15 +57,6 @@ export default function SettingsModal({ onClose, toggleMode, onLogout }) {
         </div>
         <p className={`toggler--dark ${currentMode === 'light' ? 'dark' : 'light'}`}>Dark</p>
       </div>
-      <p />
-      <button onClick={handleDelete}>Delete Profile</button>
-      {isConfirmationDeleteOpen && (
-        <div className="confirmation-modal">
-          <p>Are you sure you want to delete your profile?</p>
-          <button onClick={confirmDelete}>Yes</button>
-          <button onClick={closeDeleteConfirmation}>No</button>
-        </div>
-      )}
       <p />
       <button onClick={handleLogout}>Logout</button>
       {isConfirmationLogoutOpen && (

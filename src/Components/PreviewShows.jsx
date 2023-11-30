@@ -68,9 +68,9 @@ export default function PreviewShows({ shows, onShowClick }) {
       try {
         const updatedIsFavorited = !isFavorited;
         setIsFavorited(updatedIsFavorited);
-
+  
         await supabase
-          .from("shows")
+          .from('shows')
           .upsert([
             {
               id: selectedShow.id,
@@ -81,17 +81,15 @@ export default function PreviewShows({ shows, onShowClick }) {
               seasons: selectedShow.seasons,
               updated_at: selectedShow.updated,
               isFavourite: updatedIsFavorited,
+              date_added: updatedIsFavorited ? new Date().toISOString() : null,
             },
           ]);
-
+  
         if (!updatedIsFavorited) {
-          await supabase
-            .from("shows")
-            .delete()
-            .eq("id", selectedShow.id);
+          await supabase.from('shows').delete().eq('id', selectedShow.id);
         }
       } catch (error) {
-        console.error("Error updating favorited status:", error);
+        console.error('Error updating favorited status:', error);
       }
     }
   };

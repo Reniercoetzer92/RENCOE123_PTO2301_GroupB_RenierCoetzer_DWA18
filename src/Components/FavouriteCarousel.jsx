@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../Helpers/Supabase_client';
 import { FavoriteDialog } from '../Helpers/Index_Pages';
 import '../Components/Components.css/FavouriteCarousel.css';
+import { format } from 'date-fns'; // Import the date-fns library for date formatting
 
 export default function FavouriteCarousel() {
   const [favoriteShows, setFavoriteShows] = useState([]);
@@ -9,11 +10,12 @@ export default function FavouriteCarousel() {
   const [selectedShow, setSelectedShow] = useState(null);
   const [isFavorited, setIsFavorited] = useState(false);
   const [selectedAlphabet, setSelectedAlphabet] = useState(null);
+  const [hoveredShow, setHoveredShow] = useState(null); // New state for tracking hover status
 
   const handleRemoveFromFavorites = async (showId) => {
     try {
       // Remove the show from favorites in Supabase
-      await supabase.from('shows').upsert([{ id: showId, isFavourite: false }]);
+      await supabase.from('shows').upsert([{ id: showId, isFavourite: false, date_added: new Date() }]); // Use the current date
     } catch (error) {
       console.error('Error removing show from favorites:', error);
     }
@@ -22,7 +24,7 @@ export default function FavouriteCarousel() {
   useEffect(() => {
     const fetchAndSetFavoriteShows = async () => {
       try {
-        const { data, error } = await supabase.from('shows').select('id, image_url, title');
+        const { data, error } = await supabase.from('shows').select('id, image_url, title, date_added');
 
         if (error) {
           console.error('Error fetching favorite shows:', error);
@@ -53,7 +55,7 @@ export default function FavouriteCarousel() {
       const isFavorite = favoriteShows.some((favShow) => favShow.id === show.id);
 
       if (!isFavorite) {
-        await supabase.from('shows').upsert([{ id: show.id }]);
+        await supabase.from('shows').upsert([{ id: show.id, date_added: new Date() }]); // Use the current date
       }
 
       setSelectedShow(data);
@@ -88,7 +90,7 @@ export default function FavouriteCarousel() {
           onClick={() => handleAlphabetClick('All')}
           className={selectedAlphabet === null ? 'selected' : ''}
         >
-          All
+          All Favourites
         </button>
         {Array.from({ length: 26 }, (_, i) => String.fromCharCode('A'.charCodeAt(0) + i)).map((letter) => (
           <button
@@ -115,8 +117,18 @@ export default function FavouriteCarousel() {
             direction={currentSlide % 2 === 0 ? 'horizontal' : 'horizontal-reverse'}
           >
             {filteredFavoriteShows.map((show, index) => (
-              <sl-carousel-item key={index} onClick={() => handleShowClick(show)}>
+              <sl-carousel-item
+                key={index}
+                onClick={() => handleShowClick(show)}
+                onMouseEnter={() => setHoveredShow(show)}
+                onMouseLeave={() => setHoveredShow(null)}
+              >
                 <img src={show.image_url} alt={`Favorite ${index}`} />
+                {hoveredShow && hoveredShow.id === show.id && (
+                  <div className="tooltip">
+                    {`Added to favorites on ${format(new Date(show.date_added), 'yyyy-MM-dd HH:mm:ss')}`}
+                  </div>
+                )}
               </sl-carousel-item>
             ))}
           </sl-carousel>
