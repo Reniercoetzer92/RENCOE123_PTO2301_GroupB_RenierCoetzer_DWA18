@@ -7,6 +7,16 @@ export default function FavouriteCarousel() {
   const [favoriteShows, setFavoriteShows] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedShow, setSelectedShow] = useState(null);
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const handleRemoveFromFavorites = async (showId) => {
+    try {
+      // Remove the show from favorites in Supabase
+      await supabase.from('shows').upsert([{ id: showId, isFavourite: false }]);
+    } catch (error) {
+      console.error('Error removing show from favorites:', error);
+    }
+  };
 
   useEffect(() => {
     const fetchAndSetFavoriteShows = async () => {
@@ -37,8 +47,6 @@ export default function FavouriteCarousel() {
     return () => clearInterval(intervalId);
   }, [favoriteShows.length]);
 
-
-
   const handleShowClick = async (show) => {
     try {
       const response = await fetch(`https://podcast-api.netlify.app/id/${show.id}`);
@@ -62,7 +70,7 @@ export default function FavouriteCarousel() {
   return (
     <div>
       <h3>My Favorites:</h3>
-      {favoriteShows.length > 0 && (
+      {favoriteShows.length > 0 ? (
         <div>
           <sl-carousel
             autoplay
@@ -82,10 +90,18 @@ export default function FavouriteCarousel() {
             ))}
           </sl-carousel>
         </div>
+      ) : (
+        <p>There is nothing in your favorites.</p>
       )}
       {selectedShow && (
-        <FavoriteDialog show={selectedShow} onClose={handleDialogClose} />
-      )}
+    <FavoriteDialog
+    show={selectedShow}
+    onClose={handleDialogClose}
+    onRemoveFromFavorites={handleRemoveFromFavorites}
+    isFavorited={isFavorited}
+    toggleFavorite={() => setIsFavorited((prev) => !prev)}
+  />
+  )}
     </div>
   );
 }

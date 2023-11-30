@@ -10,17 +10,40 @@ export default function PreviewShows({ shows, onShowClick }) {
   const [showIds, setShowIds] = useState([]);
   const [imageLoading, setImageLoading] = useState(false);
   const [isFavorited, setIsFavorited] = useState(false);
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setShowIds(shows.map((show) => show.id));
   }, [shows]);
 
   useEffect(() => {
-    // Load favorited show from local storage
-    const favoritedShows = JSON.parse(localStorage.getItem("favoritedShows")) || {};
-    const showId = selectedShow?.id;
-    setIsFavorited(favoritedShows[showId] || false);
+    const fetchData = async () => {
+      setLoading(true);
+
+      // Fetch initial favorited status
+      if (selectedShow) {
+        try {
+          const { data, error } = await supabase
+            .from("shows")
+            .select("id, isFavourite")
+            .eq("id", selectedShow.id);
+
+          if (error) {
+            console.error("Error fetching initial favorited status:", error);
+            return;
+          }
+
+          const favoritedShow = data && data.length > 0 ? data[0] : null;
+          setIsFavorited(favoritedShow?.isFavourite || false);
+        } catch (error) {
+          console.error("Error fetching initial favorited status:", error);
+        }
+      }
+
+      setLoading(false);
+    };
+
+    fetchData();
   }, [selectedShow]);
 
   const handleShowClick = (showId) => {
@@ -42,31 +65,14 @@ export default function PreviewShows({ shows, onShowClick }) {
 
   const toggleFavorite = async () => {
     if (selectedShow) {
-      const showId = selectedShow.id;
-  
       try {
-        // Get the current favorited status from local storage
-        const favoritedShows = JSON.parse(localStorage.getItem("favoritedShows")) || {};
-  
-        // Toggle the favorited status
-        const updatedIsFavorited = !favoritedShows[showId];
-  
-        // Update the favorited status in the state
+        const updatedIsFavorited = !isFavorited;
         setIsFavorited(updatedIsFavorited);
-  
-        // Update the favorited status in local storage
-        localStorage.setItem("favoritedShows", JSON.stringify({ ...favoritedShows, [showId]: updatedIsFavorited }));
-  
-        // Update the favorited status in the favorited_shows table
+
         await supabase
-          .from("favorited_shows")
-          .upsert([{ show_id: showId, is_favorited: updatedIsFavorited }]);
-  
-        // Conditionally add or remove the show from the shows table
-        if (updatedIsFavorited) {
-          await supabase
-            .from("shows")
-            .upsert([{ 
+          .from("shows")
+          .upsert([
+            {
               id: selectedShow.id,
               title: selectedShow.title,
               description: selectedShow.description,
@@ -74,26 +80,30 @@ export default function PreviewShows({ shows, onShowClick }) {
               image_url: selectedShow.image,
               seasons: selectedShow.seasons,
               updated_at: selectedShow.updated,
-            }]);
-        } else {
+              isFavourite: updatedIsFavorited,
+            },
+          ]);
+
+        if (!updatedIsFavorited) {
           await supabase
             .from("shows")
             .delete()
-            .eq("id", showId);
+            .eq("id", selectedShow.id);
         }
-        } catch (error) {
-          console.error("Error updating favorited status:", error);
-        }
+      } catch (error) {
+        console.error("Error updating favorited status:", error);
+      }
     }
-  };  
+  };
 
   return (
     <div className="preview-shows">
       <h3>Featured:</h3>
       <ul>
-        {showAll ? (
+        {loading ? (
+          <div>Loading...</div>
+        ) : showAll ? (
           <div>
-            {/* Display the CarouselCards for all shows */}
             <CarouselCards idsToShow={showIds} onOpenSeason={handleShowClick} />
           </div>
         ) : (
@@ -104,7 +114,6 @@ export default function PreviewShows({ shows, onShowClick }) {
                   <sl-spinner></sl-spinner>
                 ) : (
                   <div className="preview-show-Image">
-                    {/* Display the selected show's image */}
                     <img
                       src={selectedShow.image}
                       alt={selectedShow.title}
@@ -114,24 +123,24 @@ export default function PreviewShows({ shows, onShowClick }) {
                   </div>
                 )}
                 <br />
-                <button
-                className={`add-to-favorites ${isFavorited ? 'favorited' : ''}`}
-                onClick={toggleFavorite}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className={`bi bi-star-fill ${
-                      isFavorited ? 'yellow' : 'white'
-                    }`}
-                    viewBox="0 0 16 14"
+                {selectedShow && (
+                  <button
+                    className={`add-to-favorites ${isFavorited ? 'favorited' : ''}`}
+                    onClick={toggleFavorite}
                   >
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.950l4.898-.696L7.538.792c.197-.390.73-.390.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.950l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                  </svg>
-                  Add To Favorites
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className={`bi bi-star-fill ${isFavorited ? 'yellow' : 'white'}`}
+                      viewBox="0 0 16 14"
+                    >
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.830-4.73L.173 6.765c-.329-.314-.158-.888.283-.950l4.898-.696L7.538.792c.197-.390.73-.390.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.950l-3.522 3.356.830 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                    {isFavorited ? 'Remove From Favorites' : 'Add To Favorites'}
+                  </button>
+                )}
                 <br />
                 <div className="preview-show-display">
                   <button onClick={handleBackClick}>Back</button>
