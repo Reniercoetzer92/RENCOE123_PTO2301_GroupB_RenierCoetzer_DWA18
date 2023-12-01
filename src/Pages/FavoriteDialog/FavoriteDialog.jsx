@@ -3,7 +3,18 @@ import PropTypes from 'prop-types';
 import { supabase } from "../../Helpers/Supabase_client";
 import './FavouriteDialog.css';
 
-export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,}) {
+/**
+ * FavoriteDialog component for rendering details of a favorite show and allowing removal from favorites.
+ *
+ * @param {Object} props - The component's props.
+ * @param {Object} props.show - The favorite show object.
+ * @param {Function} props.onClose - Callback function to close the dialog.
+ * @param {Function} props.onRemoveFromFavorites - Callback function to remove the show from favorites.
+ *
+ * @returns {JSX.Element} - A React component representing the FavoriteDialog.
+ */
+export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites }) {
+  // State variables
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [seasonEpisodes, setSeasonEpisodes] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
@@ -11,25 +22,42 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,})
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
+    // Update seasonEpisodes when selectedSeason changes
     if (selectedSeason) {
       setSeasonEpisodes(selectedSeason.episodes);
       setSelectedEpisode(null);
     }
   }, [selectedSeason]);
 
+  /**
+   * Handles the change of the selected season from the dropdown.
+   *
+   * @param {Object} event - The change event from the season dropdown.
+   */
   const handleSeasonChange = (event) => {
     const selectedSeasonIndex = parseInt(event.target.value, 10);
     setSelectedSeason(show.seasons[selectedSeasonIndex]);
   };
 
+  /**
+   * Handles the click event for the "Listen" button on an episode.
+   *
+   * @param {Object} episode - The selected episode.
+   */
   const handleListenClick = (episode) => {
     setSelectedEpisode(episode);
   };
 
+  /**
+   * Handles the end event of the audio player.
+   */
   const handlePlayerEnded = () => {
     setSelectedEpisode(null);
   };
 
+  /**
+   * Confirms the removal from favorites and triggers the removal process.
+   */
   const confirmRemoveFromFavorites = async () => {
     if (showConfirmation) {
       setIsRemoving(true);
@@ -57,9 +85,11 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,})
   return (
     <div className="favorite-dialog">
       <div className="favorite-dialog-content">
+        {/* Close button */}
         <button className="exit-button" onClick={onClose}>
           X
         </button>
+        {/* Remove from favorites button */}
         <button
           className={`remove-favorite-button ${isRemoving ? 'removing' : ''}`}
           onClick={confirmRemoveFromFavorites}
@@ -67,9 +97,11 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,})
           {showConfirmation ? 'Are you sure?' : isRemoving ? 'Removing...' : 'Remove from Favorites'}
         </button>
 
+        {/* Show title and description */}
         <h2>{show.title}</h2>
         <p>{show.description}</p>
 
+        {/* Season selector dropdown */}
         <div className="season-selector">
           <label htmlFor="seasonDropdown">Select a Season:</label>
           <select
@@ -88,6 +120,7 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,})
           </select>
         </div>
 
+        {/* Display selected season details and episodes */}
         {selectedSeason && (
           <div className="season">
             <p></p>
@@ -95,17 +128,20 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,})
             <h4>{selectedSeason.title}</h4>
             <p>{selectedSeason.description}</p>
 
+            {/* List of episodes */}
             <ul>
               {seasonEpisodes.map((episode) => (
                 <li key={episode.title}>
                   {episode.title} -{' '}
                   <button onClick={() => handleListenClick(episode)}>Listen</button>
+                  {/* Display episode details if selected */}
                   {selectedEpisode === episode && (
                     <div className="episode-details">
                       <p>
                         <strong>Description:</strong>
                       </p>
                       <p>{episode.description}</p>
+                      {/* Audio player */}
                       <div className="audio-player">
                         <audio controls onEnded={handlePlayerEnded}>
                           <source src={selectedEpisode.file} type="audio/mpeg" />
@@ -124,10 +160,9 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites,})
   );
 }
 
+// Prop type validation for component props
 FavoriteDialog.propTypes = {
   show: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   onRemoveFromFavorites: PropTypes.func.isRequired,
-  isFavorited: PropTypes.bool.isRequired,
-  toggleFavorite: PropTypes.func.isRequired,
 };

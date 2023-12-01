@@ -4,7 +4,13 @@ import { FavoriteDialog } from '../Helpers/Index_Pages';
 import '../Components/Components.css/FavouriteCarousel.css';
 import { format } from 'date-fns'; // Import the date-fns library for date formatting
 
+/**
+ * FavouriteCarousel component displaying a carousel of favorite podcast shows.
+ *
+ * @returns {JSX.Element} - A React component representing the Favorite Carousel.
+ */
 export default function FavouriteCarousel() {
+  // State variables
   const [favoriteShows, setFavoriteShows] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedShow, setSelectedShow] = useState(null);
@@ -12,16 +18,23 @@ export default function FavouriteCarousel() {
   const [selectedAlphabet, setSelectedAlphabet] = useState(null);
   const [hoveredShow, setHoveredShow] = useState(null); // New state for tracking hover status
 
+  /**
+   * Handles the removal of a show from favorites in Supabase.
+   *
+   * @param {string} showId - The ID of the show to be removed from favorites.
+   */
   const handleRemoveFromFavorites = async (showId) => {
     try {
-      // Remove the show from favorites in Supabase
-      await supabase.from('shows').upsert([{ id: showId, isFavourite: false, date_added: new Date() }]); // Use the current date
+      await supabase.from('shows').upsert([{ id: showId, isFavourite: false, date_added: new Date() }]);
     } catch (error) {
       console.error('Error removing show from favorites:', error);
     }
   };
 
   useEffect(() => {
+    /**
+     * Fetches and sets favorite shows from Supabase, and sets up an interval for periodic updates.
+     */
     const fetchAndSetFavoriteShows = async () => {
       try {
         const { data, error } = await supabase.from('shows').select('id, image_url, title, date_added');
@@ -48,6 +61,11 @@ export default function FavouriteCarousel() {
     return () => clearInterval(intervalId);
   }, [favoriteShows.length]);
 
+  /**
+   * Handles a click on a favorite show, fetches additional information, and updates the selected show state.
+   *
+   * @param {Object} show - The clicked favorite show.
+   */
   const handleShowClick = async (show) => {
     try {
       const response = await fetch(`https://podcast-api.netlify.app/id/${show.id}`);
@@ -55,7 +73,7 @@ export default function FavouriteCarousel() {
       const isFavorite = favoriteShows.some((favShow) => favShow.id === show.id);
 
       if (!isFavorite) {
-        await supabase.from('shows').upsert([{ id: show.id, date_added: new Date() }]); // Use the current date
+        await supabase.from('shows').upsert([{ id: show.id, date_added: new Date() }]);
       }
 
       setSelectedShow(data);
@@ -64,14 +82,27 @@ export default function FavouriteCarousel() {
     }
   };
 
+  /**
+   * Closes the dialog for the selected show.
+   */
   const handleDialogClose = () => {
     setSelectedShow(null);
   };
 
+  /**
+   * Handles a click on an alphabet button to filter favorite shows by the selected alphabet.
+   *
+   * @param {string} alphabet - The selected alphabet.
+   */
   const handleAlphabetClick = (alphabet) => {
     setSelectedAlphabet(alphabet === 'All' ? null : alphabet);
   };
 
+  /**
+   * Filters favorite shows based on the selected alphabet.
+   *
+   * @returns {Array} - The filtered favorite shows.
+   */
   const filterShowsByAlphabet = () => {
     if (!selectedAlphabet) {
       return favoriteShows; // No alphabet selected, return all favorite shows
@@ -85,6 +116,7 @@ export default function FavouriteCarousel() {
     <div>
       <h3>My Favorites:</h3>
 
+      {/* Alphabet filter buttons */}
       <div className="alphabet-buttons">
         <button
           onClick={() => handleAlphabetClick('All')}
@@ -103,6 +135,7 @@ export default function FavouriteCarousel() {
         ))}
       </div>
 
+      {/* Display favorite shows in a carousel */}
       {filteredFavoriteShows.length > 0 ? (
         <div>
           <sl-carousel
@@ -124,6 +157,8 @@ export default function FavouriteCarousel() {
                 onMouseLeave={() => setHoveredShow(null)}
               >
                 <img src={show.image_url} alt={`Favorite ${index}`} />
+
+                {/* Display tooltip on hover */}
                 {hoveredShow && hoveredShow.id === show.id && (
                   <div className="tooltip">
                     {`Added to favorites on ${format(new Date(show.date_added), 'yyyy-MM-dd HH:mm:ss')}`}
@@ -137,6 +172,7 @@ export default function FavouriteCarousel() {
         <p>There is nothing in your favorites.</p>
       )}
 
+      {/* Display the selected show dialog */}
       {selectedShow && (
         <FavoriteDialog
           show={selectedShow}

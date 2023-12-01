@@ -1,12 +1,10 @@
-# RC Podcastpodcast-studio-website
+# RC Podcast-studio-website
 
-markdown
-
-# Vite React Application README
+## Vite React Application README
 
 ## Overview
 
-This is a sample README for a React application built with Vite. The application includes components for user registration, login, a landing page, and a homepage. It uses React Router for routing and React-Modal for modals.
+This a React application built with Vite. The application includes components for user registration, login, a landing page, and a homepage. It uses React Router for routing and React-Modal for modals.
 
 ## Prerequisites
 
@@ -20,47 +18,89 @@ Before you begin, ensure you have met the following requirements:
 
 1. Clone this repository.
 
-   ```bash
-   git clone https://github.com/Reniercoetzer92/RENCOE123_PTO2301_GroupB_RenierCoetzer_DWA18.git
+git clone https://github.com/Reniercoetzer92/RENCOE123_PTO2301_GroupB_RenierCoetzer_DWA18.git
 Install dependencies using npm:
-
-bash
-
-cd <your-project-folder>
-npm install
-Usage
-Start the development server using Vite:
-
-bash
 
 npm run dev
 Open your web browser and navigate to http://localhost:3000 to access the application.
 
 Follow the on-screen instructions to use the application, which includes a landing page, user registration, and login.
 
-Structure
-The project structure is organized as follows:
+# Structure
 
-src: Contains the application source code.
-Components: Reusable React components used throughout the application.
-Pages: Individual pages of the application, including Login, Signup, Homepage, and Landingzone.
-Helpers: Utility components, constants, and libraries.
-public: Contains public assets like images and the index.html file.
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+# RC Podcast
 
-Acknowledgements
-This project uses React for building the user interface.
-Routing is implemented using React Router.
-Modals are created with React-Modal.
-The project is built with Vite.
-Contact
-If you have any questions, please feel free to contact the project maintainers.
+## Table of Contents
 
-Contributing
-Fork the project.
-Create your feature branch.
-Commit your changes.
-Push to the branch.
-Open a pull request.
-We welcome contributions from the community!
+- [RC Podcast-studio-website](#rc-podcast-studio-website)
+  - [Vite React Application README](#vite-react-application-readme)
+  - [Overview](#overview)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Structure](#structure)
+- [RC Podcast](#rc-podcast)
+  - [Table of Contents](#table-of-contents)
+  - [Project Description](#project-description)
+  - [Some of the Components](#some-of-the-components)
+    - [1. HamburgerMenu Component](#1-hamburgermenu-component)
+    - [2. LandingPageCards Component](#2-landingpagecards-component)
+    - [3. PreviewShows Component](#3-previewshows-component)
+    - [4. FavoriteDialog Component](#4-favoritedialog-component)
+    - [5. Signup Component](#5-signup-component)
+    - [6. SearchDialog Component](#6-searchdialog-component)
+    - [7. SettingsModal Component](#7-settingsmodal-component)
+    - [8. CarouselCards Component](#8-carouselcards-component)
+  - [Contributing](#contributing)
+  - [License](#license)
+
+## Project Description
+
+Provide a brief description of your project here. Mention its purpose, key features, and any relevant information.
+
+## Some of the Components
+
+### 1. HamburgerMenu Component
+
+The `HamburgerMenu` component represents a hamburger-style menu button with the following props:
+
+- `onSettingsClick`: Callback function to handle menu button click.
+- `isButtonEnabled`: Indicates whether the button is enabled or disabled.
+- `isMenuOpen`: Indicates whether the menu is open or closed.
+- `resetHamburger`: Callback function to reset the hamburger menu.
+
+### 2. LandingPageCards Component
+
+The `LandingPageCards` component fetches show previews and displays them in a carousel. It includes a description and a login modal.
+
+### 3. PreviewShows Component
+
+The `PreviewShows` component displays featured shows, allows favoriting, and handles various user interactions. It includes a carousel for the featured shows.
+
+### 4. FavoriteDialog Component
+
+The `FavoriteDialog` component represents a dialog for favorited shows. It includes details about the show, episodes, and options for listening.
+
+### 5. Signup Component
+
+The `Signup` component provides a user registration form with fields for name, email, password, and an option to join the newsletter.
+
+### 6. SearchDialog Component
+
+The `SearchDialog` component allows users to search and filter shows. It includes options for sorting, filtering by genre, and alphabetical search.
+
+### 7. SettingsModal Component
+
+The `SettingsModal` component offers options for mode switching (light/dark) and user actions like logout.
+
+### 8. CarouselCards Component
+
+display different shows in carousels.
+
+## Contributing
+
+Renier Coetzer
+
+## License
+
+Created by Renier Coetzer
+

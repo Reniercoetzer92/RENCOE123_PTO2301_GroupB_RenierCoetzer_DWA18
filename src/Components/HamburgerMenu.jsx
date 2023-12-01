@@ -33,6 +33,7 @@ export default function HamburgerMenu({ onSettingsClick, isButtonEnabled, isMenu
 
   return (
     <div>
+      {/* Container for the hamburger menu button */}
       <div className={`container ${isMenuOpen ? 'change' : ''} ${buttonClass}`} onClick={handleMenuClick}>
         <div className="bar1"></div>
         <div className="bar2"></div>

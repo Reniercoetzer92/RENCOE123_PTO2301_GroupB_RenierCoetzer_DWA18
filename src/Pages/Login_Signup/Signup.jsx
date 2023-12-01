@@ -3,8 +3,15 @@ import { supabase } from "../../Helpers/Supabase_client";
 import { Link, useNavigate } from "react-router-dom";
 import './Signup.css';
 
+/**
+ * Signup component for user registration.
+ *
+ * @returns {JSX.Element} - A React component representing the Signup form.
+ */
 const Signup = () => {
   const navigate = useNavigate();
+
+  // State variables
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +22,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Event handler for form input changes
   const handleChange = (event) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -22,12 +30,14 @@ const Signup = () => {
     }));
   };
 
+  // Event handler for form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
+      // Attempt user registration with Supabase authentication
       const { data, error } = await supabase.auth.signUp({
         name: formData.name,
         email: formData.email,
@@ -40,7 +50,7 @@ const Signup = () => {
 
       console.log(data);
       alert('Check your email for a verification link');
-      navigate('/login'); 
+      navigate('/login'); // Redirect to login page after successful registration
     } catch (error) {
       setError(error.message);
     } finally {
@@ -48,6 +58,7 @@ const Signup = () => {
     }
   };
 
+  // Event handler for exit button click
   const handleExit = () => {
     navigate('/');
   };
@@ -55,6 +66,7 @@ const Signup = () => {
   return (
     <div className="signup-modal">
       <div className="signup-modal-content">
+        {/* Exit button */}
         <button className="exit-button" onClick={handleExit}>
           X
         </button>
@@ -62,6 +74,7 @@ const Signup = () => {
         <h1>To</h1>
         <img src="/rcstudiologo.jpg" alt="Studio Logo" />
         <h2>Sign Up</h2>
+        {/* Signup form */}
         <form onSubmit={handleSubmit}>
           <input
             required
@@ -95,9 +108,11 @@ const Signup = () => {
             name="confirmPassword"
             value={formData.confirmPassword}
           />
+          {/* Submit button */}
           <button type="submit" disabled={loading}>
             {loading ? "Signing up..." : "Sign up"}
           </button>
+          {/* Login link */}
           <p>
             Already have an account?{' '}
             <span className="Log-In-link">
@@ -105,6 +120,7 @@ const Signup = () => {
             </span>
           </p>
         </form>
+        {/* Error message display */}
         {error && <p className="error-message">{error}</p>}
       </div>
     </div>
@@ -112,3 +128,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

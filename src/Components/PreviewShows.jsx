@@ -4,7 +4,17 @@ import { CarouselCards } from "../Helpers/Index_Components";
 import { supabase } from "../Helpers/Supabase_client";
 import "./Components.css/PreviewShows.css";
 
+/**
+ * PreviewShows component for rendering a list of featured podcast shows with the option to view details.
+ *
+ * @param {Object} props - The component's props.
+ * @param {Array} props.shows - Array of featured podcast shows.
+ * @param {Function} props.onShowClick - Callback function to handle a show click.
+ *
+ * @returns {JSX.Element} - A React component representing the PreviewShows.
+ */
 export default function PreviewShows({ shows, onShowClick }) {
+  // State variables
   const [selectedShow, setSelectedShow] = useState(null);
   const [showAll, setShowAll] = useState(true);
   const [showIds, setShowIds] = useState([]);
@@ -13,14 +23,15 @@ export default function PreviewShows({ shows, onShowClick }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Update showIds when shows prop changes
     setShowIds(shows.map((show) => show.id));
   }, [shows]);
 
   useEffect(() => {
+    // Fetch initial favorited status when selectedShow changes
     const fetchData = async () => {
       setLoading(true);
 
-      // Fetch initial favorited status
       if (selectedShow) {
         try {
           const { data, error } = await supabase
@@ -46,6 +57,11 @@ export default function PreviewShows({ shows, onShowClick }) {
     fetchData();
   }, [selectedShow]);
 
+  /**
+   * Handles a click on a show preview image. Shows loading spinner and triggers onShowClick callback.
+   *
+   * @param {string} showId - ID of the clicked show.
+   */
   const handleShowClick = (showId) => {
     setImageLoading(true);
     onShowClick(showId);
@@ -58,17 +74,23 @@ export default function PreviewShows({ shows, onShowClick }) {
     }, 2000);
   };
 
+  /**
+   * Handles a click on the "Back" button to go back to the list of featured shows.
+   */
   const handleBackClick = () => {
     setSelectedShow(null);
     setShowAll(true);
   };
 
+  /**
+   * Toggles the favorited status of the selected show.
+   */
   const toggleFavorite = async () => {
     if (selectedShow) {
       try {
         const updatedIsFavorited = !isFavorited;
         setIsFavorited(updatedIsFavorited);
-  
+
         await supabase
           .from('shows')
           .upsert([
@@ -84,7 +106,7 @@ export default function PreviewShows({ shows, onShowClick }) {
               date_added: updatedIsFavorited ? new Date().toISOString() : null,
             },
           ]);
-  
+
         if (!updatedIsFavorited) {
           await supabase.from('shows').delete().eq('id', selectedShow.id);
         }
@@ -102,10 +124,12 @@ export default function PreviewShows({ shows, onShowClick }) {
           <div>Loading...</div>
         ) : showAll ? (
           <div>
+            {/* Display a carousel of show previews */}
             <CarouselCards idsToShow={showIds} onOpenSeason={handleShowClick} />
           </div>
         ) : (
           <div>
+            {/* Display selected show details */}
             {selectedShow && (
               <div className="preview-show-display">
                 {imageLoading ? (
@@ -126,6 +150,7 @@ export default function PreviewShows({ shows, onShowClick }) {
                     className={`add-to-favorites ${isFavorited ? 'favorited' : ''}`}
                     onClick={toggleFavorite}
                   >
+                    {/* Star icon for favoriting */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -141,6 +166,7 @@ export default function PreviewShows({ shows, onShowClick }) {
                 )}
                 <br />
                 <div className="preview-show-display">
+                  {/* Button to go back to the list of featured shows */}
                   <button onClick={handleBackClick}>Back</button>
                 </div>
               </div>
