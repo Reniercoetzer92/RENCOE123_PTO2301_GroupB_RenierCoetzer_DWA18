@@ -1,6 +1,6 @@
 # RC Podcast-studio-website
 
-## Vite React Application README
+link: https://rcstudiopodcast.netlify.app/
 
 ## Overview
 
@@ -33,7 +33,6 @@ Follow the on-screen instructions to use the application, which includes a landi
 ## Table of Contents
 
 - [RC Podcast-studio-website](#rc-podcast-studio-website)
-  - [Vite React Application README](#vite-react-application-readme)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
