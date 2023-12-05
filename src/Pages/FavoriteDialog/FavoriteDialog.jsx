@@ -103,7 +103,7 @@ export default function FavoriteDialog({ show, onClose, onRemoveFromFavorites })
 
         {/* Season selector dropdown */}
         <div className="season-selector">
-          <label htmlFor="seasonDropdown">Select a Season:</label>
+          <label htmlFor="seasonDropdown"></label>
           <select
             className="select-season"
             onChange={handleSeasonChange}
